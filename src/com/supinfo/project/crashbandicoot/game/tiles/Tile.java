@@ -9,9 +9,17 @@ public class Tile {
     public int x, y;
     public int size = 16;
 
-    public Tile(int x, int y) {
+    Tiles tile;
+
+    public enum Tiles {
+        GRASS, ROCK, WATER
+    }
+
+    public Tile(int x, int y, Tiles tile) {
         this.x = x;
         this.y = y;
+        this.tile = tile;
+
     }
 
     public void render() {

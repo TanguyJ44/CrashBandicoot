@@ -22,7 +22,7 @@ public class Game {
     }
 
     public void update() {
-        translateView(-1, 0);
+        //translateView(-1, 0);
         level.update();
     }
 
