@@ -1,28 +1,34 @@
 package com.supinfo.project.crashbandicoot.game;
 
-import com.supinfo.project.crashbandicoot.Component;
-import com.supinfo.project.crashbandicoot.graphics.Renderer;
+import org.lwjgl.opengl.GL11;
 
 public class Game {
 
-    public Game() {
+    Level level;
 
+    public static float xScroll, yScroll;
+
+    public Game() {
+        level = new Level(10, 10);
     }
 
     public void init() {
+        level.init();
+    }
 
+    public void translateView(float xa, float ya) {
+        xScroll += xa;
+        yScroll += ya;
     }
 
     public void update() {
-
+        translateView(-1, 0);
+        level.update();
     }
 
     public void render() {
-        for(int x = 0; x < Component.frameWidth / 16; x++) {
-            for(int y = 0; y < Component.frameHeight / 16; y++) {
-                Renderer.renderQuad(x * 17, y * 17, 16, 16, new float[]{1, 1, 1, 1});
-            }
-        }
+        GL11.glTranslatef(xScroll, yScroll, 0);
+        level.render();
     }
 
 }
