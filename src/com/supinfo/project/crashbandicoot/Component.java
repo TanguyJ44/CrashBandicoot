@@ -115,7 +115,7 @@ public class Component {
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        Renderer.renderQuad(50, 50, 16,16);
+        Renderer.renderQuad(50, 50, 16,16, new float[]{1.0f, 1.0f, 1.0f, 1.0f});
     }
 
     public static void main(String[] args) {
