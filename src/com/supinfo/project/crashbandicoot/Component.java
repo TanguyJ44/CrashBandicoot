@@ -1,8 +1,8 @@
 package com.supinfo.project.crashbandicoot;
 
+import com.supinfo.project.crashbandicoot.game.Game;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.glu.GLU;
@@ -12,8 +12,8 @@ import static org.lwjgl.opengl.GL11.*;
 public class Component {
 
     public static int frameScale = 3;
-    public static int frameWidth = 1000 / frameScale;
-    public static int frameHeight = 700 / frameScale;
+    public static int frameWidth = 720 / frameScale;
+    public static int frameHeight = 480 / frameScale;
 
     public boolean run = false;
 
@@ -22,31 +22,12 @@ public class Component {
 
     DisplayMode displaymode = new DisplayMode(frameWidth * frameScale, frameHeight * frameScale);
 
+    Game game;
+
     public Component() {
-        try {
-            Display.setDisplayMode(displaymode);
+        display();
 
-            Display.setTitle("Demake Crash Bandicoot - 1PROJ");
-
-            Display.setResizable(true);
-            Display.setFullscreen(false);
-
-            Display.create();
-
-            view2D(frameWidth, frameHeight);
-        } catch (LWJGLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void view2D(int width, int height){
-        glViewport(0, 0, width * frameScale, height * frameScale);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        GLU.gluOrtho2D(0, width, height, 0);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+        game = new Game();
     }
 
     public void launch() {
@@ -55,6 +36,8 @@ public class Component {
     }
 
     public void loop() {
+
+        game.init();
 
         long timer = System.currentTimeMillis();
 
@@ -107,15 +90,41 @@ public class Component {
     }
 
     public void update(){
-
+        game.update();
     }
 
     public void render(){
-        view2D(Display.getWidth() / frameScale, Display.getHeight() / frameScale);
-
+        view2D(frameWidth, frameHeight);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        Renderer.renderQuad(50, 50, 16,16, new float[]{1.0f, 1.0f, 1.0f, 1.0f});
+        game.render();
+    }
+
+    public void display() {
+        try {
+            Display.setDisplayMode(displaymode);
+
+            Display.setTitle("Demake Crash Bandicoot - 1PROJ");
+
+            Display.setResizable(true);
+            Display.setFullscreen(false);
+
+            Display.create();
+
+            view2D(frameWidth, frameHeight);
+        } catch (LWJGLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void view2D(int width, int height){
+        glViewport(0, 0, width * frameScale, height * frameScale);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        GLU.gluOrtho2D(0, width, height, 0);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
     }
 
     public static void main(String[] args) {
