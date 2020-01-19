@@ -1,5 +1,6 @@
 package com.supinfo.project.crashbandicoot;
 
+import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
@@ -114,16 +115,7 @@ public class Component {
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBegin(GL_QUADS);
-            glColor3f(0.5f, 1.0f, 0.8f);
-            glVertex2f(16, 16);
-            glColor3f(1.0f, 0.8f, 0.8f);
-            glVertex2f(16 + 16, 16);
-            glColor3f(0.5f, 0.8f, 1.0f);
-            glVertex2f(16 + 16, 16 + 16);
-            glColor3f(1.0f, 1.0f, 0.8f);
-            glVertex2f(16, 16 + 16);
-        glEnd();
+        Renderer.renderQuad(50, 50, 16,16);
     }
 
     public static void main(String[] args) {
