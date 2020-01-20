@@ -19,11 +19,23 @@ public class Level {
     }
 
     public void generate() {
-        for (int x = 0; x < width; x++) {
+        /*for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 tiles.add(new Tile(x, y, Tile.Tiles.GRASS));
             }
-        }
+        }*/
+        tiles.add(new Tile(0, 0, Tile.Tiles.GRASS));
+        /*for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tiles.add(new Tile(x, y, Tile.Tiles.WATHER));
+                if(Math.random() > 0.8f) {
+                    tiles.add(new Tile(x, y, Tile.Tiles.DIRTH));
+                }
+                if(Math.random() > 0.95f) {
+                    tiles.add(new Tile(x, y, Tile.Tiles.GRASS));
+                }
+            }
+        }*/
     }
 
     public void init() {

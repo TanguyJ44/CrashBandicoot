@@ -13,6 +13,8 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class Texture {
 
+    public static Texture tiles = loadTexture("./res/test.png");
+
     int width, height;
     int id;
 
@@ -26,6 +28,7 @@ public class Texture {
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File(path));
+            //Text.class.getResource(path)
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +80,7 @@ public class Texture {
     }
 
     public void unbind() {
-        glBindTexture(GL_TEXTURE_2D, id);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
 }

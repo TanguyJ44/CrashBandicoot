@@ -12,8 +12,8 @@ import static org.lwjgl.opengl.GL11.*;
 public class Component {
 
     public static int frameScale = 3;
-    public static int frameWidth = 720 / frameScale;
-    public static int frameHeight = 480 / frameScale;
+    public static int frameWidth = 1000 / frameScale;
+    public static int frameHeight = 750 / frameScale;
 
     public boolean run = false;
 
@@ -125,6 +125,8 @@ public class Component {
         GLU.gluOrtho2D(0, width, height, 0);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+
+        glEnable(GL_TEXTURE_2D);
     }
 
     public static void main(String[] args) {

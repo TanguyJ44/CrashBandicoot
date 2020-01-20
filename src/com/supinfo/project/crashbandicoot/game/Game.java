@@ -17,12 +17,14 @@ public class Game {
     }
 
     public void translateView(float xa, float ya) {
-        xScroll += xa;
-        yScroll += ya;
+        if (xScroll > -167) {
+            xScroll += xa;
+            yScroll += ya;
+        }
     }
 
     public void update() {
-        //translateView(-1, 0);
+        translateView(-0.3f, 0);
         level.update();
     }
 

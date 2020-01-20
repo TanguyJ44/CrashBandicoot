@@ -21,3 +21,6 @@ Langage : Java 8 (SE)
 - Initialisation du moteur de jeu
 - Initialisation du moteur de rendu
 - Implémentation des méthodes de gestion graphique
+- Rendu des images
+- Mise à l'échelle 
+
