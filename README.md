@@ -23,4 +23,7 @@ Langage : Java 8 (SE)
 - Implémentation des méthodes de gestion graphique
 - Rendu des images
 - Mise à l'échelle 
+- Prise en charge du redimensionnement
+- Correction bug d'affichage
+- Implémentation du système d'entité
 

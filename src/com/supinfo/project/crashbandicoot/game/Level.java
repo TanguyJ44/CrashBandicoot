@@ -1,5 +1,6 @@
 package com.supinfo.project.crashbandicoot.game;
 
+import com.supinfo.project.crashbandicoot.entities.Entity;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ public class Level {
     public int width, height;
 
     List<Tile> tiles = new ArrayList<Tile>();
+
+    List<Entity> entities = new ArrayList<>();
 
     public Level(int width, int height) {
         this.width = width;
@@ -30,13 +33,29 @@ public class Level {
 
     }
 
-    public void update() {
+    public void addEntity(Entity e) {
+        entities.add(e);
+    }
 
+    public void removeEntity(Entity e) {
+        entities.remove(e);
+    }
+
+    public void update() {
+        for(int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
+            if (e.getRemoved()) entities.remove(e);
+            e.update();
+        }
     }
 
     public void render() {
         for (Tile tile : tiles) {
             tile.render();
+        }
+        for(int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
+            e.render();
         }
     }
 
