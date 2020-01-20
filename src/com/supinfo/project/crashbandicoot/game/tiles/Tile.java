@@ -10,34 +10,33 @@ import static org.lwjgl.opengl.GL11.*;
 public class Tile {
 
     public int x, y;
-    public int size = 500;
+    public int size = 16;
 
-    int xo = 0, yo = 0;
+    public int xo;
+    public int yo;
 
     Tiles tile;
 
     public enum Tiles {
-        GRASS, DIRTH, WATHER
+        BG
     }
 
-    public Tile(int x, int y, Tiles tile) {
+    public Tile(int x, int y, int xo, int yo, Tiles tile) {
         this.x = x;
         this.y = y;
+        this.xo = xo;
+        this.yo = yo;
         this.tile = tile;
-
-        if(tile == Tiles.GRASS) yo = 0;
-        if(tile == Tiles.DIRTH) yo = 1;
-        if(tile == Tiles.WATHER) yo = 2;
     }
 
     public void render() {
-        float x0 = x + Game.xScroll / 16;
+        float x0 = x + Game.xScroll;
         float y0 = y + Game.yScroll / 16;
 
         float x1 = x + 1 + Game.xScroll / 16;
         float y1 = y + 1 + Game.yScroll / 16;
 
-        //if(x1 < 0 || y1 < 0 || x0 > Component.frameWidth / 16 || y0 > Component.frameHeight / 16) return;
+        if(x1 < 0 || y1 < 0 || x0 > Component.frameWidth / 16 || y0 > Component.frameHeight / 16) return;
         Texture.tiles.bind();
             glBegin(GL_QUADS);
                 Renderer.quadData(x * size, y * size, size, size, new float[]{1, 1, 1, 1}, xo, yo);

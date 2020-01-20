@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class Texture {
 
-    public static Texture tiles = loadTexture("./res/test.png");
+    public static Texture tiles = loadTexture("./res/test_bg.png");
 
     int width, height;
     int id;
@@ -41,8 +41,8 @@ public class Texture {
 
         ByteBuffer buffer = BufferUtils.createByteBuffer(w * h * 4);
 
-        for (int x = 0; x < w; x++) {
-            for (int y = 0; y < h; y++) {
+        for (int y = 0; y < w; y++) {
+            for (int x = 0; x < h; x++) {
                 int i = pixels[x + y * w];
                 buffer.put((byte) ((i >> 16) & 0xFF));
                 buffer.put((byte) ((i >> 8) & 0xFF));

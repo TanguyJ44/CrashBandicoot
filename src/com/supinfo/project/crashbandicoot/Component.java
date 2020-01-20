@@ -53,6 +53,9 @@ public class Component {
 
             Display.update();
 
+            frameWidth = Display.getWidth() / frameScale;
+            frameHeight = Display.getHeight() / frameScale;
+
             tick = false;
             render = false;
 
