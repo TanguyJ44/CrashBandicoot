@@ -19,7 +19,7 @@ public class Player extends Entity{
     @Override
     public void render() {
         texture.bind();
-        Renderer.renderEntity(x, y, 16, 16, Color.WHITE, 1.0f, 0, 0);
+        Renderer.renderEntity(x, y, 32, 40, Color.WHITE, 1.0f, 0, 0);
         texture.unbind();
     }
 }

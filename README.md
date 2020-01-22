@@ -28,4 +28,5 @@ Langage : Java 8 (SE)
 - Implémentation du système d'entité
 - Ajout du joueur
 - Couleur & Alpha
+- Amélioration qualité images
 

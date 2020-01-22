@@ -9,8 +9,8 @@ public abstract class Entity {
     protected Texture texture;
 
     public Entity(int x, int y) {
-        this.x = x * 16;
-        this.y = y * 16;
+        this.x = x;
+        this.y = y;
     }
 
     public abstract void update();

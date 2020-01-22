@@ -14,8 +14,8 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class Texture {
 
-    public static Texture tiles = loadTexture("./res/test_bg.png");
-    public static Texture player = loadTexture("./res/perso.png");
+    public static Texture tiles = loadTexture("./res/maps.png");
+    public static Texture player = loadTexture("./res/pp.png");
 
     int width, height;
     int id;
