@@ -26,4 +26,6 @@ Langage : Java 8 (SE)
 - Prise en charge du redimensionnement
 - Correction bug d'affichage
 - Implémentation du système d'entité
+- Ajout du joueur
+- Couleur & Alpha
 
