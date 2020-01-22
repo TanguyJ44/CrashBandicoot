@@ -1,13 +1,16 @@
 package com.supinfo.project.crashbandicoot.entities;
 
+import com.supinfo.project.crashbandicoot.graphics.Texture;
+
 public abstract class Entity {
 
-    private int x, y;
-    private boolean removed = false;
+    protected int x, y;
+    protected boolean removed = false;
+    protected Texture texture;
 
     public Entity(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.x = x * 16;
+        this.y = y * 16;
     }
 
     public abstract void update();
@@ -23,6 +26,10 @@ public abstract class Entity {
 
     public boolean getRemoved() {
         return removed;
+    }
+
+    public Texture getTexture() {
+        return texture;
     }
 
 }

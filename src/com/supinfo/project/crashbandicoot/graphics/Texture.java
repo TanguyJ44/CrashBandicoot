@@ -1,5 +1,6 @@
 package com.supinfo.project.crashbandicoot.graphics;
 
+import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 import org.lwjgl.BufferUtils;
 
 import javax.imageio.ImageIO;
@@ -14,6 +15,7 @@ import static org.lwjgl.opengl.GL12.*;
 public class Texture {
 
     public static Texture tiles = loadTexture("./res/test_bg.png");
+    public static Texture player = loadTexture("./res/perso.png");
 
     int width, height;
     int id;

@@ -1,6 +1,7 @@
 package com.supinfo.project.crashbandicoot.game;
 
 import com.supinfo.project.crashbandicoot.entities.Entity;
+import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Level {
         this.height = height;
 
         generate();
+        spawner();
     }
 
     public void generate() {
@@ -27,6 +29,10 @@ public class Level {
                 tiles.add(new Tile(x, y, x, y, Tile.Tiles.BG));
             }
         }
+    }
+
+    public void spawner() {
+        addEntity(new Player(5, 5));
     }
 
     public void init() {
