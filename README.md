@@ -32,3 +32,4 @@ Langage : Java 8 (SE)
 - Correction de bug "Sprite Sheet"
 - Ajout du déplacement personnage
 - Alternance des "Sprite Sheet"
+- Ajout des colisions (v1)

@@ -11,6 +11,8 @@ public class Level {
 
     public int width, height;
 
+    Tile[][] solidTile;
+
     List<Tile> tiles = new ArrayList<Tile>();
 
     List<Entity> entities = new ArrayList<>();
@@ -34,11 +36,21 @@ public class Level {
     }
 
     public void spawner() {
+        player.init(this);
         addEntity(player);
     }
 
-    public void init() {
+    public Tile getSolidTile(int x, int y) {
+        if (x < 0 || y < 0 || x >= width || y >= height) return null;
+        return solidTile[x][y];
+    }
 
+    public void init() {
+        solidTile = new Tile[width][height];
+
+        for (int i = 0; i < width; i++) {
+            solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.BG);
+        }
     }
 
     public void addEntity(Entity e) {
