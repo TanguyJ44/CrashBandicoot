@@ -29,4 +29,5 @@ Langage : Java 8 (SE)
 - Ajout du joueur
 - Couleur & Alpha
 - Amélioration qualité images
+- Correction de bug "Sprite Sheet"
 

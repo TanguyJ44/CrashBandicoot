@@ -32,7 +32,7 @@ public class Level {
     }
 
     public void spawner() {
-        addEntity(new Player(40, 82));
+        addEntity(new Player(40, 110));
     }
 
     public void init() {
