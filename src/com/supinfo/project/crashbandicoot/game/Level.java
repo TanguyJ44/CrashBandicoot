@@ -15,6 +15,8 @@ public class Level {
 
     List<Entity> entities = new ArrayList<>();
 
+    private static Player player = new Player(40, 110);
+
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
@@ -32,7 +34,7 @@ public class Level {
     }
 
     public void spawner() {
-        addEntity(new Player(40, 110));
+        addEntity(player);
     }
 
     public void init() {
@@ -63,6 +65,10 @@ public class Level {
             Entity e = entities.get(i);
             e.render();
         }
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 
 }

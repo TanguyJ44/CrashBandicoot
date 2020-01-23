@@ -30,4 +30,5 @@ Langage : Java 8 (SE)
 - Couleur & Alpha
 - Amélioration qualité images
 - Correction de bug "Sprite Sheet"
-
+- Ajout du déplacement personnage
+- Alternance des "Sprite Sheet"

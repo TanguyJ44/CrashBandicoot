@@ -1,5 +1,6 @@
 package com.supinfo.project.crashbandicoot.game;
 
+import com.supinfo.project.crashbandicoot.Component;
 import org.lwjgl.opengl.GL11;
 
 public class Game {
@@ -17,15 +18,25 @@ public class Game {
     }
 
     public void translateView(float xa, float ya) {
-        if (xScroll > -167) {
-            xScroll += xa;
-            yScroll += ya;
-        }
+        /*if (xScroll > -167) {
+            xScroll = xa;
+            yScroll = ya;
+        }*/
+        xScroll = xa;
+        yScroll = ya;
     }
 
+    float xa = 0, ya = 0;
     public void update() {
-        //translateView(-0.3f, 0);
         level.update();
+
+        if(Level.getPlayer().getX() > Component.frameWidth / 2 - 16) {
+            xa = -Level.getPlayer().getX() + Component.frameWidth / 2 - 16;
+        } else {
+            xa = -0.3f;
+        }
+
+        translateView(xa, ya);
     }
 
     public void render() {
