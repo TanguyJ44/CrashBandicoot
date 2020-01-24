@@ -9,6 +9,8 @@ public abstract class Entity {
     protected boolean removed = false;
     protected Texture texture;
     protected Level level;
+    protected float mass;
+    protected float drag;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -22,6 +24,11 @@ public abstract class Entity {
     public boolean isSolidTile(float xa, float ya) {
         //System.out.println("x:" + (int) (x + xa) / 16 + " y:" + (int) (y + ya) / 16);
         if (level.getSolidTile((int) (x + xa) / 16, (int) (y + ya) / 16) != null) return true;
+        return false;
+    }
+
+    public boolean isGrounded() {
+        if (level.getSolidTile((int)(x + 8) / 16,(int)(y + 16) / 16) != null) return true;
         return false;
     }
 

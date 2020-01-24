@@ -10,7 +10,7 @@ public class Game {
     public static float xScroll, yScroll;
 
     public Game() {
-        level = new Level(40, 40);
+        level = new Level(80, 80);
     }
 
     public void init() {

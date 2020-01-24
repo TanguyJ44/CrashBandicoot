@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Level {
 
+    public float gravity = 1.8f;
+
     public int width, height;
 
     Tile[][] solidTile;
@@ -17,7 +19,7 @@ public class Level {
 
     List<Entity> entities = new ArrayList<>();
 
-    private static Player player = new Player(40, 110);
+    private static Player player = new Player(40, 100);
 
     public Level(int width, int height) {
         this.width = width;

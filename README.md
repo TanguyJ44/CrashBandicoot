@@ -33,3 +33,5 @@ Langage : Java 8 (SE)
 - Ajout du déplacement personnage
 - Alternance des "Sprite Sheet"
 - Ajout des colisions (v1)
+- Implémentation de la gravitée
+- Ajout du saut

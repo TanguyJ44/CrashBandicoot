@@ -10,9 +10,14 @@ public class Player extends Entity{
 
     int xo = 0;
 
+    boolean isJump = false;
+
     public Player(int x, int y) {
         super(x, y);
         texture = Texture.player;
+
+        mass = 0.9f;
+        drag = 0.95f;
     }
 
     @Override
@@ -21,21 +26,28 @@ public class Player extends Entity{
     }
 
     float xa, ya;
+    float speed = 1f;
     @Override
     public void update() {
+        ya += level.gravity * mass;
+
         if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 450) {
-            xa = 1;
+            xa += speed;
             if(xo != 0) xo = 0;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
-            xa = -1;
+            xa -= speed;
             if(xo != 1) xo = 1;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            ya = -1;
+            if(y == 111 && isJump == true) isJump = false;
+            if(isGrounded() && isJump == false) {
+                isJump = true;
+                ya -= 30;
+            }
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            ya = +1;
+
         }
 
         if(!isSolidTile(xa, 0)) {
@@ -44,8 +56,25 @@ public class Player extends Entity{
         }
         if(!isSolidTile(0, ya)) {
             y += ya;
-            ya += 0;
+            ya = 0;
         }
+
+        /*int xStep = (int) Math.abs(xa * 100);
+        for (int i = 0; i < xStep; i++) {
+            if (!isSolidTile(xa / xStep, 0)) {
+                x += xa / xStep;
+            } else {
+                xa = 0;
+            }
+        }
+        int yStep = (int) Math.abs(ya * 100);
+        for (int i = 0; i < yStep; i++) {
+            if (!isSolidTile(0, ya / yStep)) {
+                y += ya / yStep;
+            } else {
+                ya = 0;
+            }
+        }*/
 
         xa = 0;
         ya = 0;
