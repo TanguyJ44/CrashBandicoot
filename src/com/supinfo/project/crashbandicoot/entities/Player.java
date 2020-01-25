@@ -38,27 +38,28 @@ public class Player extends Entity{
         anim.update();
         anim.pause();
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 450) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)/* && x < 450*/) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
             xa -= speed;
             if(dir != 1) dir = 1;
             anim.play();
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
             //if(y == 111 && isJump == true) isJump = false;
             if(isGrounded() /*&& isJump == false*/) {
                 //isJump = true;
                 ya -= 20;
             }
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ya = speed;
         }
 
+        // Limite de chute
         if(y > 220) {
             x = 10;
             y = 80;
@@ -83,8 +84,9 @@ public class Player extends Entity{
 
         // Détection des fruits
         for (int i = 0; i < level.fruits.size(); i++) {
-            if(((int) x > level.fruits.get(i).getX() - 2) && ((int) x < level.fruits.get(i).getX() + 2)) {
-                level.fruits.remove(i);
+            if(((int) x > level.fruits.get(i).getX() - 2) && ((int) x < level.fruits.get(i).getX() + 2)
+                    && level.fruits.get(i).getEat() == false) {
+                level.fruits.get(i).setEat(true);
             }
         }
 

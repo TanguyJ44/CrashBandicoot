@@ -40,7 +40,7 @@ public class Tile {
         if(x1 < 0 || y1 < 0 || x0 > Component.frameWidth / 16 || y0 > Component.frameHeight / 16) return;
         Texture.tiles.bind();
             glBegin(GL_QUADS);
-                Renderer.quadData(x * size, y * size, size, size, Color.WHITE, 16.0f, xo, yo);
+                Renderer.quadData(x * size, y * size, size, size, Color.WHITE, 32.0f, xo, yo);
             glEnd();
         Texture.tiles.unbind();
     }

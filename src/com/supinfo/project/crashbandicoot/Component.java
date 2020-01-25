@@ -46,6 +46,8 @@ public class Component {
 
         int frames = 0;
 
+        long noww = System.currentTimeMillis(), delta;
+
         while (run) {
             if(Display.isCloseRequested())
                 destroy();
@@ -78,6 +80,21 @@ public class Component {
                 frames = 0;
             }
 
+            delta = -noww + (noww = System.currentTimeMillis());
+            if(delta < 5){
+                try {
+                    Thread.sleep(5-delta);
+                    noww += 5-delta;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            /*try {
+                sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
         }
         exit();
     }

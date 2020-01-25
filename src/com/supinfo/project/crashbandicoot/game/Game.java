@@ -18,10 +18,6 @@ public class Game {
     }
 
     public void translateView(float xa, float ya) {
-        /*if (xScroll > -167) {
-            xScroll = xa;
-            yScroll = ya;
-        }*/
         xScroll = xa;
         yScroll = ya;
     }

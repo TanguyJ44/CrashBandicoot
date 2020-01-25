@@ -96,17 +96,18 @@ public class Level {
     }
 
     public void initObjects() {
-        fruits.add(new Fruit(120, 120));
-        fruits.add(new Fruit(200, 110));
-        fruits.add(new Fruit(280, 120));
-        fruits.add(new Fruit(360, 110));
-        fruits.add(new Fruit(440, 120));
+        fruits.add(new Fruit(120, 120, false));
+        fruits.add(new Fruit(200, 110, false));
+        fruits.add(new Fruit(280, 120, false));
+        fruits.add(new Fruit(360, 110, false));
+        fruits.add(new Fruit(440, 120, false));
     }
 
     public void levelObjects() {
         texture.bind();
         for (int i = 0; i < fruits.size(); i++) {
-            Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Color.WHITE, 0.5f, 0, 0);
+            if (fruits.get(i).getEat() == false)
+                Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Color.WHITE, 0.5f, 0, 0);
         }
         texture.unbind();
     }
