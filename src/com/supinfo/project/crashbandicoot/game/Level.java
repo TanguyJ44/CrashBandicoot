@@ -3,6 +3,10 @@ package com.supinfo.project.crashbandicoot.game;
 import com.supinfo.project.crashbandicoot.entities.Entity;
 import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
+import com.supinfo.project.crashbandicoot.graphics.Color;
+import com.supinfo.project.crashbandicoot.graphics.Renderer;
+import com.supinfo.project.crashbandicoot.graphics.Texture;
+import com.supinfo.project.crashbandicoot.objects.Fruit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,10 @@ public class Level {
     List<Tile> tiles = new ArrayList<Tile>();
 
     List<Entity> entities = new ArrayList<>();
+
+    Texture texture;
+
+    public ArrayList<Fruit> fruits = new ArrayList<Fruit>();
 
     private static Player player = new Player(10, 80);
 
@@ -48,7 +56,10 @@ public class Level {
     }
 
     public void init() {
+        initObjects();
+
         solidTile = new Tile[width][height];
+        texture = Texture.apple;
 
         for (int i = 0; i < width; i++) {
             if(i != 3) {
@@ -82,6 +93,22 @@ public class Level {
             Entity e = entities.get(i);
             e.render();
         }
+    }
+
+    public void initObjects() {
+        fruits.add(new Fruit(120, 120));
+        fruits.add(new Fruit(200, 110));
+        fruits.add(new Fruit(280, 120));
+        fruits.add(new Fruit(360, 110));
+        fruits.add(new Fruit(440, 120));
+    }
+
+    public void levelObjects() {
+        texture.bind();
+        for (int i = 0; i < fruits.size(); i++) {
+            Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Color.WHITE, 0.5f, 0, 0);
+        }
+        texture.unbind();
     }
 
     public static Player getPlayer() {

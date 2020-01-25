@@ -36,3 +36,4 @@ Langage : Java 8 (SE)
 - Implémentation de la gravitée
 - Ajout du saut
 - Implémentation des animations
+- Ajout des fruits
