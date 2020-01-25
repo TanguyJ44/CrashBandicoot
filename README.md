@@ -35,3 +35,4 @@ Langage : Java 8 (SE)
 - Ajout des colisions (v1)
 - Implémentation de la gravitée
 - Ajout du saut
+- Implémentation des animations
