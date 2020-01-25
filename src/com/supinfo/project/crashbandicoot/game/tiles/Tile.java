@@ -19,7 +19,7 @@ public class Tile {
     Tiles tile;
 
     public enum Tiles {
-        BG
+        BG, COL
     }
 
     public Tile(int x, int y, int xo, int yo, Tiles tile) {

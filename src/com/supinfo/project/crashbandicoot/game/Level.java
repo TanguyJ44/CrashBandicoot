@@ -19,7 +19,7 @@ public class Level {
 
     List<Entity> entities = new ArrayList<>();
 
-    private static Player player = new Player(40, 100);
+    private static Player player = new Player(10, 80);
 
     public Level(int width, int height) {
         this.width = width;
@@ -51,7 +51,10 @@ public class Level {
         solidTile = new Tile[width][height];
 
         for (int i = 0; i < width; i++) {
-            solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.BG);
+            if(i != 3) {
+                solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
+                solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
+            }
         }
     }
 

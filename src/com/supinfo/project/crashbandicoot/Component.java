@@ -1,7 +1,6 @@
 package com.supinfo.project.crashbandicoot;
 
 import com.supinfo.project.crashbandicoot.game.Game;
-import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
