@@ -1,7 +1,7 @@
 package com.supinfo.project.crashbandicoot.entities;
 
 import com.supinfo.project.crashbandicoot.game.Level;
-import com.supinfo.project.crashbandicoot.graphics.Color;
+import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.utiles.Animation;
@@ -13,6 +13,8 @@ public class Player extends Entity{
     int dir = 0;
 
     boolean isJump = false;
+
+    public static float playerX;
 
     public Player(int x, int y) {
         super(x, y);
@@ -38,7 +40,9 @@ public class Player extends Entity{
         anim.update();
         anim.pause();
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)/* && x < 450*/) {
+        playerX = x;
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 990) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
@@ -63,6 +67,8 @@ public class Player extends Entity{
         if(y > 220) {
             x = 10;
             y = 80;
+            dir = 0;
+            level.reloadObject();
         }
 
         int xStep = (int) Math.abs(xa * 100);
@@ -100,7 +106,7 @@ public class Player extends Entity{
         level.levelObjects();
 
         texture.bind();
-        Renderer.renderEntity(x, y, 32, 40, Color.WHITE, 4.5f, dir, anim.getCurrentFrame());
+            Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, anim.getCurrentFrame());
         texture.unbind();
     }
 }

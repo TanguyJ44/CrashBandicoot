@@ -46,13 +46,12 @@ public class Component {
 
         int frames = 0;
 
-        long noww = System.currentTimeMillis(), delta;
-
         while (run) {
             if(Display.isCloseRequested())
                 destroy();
 
             Display.update();
+            Display.sync(200);
 
             frameWidth = Display.getWidth() / frameScale;
             frameHeight = Display.getHeight() / frameScale;
@@ -80,21 +79,6 @@ public class Component {
                 frames = 0;
             }
 
-            delta = -noww + (noww = System.currentTimeMillis());
-            if(delta < 5){
-                try {
-                    Thread.sleep(5-delta);
-                    noww += 5-delta;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            /*try {
-                sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
         }
         exit();
     }
@@ -149,6 +133,7 @@ public class Component {
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     }
 
     public static void main(String[] args) {

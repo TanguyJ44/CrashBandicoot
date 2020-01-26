@@ -3,11 +3,15 @@ package com.supinfo.project.crashbandicoot.game;
 import com.supinfo.project.crashbandicoot.entities.Entity;
 import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
-import com.supinfo.project.crashbandicoot.graphics.Color;
+import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.Color;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +32,8 @@ public class Level {
     public ArrayList<Fruit> fruits = new ArrayList<Fruit>();
 
     private static Player player = new Player(10, 80);
+
+    //private TrueTypeFont font;
 
     public Level(int width, int height) {
         this.width = width;
@@ -101,15 +107,27 @@ public class Level {
         fruits.add(new Fruit(280, 120, false));
         fruits.add(new Fruit(360, 110, false));
         fruits.add(new Fruit(440, 120, false));
+
+        /*Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
+        font = new TrueTypeFont(awtFont, false);*/
     }
 
     public void levelObjects() {
+        /*Color.white.bind();
+        font.drawString(10, 10, "Hello World !", Color.white);*/
+
         texture.bind();
         for (int i = 0; i < fruits.size(); i++) {
             if (fruits.get(i).getEat() == false)
-                Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Color.WHITE, 0.5f, 0, 0);
+                Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Colors.WHITE, 0.5f, 0, 0);
         }
         texture.unbind();
+    }
+
+    public void reloadObject() {
+        for (int i = 0; i < fruits.size(); i++) {
+            if(fruits.get(i).getEat() == true) fruits.get(i).setEat(false);
+        }
     }
 
     public static Player getPlayer() {

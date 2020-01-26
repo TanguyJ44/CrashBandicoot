@@ -2,7 +2,7 @@ package com.supinfo.project.crashbandicoot.game.tiles;
 
 import com.supinfo.project.crashbandicoot.Component;
 import com.supinfo.project.crashbandicoot.game.Game;
-import com.supinfo.project.crashbandicoot.graphics.Color;
+import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 
@@ -40,7 +40,7 @@ public class Tile {
         if(x1 < 0 || y1 < 0 || x0 > Component.frameWidth / 16 || y0 > Component.frameHeight / 16) return;
         Texture.tiles.bind();
             glBegin(GL_QUADS);
-                Renderer.quadData(x * size, y * size, size, size, Color.WHITE, 32.0f, xo, yo);
+                Renderer.quadData(x * size, y * size, size, size, Colors.WHITE, 32.0f, xo, yo);
             glEnd();
         Texture.tiles.unbind();
     }
