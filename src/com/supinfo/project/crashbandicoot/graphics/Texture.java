@@ -17,6 +17,7 @@ public class Texture {
     public static Texture tiles = loadTexture("./res/map2.png");
     public static Texture player = loadTexture("./res/sprite_perso.png");
     public static Texture apple = loadTexture("./res/fruit.png");
+    public static Texture boxe = loadTexture("./res/case.png");
 
     int width, height;
     int id;

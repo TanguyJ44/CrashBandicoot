@@ -38,3 +38,5 @@ Langage : Java 8 (SE)
 - Implémentation des animations
 - Ajout des fruits
 - Ajout des colisions (v2)
+- Fonction reload
+- Ajout des caisses

@@ -62,6 +62,12 @@ public class Player extends Entity{
         if (Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ya = speed;
         }
+        if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+            x = 10;
+            y = 80;
+            dir = 0;
+            level.reloadObject();
+        }
 
         // Limite de chute
         if(y > 220) {

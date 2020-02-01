@@ -6,6 +6,7 @@ import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
+import com.supinfo.project.crashbandicoot.objects.Boxes;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
@@ -27,9 +28,11 @@ public class Level {
 
     List<Entity> entities = new ArrayList<>();
 
-    Texture texture;
+    Texture textureFruit;
+    Texture textureBoxe;
 
     public ArrayList<Fruit> fruits = new ArrayList<Fruit>();
+    public ArrayList<Boxes> boxes = new ArrayList<Boxes>();
 
     private static Player player = new Player(10, 80);
 
@@ -65,14 +68,21 @@ public class Level {
         initObjects();
 
         solidTile = new Tile[width][height];
-        texture = Texture.apple;
+        textureFruit = Texture.apple;
+        textureBoxe = Texture.boxe;
 
         for (int i = 0; i < width; i++) {
-            if(i != 3) {
-                solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
-                solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
-            }
+            solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
+            solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
         }
+
+        solidTile[10][6] = new Tile(10, 6, 0, 0, Tile.Tiles.COL);
+        solidTile[11][6] = new Tile(11, 6, 0, 0, Tile.Tiles.COL);
+        solidTile[12][6] = new Tile(12, 6, 0, 0, Tile.Tiles.COL);
+
+        solidTile[19][5] = new Tile(10, 6, 0, 0, Tile.Tiles.COL);
+        solidTile[20][5] = new Tile(11, 6, 0, 0, Tile.Tiles.COL);
+        solidTile[21][5] = new Tile(12, 6, 0, 0, Tile.Tiles.COL);
     }
 
     public void addEntity(Entity e) {
@@ -103,10 +113,19 @@ public class Level {
 
     public void initObjects() {
         fruits.add(new Fruit(120, 120, false));
-        fruits.add(new Fruit(200, 110, false));
-        fruits.add(new Fruit(280, 120, false));
+        fruits.add(new Fruit(200, 80, false));
+        fruits.add(new Fruit(290, 120, false));
         fruits.add(new Fruit(360, 110, false));
         fruits.add(new Fruit(440, 120, false));
+
+        fruits.add(new Fruit(550, 110, false));
+        fruits.add(new Fruit(650, 120, false));
+        fruits.add(new Fruit(750, 110, false));
+        fruits.add(new Fruit(850, 120, false));
+        fruits.add(new Fruit(950, 110, false));
+
+        boxes.add(new Boxes(190, 125, 1, true, false, false, Boxes.Box.BASIC));
+        boxes.add(new Boxes(325, 75, 1, true, false, false, Boxes.Box.BASIC));
 
         /*Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
         font = new TrueTypeFont(awtFont, false);*/
@@ -116,17 +135,30 @@ public class Level {
         /*Color.white.bind();
         font.drawString(10, 10, "Hello World !", Color.white);*/
 
-        texture.bind();
+        textureFruit.bind();
         for (int i = 0; i < fruits.size(); i++) {
             if (fruits.get(i).getEat() == false)
                 Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Colors.WHITE, 0.5f, 0, 0);
         }
-        texture.unbind();
+        textureFruit.unbind();
+
+        textureBoxe.bind();
+        for (int i = 0; i < boxes.size(); i++) {
+            if (boxes.get(i).getBreak() == false)
+                Renderer.renderEntity(boxes.get(i).getX(), boxes.get(i).getY(), 32, 32, Colors.WHITE, 1f, 0, 0);
+        }
+        textureBoxe.unbind();
     }
 
     public void reloadObject() {
+        // Reload fruits
         for (int i = 0; i < fruits.size(); i++) {
             if(fruits.get(i).getEat() == true) fruits.get(i).setEat(false);
+        }
+
+        // Reload boxes
+        for (int i = 0; i < boxes.size(); i++) {
+            if(boxes.get(i).getBreak() == true) boxes.get(i).setBreak(false);
         }
     }
 
