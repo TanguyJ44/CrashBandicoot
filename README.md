@@ -40,3 +40,5 @@ Langage : Java 8 (SE)
 - Ajout des colisions (v2)
 - Fonction reload
 - Ajout des caisses
+- Animation des objets
+- Ajout de texte

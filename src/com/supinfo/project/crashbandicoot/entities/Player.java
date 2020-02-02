@@ -16,6 +16,8 @@ public class Player extends Entity{
 
     public static float playerX;
 
+    public static int numberFruits = 0;
+
     public Player(int x, int y) {
         super(x, y);
         texture = Texture.player;
@@ -66,6 +68,7 @@ public class Player extends Entity{
             x = 10;
             y = 80;
             dir = 0;
+            numberFruits = 0;
             level.reloadObject();
         }
 
@@ -94,11 +97,15 @@ public class Player extends Entity{
             }
         }
 
+        //System.out.println(y);
+
         // Détection des fruits
         for (int i = 0; i < level.fruits.size(); i++) {
-            if(((int) x > level.fruits.get(i).getX() - 2) && ((int) x < level.fruits.get(i).getX() + 2)
-                    && level.fruits.get(i).getEat() == false) {
-                level.fruits.get(i).setEat(true);
+            if(((int) x > level.fruits.get(i).getX() - 7) && ((int) x < level.fruits.get(i).getX() + 7) && level.fruits.get(i).getEat() == false) {
+                if(((int) y + 9 > level.fruits.get(i).getDefaultY() - 10) && ((int) y + 9 < level.fruits.get(i).getDefaultY() + 10)) {
+                    level.fruits.get(i).setEat(true);
+                    numberFruits++;
+                }
             }
         }
 

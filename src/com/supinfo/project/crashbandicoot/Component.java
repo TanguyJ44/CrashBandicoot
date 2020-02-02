@@ -1,9 +1,11 @@
 package com.supinfo.project.crashbandicoot;
 
 import com.supinfo.project.crashbandicoot.game.Game;
+import com.supinfo.project.crashbandicoot.game.Level;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -35,7 +37,6 @@ public class Component {
     }
 
     public void loop() {
-
         game.init();
 
         long timer = System.currentTimeMillis();
@@ -133,12 +134,10 @@ public class Component {
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     }
 
     public static void main(String[] args) {
         Component component = new Component();
-
         component.launch();
     }
 
