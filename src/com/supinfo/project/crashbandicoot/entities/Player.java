@@ -77,6 +77,7 @@ public class Player extends Entity{
             x = 10;
             y = 80;
             dir = 0;
+            numberFruits = 0;
             level.reloadObject();
         }
 
@@ -97,8 +98,6 @@ public class Player extends Entity{
             }
         }
 
-        //System.out.println(y);
-
         // Détection des fruits
         for (int i = 0; i < level.fruits.size(); i++) {
             if(((int) x > level.fruits.get(i).getX() - 7) && ((int) x < level.fruits.get(i).getX() + 7) && level.fruits.get(i).getEat() == false) {
@@ -107,6 +106,14 @@ public class Player extends Entity{
                     numberFruits++;
                 }
             }
+        }
+
+        if((int)x > 627 && (int)x < 643 && (170 - Level.animPique.getCurrentCoord()) < 150){
+            x = 10;
+            y = 80;
+            dir = 0;
+            numberFruits = 0;
+            level.reloadObject();
         }
 
         xa *= drag;

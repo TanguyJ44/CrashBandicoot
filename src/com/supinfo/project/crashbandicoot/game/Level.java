@@ -16,6 +16,7 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Level {
 
@@ -31,6 +32,7 @@ public class Level {
 
     Texture textureFruit;
     Texture textureBoxe;
+    Texture texturePique;
 
     public ArrayList<Fruit> fruits = new ArrayList<Fruit>();
     public ArrayList<Boxes> boxes = new ArrayList<Boxes>();
@@ -38,6 +40,7 @@ public class Level {
     private static Player player = new Player(10, 80);
 
     ObjectsAnimation animFruits;
+    public static ObjectsAnimation animPique;
 
     UnicodeFont font;
 
@@ -49,6 +52,7 @@ public class Level {
         spawner();
 
         animFruits = new ObjectsAnimation(5, 6, true);
+        animPique = new ObjectsAnimation(50, 0, false);
     }
 
     public void generate() {
@@ -73,10 +77,13 @@ public class Level {
         solidTile = new Tile[width][height];
         textureFruit = Texture.apple;
         textureBoxe = Texture.boxe;
+        texturePique = Texture.pique;
 
         for (int i = 0; i < width; i++) {
-            solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
-            solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
+            if(i != 28) {
+                solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
+                solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
+            }
         }
 
         solidTile[10][6] = new Tile(10, 6, 0, 0, Tile.Tiles.COL);
@@ -89,6 +96,7 @@ public class Level {
 
         initObjects();
         animFruits.play();
+        animPique.play();
     }
 
     public void addEntity(Entity e) {
@@ -106,6 +114,7 @@ public class Level {
             e.update();
         }
         animFruits.update();
+        animPique.update();
     }
 
     public void render() {
@@ -123,10 +132,10 @@ public class Level {
         fruits.add(new Fruit(200, 80, false));
         fruits.add(new Fruit(290, 120, false));
         //fruits.add(new Fruit(360, 110, false));
-        fruits.add(new Fruit(440, 120, false));
+        fruits.add(new Fruit(450, 90, false));
 
         fruits.add(new Fruit(550, 90, false));
-        fruits.add(new Fruit(650, 120, false));
+        //fruits.add(new Fruit(650, 120, false));
         fruits.add(new Fruit(750, 90, false));
         fruits.add(new Fruit(850, 120, false));
         fruits.add(new Fruit(950, 90, false));
@@ -166,6 +175,10 @@ public class Level {
                 Renderer.renderEntity(boxes.get(i).getX(), boxes.get(i).getY(), 32, 32, Colors.WHITE, 1f, 0, 0);
         }
         textureBoxe.unbind();
+
+        texturePique.bind();
+            Renderer.renderEntity(643, 170 - animPique.getCurrentCoord(), 32, 64, Colors.WHITE, 2f, 0, 0);
+        texturePique.unbind();
 
         for (int i = 0; i < fruits.size(); i++) {
             fruits.get(i).setY(fruits.get(i).getDefaultY() + animFruits.getCurrentCoord());

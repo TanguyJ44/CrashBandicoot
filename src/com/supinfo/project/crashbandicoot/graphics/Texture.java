@@ -19,6 +19,8 @@ public class Texture {
     public static Texture apple = loadTexture("./res/fruit.png");
     public static Texture boxe = loadTexture("./res/case.png");
 
+    public static Texture pique = loadTexture("./res/pique.png");
+
     int width, height;
     int id;
 
