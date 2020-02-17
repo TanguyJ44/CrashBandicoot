@@ -47,4 +47,8 @@ public class Animation {
         return frame;
     }
 
+    public void setCurrentFrame(int newFrame) {
+        frame = newFrame;
+    }
+
 }

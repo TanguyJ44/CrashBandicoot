@@ -10,13 +10,14 @@ import org.lwjgl.input.Keyboard;
 public class Player extends Entity{
 
     Animation anim;
-    int dir = 0;
+    public static int dir = 0;
 
     boolean isJump = false;
 
-    public static float playerX;
+    public static float playerX, playerY;
 
     public static int numberFruits = 0;
+    public static int playerLife = 3;
 
     public Player(int x, int y) {
         super(x, y);
@@ -35,6 +36,9 @@ public class Player extends Entity{
 
     float xa, ya;
     float speed = 0.8f;
+
+    int old_dir;
+
     @Override
     public void update() {
         ya += level.gravity * mass;
@@ -43,6 +47,7 @@ public class Player extends Entity{
         anim.pause();
 
         playerX = x;
+        playerY = y;
 
         if (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 990) {
             xa += speed;
@@ -55,9 +60,13 @@ public class Player extends Entity{
             anim.play();
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            //if(y == 111 && isJump == true) isJump = false;
-            if(isGrounded() /*&& isJump == false*/) {
-                //isJump = true;
+            if(dir != 2) {
+                anim.pause();
+                anim.setCurrentFrame(dir);
+                old_dir = dir;
+                dir = 2;
+            }
+            if(isGrounded()) {
                 ya -= 20;
             }
         }
@@ -70,6 +79,11 @@ public class Player extends Entity{
             dir = 0;
             numberFruits = 0;
             level.reloadObject();
+        }
+
+        if (ya == 0.9f && dir == 2) {
+            anim.play();
+            dir = old_dir;
         }
 
         // Limite de chute
@@ -100,7 +114,7 @@ public class Player extends Entity{
 
         // Détection des fruits
         for (int i = 0; i < level.fruits.size(); i++) {
-            if(((int) x > level.fruits.get(i).getX() - 7) && ((int) x < level.fruits.get(i).getX() + 7) && level.fruits.get(i).getEat() == false) {
+            if(((int) x > level.fruits.get(i).getX() - 7) && ((int) x < level.fruits.get(i).getX() + 10) && level.fruits.get(i).getEat() == false) {
                 if(((int) y + 9 > level.fruits.get(i).getDefaultY() - 10) && ((int) y + 9 < level.fruits.get(i).getDefaultY() + 10)) {
                     level.fruits.get(i).setEat(true);
                     numberFruits++;
@@ -108,6 +122,7 @@ public class Player extends Entity{
             }
         }
 
+        // Détection des piques
         if((int)x > 627 && (int)x < 643 && (170 - Level.animPique.getCurrentCoord()) < 150){
             x = 10;
             y = 80;

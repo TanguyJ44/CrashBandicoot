@@ -42,3 +42,8 @@ Langage : Java 8 (SE)
 - Ajout des caisses
 - Animation des objets
 - Ajout de texte
+- Ajout de Akuaku
+- Ajout du sprite sheet "saut du personnage'
+- Mise à jour du design des fruits
+- Correction de bugs mineurs
+- Ajout du header

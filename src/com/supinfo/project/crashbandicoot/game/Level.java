@@ -1,22 +1,19 @@
 package com.supinfo.project.crashbandicoot.game;
 
+import com.supinfo.project.crashbandicoot.entities.AkuAku;
 import com.supinfo.project.crashbandicoot.entities.Entity;
 import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
+import com.supinfo.project.crashbandicoot.graphics.Header;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.objects.Boxes;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Level {
 
@@ -38,11 +35,10 @@ public class Level {
     public ArrayList<Boxes> boxes = new ArrayList<Boxes>();
 
     private static Player player = new Player(10, 80);
+    private static AkuAku akuaku = new AkuAku(8, 90);
 
     ObjectsAnimation animFruits;
     public static ObjectsAnimation animPique;
-
-    UnicodeFont font;
 
     public Level(int width, int height) {
         this.width = width;
@@ -65,7 +61,11 @@ public class Level {
 
     public void spawner() {
         player.init(this);
+        akuaku.init(this);
+
         addEntity(player);
+        if(AkuAku.invokAkuaku == true)
+            addEntity(akuaku);
     }
 
     public Tile getSolidTile(int x, int y) {
@@ -86,17 +86,11 @@ public class Level {
             }
         }
 
-        solidTile[10][6] = new Tile(10, 6, 0, 0, Tile.Tiles.COL);
-        solidTile[11][6] = new Tile(11, 6, 0, 0, Tile.Tiles.COL);
-        solidTile[12][6] = new Tile(12, 6, 0, 0, Tile.Tiles.COL);
-
-        solidTile[19][5] = new Tile(10, 6, 0, 0, Tile.Tiles.COL);
-        solidTile[20][5] = new Tile(11, 6, 0, 0, Tile.Tiles.COL);
-        solidTile[21][5] = new Tile(12, 6, 0, 0, Tile.Tiles.COL);
-
         initObjects();
         animFruits.play();
         animPique.play();
+
+        Header.init();
     }
 
     public void addEntity(Entity e) {
@@ -140,32 +134,17 @@ public class Level {
         fruits.add(new Fruit(850, 120, false));
         fruits.add(new Fruit(950, 90, false));
 
-        boxes.add(new Boxes(190, 125, 1, true, false, false, Boxes.Box.BASIC));
-        boxes.add(new Boxes(325, 75, 1, true, false, false, Boxes.Box.BASIC));
-
-        fontInit();
-    }
-
-    public void fontInit() {
-        Font awtFont = new Font("Arial", Font.BOLD, 20);
-        font = new UnicodeFont(awtFont);
-        font.getEffects().add(new ColorEffect(java.awt.Color.white));
-        font.addAsciiGlyphs();
-
-        try {
-            font.loadGlyphs();
-        } catch (SlickException ex) {
-            System.err.println(ex.toString());
-        }
+        /*boxes.add(new Boxes(190, 125, 1, true, false, false, Boxes.Box.BASIC));
+        boxes.add(new Boxes(325, 75, 1, true, false, false, Boxes.Box.BASIC));*/
     }
 
     public void levelObjects() {
-        font.drawString(Math.abs(Game.xScroll) + 10, 5, "" + player.numberFruits);
+        Header.render();
 
         textureFruit.bind();
         for (int i = 0; i < fruits.size(); i++) {
             if (fruits.get(i).getEat() == false)
-                Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 32, 32, Colors.WHITE, 0.5f, 0, 0);
+                Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 37, 37, Colors.WHITE, 0.5f, 0, 0);
         }
         textureFruit.unbind();
 
