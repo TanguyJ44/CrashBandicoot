@@ -11,6 +11,7 @@ import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.objects.Boxes;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
+import com.supinfo.project.crashbandicoot.utiles.ScreenLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +92,8 @@ public class Level {
         animPique.play();
 
         Header.init();
+
+        ScreenLoader.init();
     }
 
     public void addEntity(Entity e) {
@@ -162,6 +165,10 @@ public class Level {
         for (int i = 0; i < fruits.size(); i++) {
             fruits.get(i).setY(fruits.get(i).getDefaultY() + animFruits.getCurrentCoord());
         }
+    }
+
+    public void loadAfterPlayer() {
+        ScreenLoader.render();
     }
 
     public void reloadObject() {

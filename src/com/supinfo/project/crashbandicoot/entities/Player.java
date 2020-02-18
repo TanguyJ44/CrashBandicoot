@@ -74,13 +74,27 @@ public class Player extends Entity{
             ya = speed;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+            playerLife = 3;
+            AkuAku.akuakuLife = 0;
+            AkuAku.invokAkuaku = false;
             x = 10;
             y = 80;
             dir = 0;
             numberFruits = 0;
             level.reloadObject();
         }
+        if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
+            numberFruits++;
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_F3)) {
+            if(playerLife < 3) playerLife++;
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_F4)) {
+            if(AkuAku.invokAkuaku == false) AkuAku.invokAkuaku = true;
+            if(AkuAku.akuakuLife < 2) AkuAku.akuakuLife++;
+        }
 
+        // saut
         if (ya == 0.9f && dir == 2) {
             anim.play();
             dir = old_dir;
@@ -88,6 +102,7 @@ public class Player extends Entity{
 
         // Limite de chute
         if(y > 220) {
+            if(playerLife > 0) playerLife--;
             x = 10;
             y = 80;
             dir = 0;
@@ -124,6 +139,7 @@ public class Player extends Entity{
 
         // Détection des piques
         if((int)x > 627 && (int)x < 643 && (170 - Level.animPique.getCurrentCoord()) < 150){
+            if(playerLife > 0) playerLife--;
             x = 10;
             y = 80;
             dir = 0;
@@ -143,5 +159,7 @@ public class Player extends Entity{
         texture.bind();
             Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, anim.getCurrentFrame());
         texture.unbind();
+
+        level.loadAfterPlayer();
     }
 }

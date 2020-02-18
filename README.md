@@ -1,7 +1,7 @@
 # CrashBandicoot
 Projet Supinfo (1PROJ)
 
-Réalisation du jeu Crash Bandicoot en 2D (développement + design)
+Réalisation du jeu Crash Bandicoot en 2D (développement + design) sous la forme d'un demake
 
 # Présentation
 Crash Bandicoot est un jeu vidéo de plates-formes développé par Naughty Dog et édité par Sony Computer Entertainment en 1996 sur PlayStation. Il constitue le premier épisode de la série Crash Bandicoot.
@@ -11,7 +11,7 @@ Crash Bandicoot relate la création de l'anthropomorphe Crash Bandicoot, le hér
 # Langage et librairies
 Langage : Java 8 (SE)
 - Dev Kit : JDK 8
-- LWJGL / GLFW / OpenGL / OpenCL / OpenAL
+- LWJGL / GLFW / OpenGL / OpenCL / OpenAL / Slick
 
 # Dev' Logs
 - Création du projet
@@ -47,3 +47,6 @@ Langage : Java 8 (SE)
 - Mise à jour du design des fruits
 - Correction de bugs mineurs
 - Ajout du header
+- Animation de mouvement Akuaku
+- Ajout écran de chargement
+- Ajout des touches de debugs

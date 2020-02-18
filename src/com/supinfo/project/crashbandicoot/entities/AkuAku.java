@@ -8,7 +8,7 @@ import com.supinfo.project.crashbandicoot.graphics.Texture;
 public class AkuAku extends Entity {
 
     public static boolean invokAkuaku = false;
-    public static int akuakuLife = 2;
+    public static int akuakuLife = 2; // De 0 à 2
 
     public AkuAku(int x, int y) {
         super(x, y);
@@ -19,20 +19,40 @@ public class AkuAku extends Entity {
     @Override
     public void init(Level level) { }
 
+    int akuakuDir;
+    float draging = 2f;
+
     @Override
     public void update() {
+
         if(Player.dir == 0) {
-            x = Player.playerX -30;
+            akuakuDir = 0;
+
+            if(x < Player.playerX - 50) {
+                x+=1.5f;
+                if(draging != 2f) draging = 2f;
+            } else{
+                if(draging > 0) draging -= 0.1f;
+                x+= draging;
+            }
         } else if (Player.dir == 1) {
-            x = Player.playerX +40;
+            akuakuDir = 1;
+
+            if(x > Player.playerX + 50) {
+                x-=1.5f;
+                if(draging != 2f) draging = 2f;
+            } else{
+                if(draging > 0) draging -= 0.1f;
+                x-= draging;
+            }
         }
-        y = Player.playerY - 20;
+
     }
 
     @Override
     public void render() {
         texture.bind();
-            Renderer.renderEntity(x, y, 25, 25, Colors.WHITE, 5.3f, akuakuLife, 0);
+            Renderer.renderEntity(x, y, 25, 25, Colors.WHITE, 5.3f, akuakuLife, akuakuDir);
         texture.unbind();
     }
 }
