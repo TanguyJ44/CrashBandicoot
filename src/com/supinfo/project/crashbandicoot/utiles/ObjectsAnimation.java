@@ -25,7 +25,10 @@ public class ObjectsAnimation {
                 if (coord <= length && invert == false) coord++;
                 if(coord <= length && invert == true) coord--;
                 if (coord == length) invert = true;
-                if (coord == 0) invert = false;
+                if (coord == 0){
+                    invert = false;
+                    if(loop == false) playing = false;
+                }
                 time = 0;
             }
         }

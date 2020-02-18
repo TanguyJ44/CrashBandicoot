@@ -1,6 +1,7 @@
 package com.supinfo.project.crashbandicoot.entities;
 
 import com.supinfo.project.crashbandicoot.game.Level;
+import com.supinfo.project.crashbandicoot.game.Traps;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
@@ -138,7 +139,7 @@ public class Player extends Entity{
         }
 
         // Détection des piques
-        if((int)x > 627 && (int)x < 643 && (170 - Level.animPique.getCurrentCoord()) < 150){
+        if((int)x > 627 && (int)x < 643 && (170 - Traps.animPique.getCurrentCoord()) < 150){
             if(playerLife > 0) playerLife--;
             x = 10;
             y = 80;

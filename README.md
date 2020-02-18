@@ -50,3 +50,6 @@ Langage : Java 8 (SE)
 - Animation de mouvement Akuaku
 - Ajout écran de chargement
 - Ajout des touches de debugs
+- Amélioration des pièges (fonction random)
+
+#Patchs

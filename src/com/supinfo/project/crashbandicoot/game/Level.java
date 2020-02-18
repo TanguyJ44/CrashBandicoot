@@ -39,7 +39,6 @@ public class Level {
     private static AkuAku akuaku = new AkuAku(8, 90);
 
     ObjectsAnimation animFruits;
-    public static ObjectsAnimation animPique;
 
     public Level(int width, int height) {
         this.width = width;
@@ -49,7 +48,6 @@ public class Level {
         spawner();
 
         animFruits = new ObjectsAnimation(5, 6, true);
-        animPique = new ObjectsAnimation(50, 0, false);
     }
 
     public void generate() {
@@ -89,7 +87,8 @@ public class Level {
 
         initObjects();
         animFruits.play();
-        animPique.play();
+
+        Traps.init();
 
         Header.init();
 
@@ -110,8 +109,10 @@ public class Level {
             if (e.getRemoved()) entities.remove(e);
             e.update();
         }
+
+        Traps.update();
+
         animFruits.update();
-        animPique.update();
     }
 
     public void render() {
@@ -128,17 +129,11 @@ public class Level {
         fruits.add(new Fruit(120, 120, false));
         fruits.add(new Fruit(200, 80, false));
         fruits.add(new Fruit(290, 120, false));
-        //fruits.add(new Fruit(360, 110, false));
         fruits.add(new Fruit(450, 90, false));
-
         fruits.add(new Fruit(550, 90, false));
-        //fruits.add(new Fruit(650, 120, false));
         fruits.add(new Fruit(750, 90, false));
         fruits.add(new Fruit(850, 120, false));
         fruits.add(new Fruit(950, 90, false));
-
-        /*boxes.add(new Boxes(190, 125, 1, true, false, false, Boxes.Box.BASIC));
-        boxes.add(new Boxes(325, 75, 1, true, false, false, Boxes.Box.BASIC));*/
     }
 
     public void levelObjects() {
@@ -159,7 +154,7 @@ public class Level {
         textureBoxe.unbind();
 
         texturePique.bind();
-            Renderer.renderEntity(643, 170 - animPique.getCurrentCoord(), 32, 64, Colors.WHITE, 2f, 0, 0);
+            Renderer.renderEntity(643, 170 - Traps.animPique.getCurrentCoord(), 32, 64, Colors.WHITE, 2f, 0, 0);
         texturePique.unbind();
 
         for (int i = 0; i < fruits.size(); i++) {
