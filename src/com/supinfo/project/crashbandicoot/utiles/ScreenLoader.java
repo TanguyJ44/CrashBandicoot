@@ -25,7 +25,7 @@ public class ScreenLoader {
         }
 
         if(time < 501) time++;
-        if(time == 500) isVisible = false;
+        if(time == 10) isVisible = false;
 
     }
 

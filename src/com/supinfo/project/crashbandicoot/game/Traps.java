@@ -26,7 +26,6 @@ public class Traps {
                 rand = 1 + (int)(Math.random() * ((8 - 1) + 1));
 
                 if(rand == 5) {
-                    System.out.println("!");
                     animPique.play();
                 }
 

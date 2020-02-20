@@ -2,6 +2,7 @@ package com.supinfo.project.crashbandicoot.game;
 
 import com.supinfo.project.crashbandicoot.entities.AkuAku;
 import com.supinfo.project.crashbandicoot.entities.Entity;
+import com.supinfo.project.crashbandicoot.entities.Fish;
 import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
@@ -37,6 +38,7 @@ public class Level {
 
     private static Player player = new Player(10, 80);
     private static AkuAku akuaku = new AkuAku(8, 90);
+    private static Fish fish = new Fish(792, 150);
 
     ObjectsAnimation animFruits;
 
@@ -61,10 +63,13 @@ public class Level {
     public void spawner() {
         player.init(this);
         akuaku.init(this);
+        fish.init(this);
 
         addEntity(player);
         if(AkuAku.invokAkuaku == true)
             addEntity(akuaku);
+
+        addEntity(fish);
     }
 
     public Tile getSolidTile(int x, int y) {
@@ -79,7 +84,7 @@ public class Level {
         texturePique = Texture.pique;
 
         for (int i = 0; i < width; i++) {
-            if(i != 28) {
+            if(i != 28 && i != 48 && i != 49) {
                 solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
                 solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
             }

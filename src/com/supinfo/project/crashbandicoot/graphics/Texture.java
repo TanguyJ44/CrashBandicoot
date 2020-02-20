@@ -14,17 +14,19 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class Texture {
 
-    public static Texture load = loadTexture("./res/load.png");
-    public static Texture tiles = loadTexture("./res/new_map.png");
+    public static Texture load = loadTexture("./res/images/load.png");
+    public static Texture tiles = loadTexture("./res/images/new_map.png");
 
-    public static Texture player = loadTexture("./res/sprite_perso.png");
-    public static Texture head_player = loadTexture("./res/head_cb.png");
-    public static Texture akuaku = loadTexture("./res/sprite_akuaku.png");
+    public static Texture player = loadTexture("./res/images/sprite_perso.png");
+    public static Texture head_player = loadTexture("./res/images/head_cb.png");
+    public static Texture akuaku = loadTexture("./res/images/sprite_akuaku.png");
 
-    public static Texture apple = loadTexture("./res/fruit.png");
-    public static Texture boxe = loadTexture("./res/case.png");
+    public static Texture apple = loadTexture("./res/images/fruit.png");
+    public static Texture boxe = loadTexture("./res/images/case.png");
 
-    public static Texture pique = loadTexture("./res/pique.png");
+    public static Texture pique = loadTexture("./res/images/pique.png");
+
+    public static Texture fish = loadTexture("./res/images/sprite_fish.png");
 
     int width, height;
     int id;

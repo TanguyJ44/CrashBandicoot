@@ -52,4 +52,11 @@ Langage : Java 8 (SE)
 - Ajout des touches de debugs
 - Amélioration des pièges (fonction random)
 
-#Patchs
+# Patchs
+#### PA01-2020-02-20 
+- Correction de bugs mineurs
+- Optimisation de la boucle d'affichage
+- Traitement des calculs différé
+- Amélioration des méthodes de rendu
+
+
