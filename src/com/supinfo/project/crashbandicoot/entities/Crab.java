@@ -12,6 +12,9 @@ public class Crab extends Entity {
     private int time;
     private int coord;
 
+    private int dir;
+    private int dirCount;
+
     boolean invert = false;
 
     public Crab(int x, int y) {
@@ -26,6 +29,9 @@ public class Crab extends Entity {
         speed = 2;
         time = 0;
         coord = 0;
+
+        dir = 0;
+        dirCount = 0;
     }
 
     @Override
@@ -35,12 +41,17 @@ public class Crab extends Entity {
             if (time > speed) {
                 if (coord <= length && invert == false) coord++;
                 if(coord <= length && invert == true) coord--;
-                if (coord == length) {
-                    invert = true;
+                if (coord == length) invert = true;
+                if (coord == 0) invert = false;
+
+                if(dirCount > 5) {
+                    dirCount = 0;
+                    if(dir == 0) dir = 1;
+                    else dir = 0;
                 }
-                if (coord == 0) {
-                    invert = false;
-                }
+
+                dirCount++;
+
                 time = 0;
             }
         }
@@ -65,7 +76,7 @@ public class Crab extends Entity {
     @Override
     public void render() {
         texture.bind();
-            Renderer.renderEntity(x + coord, y, 35, 35, Colors.WHITE, 1f, 0, 0);
+            Renderer.renderEntity(x + coord, y, 25, 25, Colors.WHITE, 2f, dir, 0);
         texture.unbind();
     }
 }

@@ -37,8 +37,8 @@ public class Traps {
         // Traps collide detection
         if ((Player.playerX >= 643 + 32)
                 || (Player.playerX + Player.playerBoxWidth <= 643)
-                || (Player.playerY >= animPique.getCurrentCoord() + 64)
-                || (Player.playerY + Player.playerBoxHeight <= animPique.getCurrentCoord())){
+                || (Player.playerY >= 170 - animPique.getCurrentCoord() + 64)
+                || (Player.playerY + Player.playerBoxHeight <= 170 - animPique.getCurrentCoord())){
             // Player is not in a area
         } else {
             Player.killPlayer = true;

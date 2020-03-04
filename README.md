@@ -57,6 +57,8 @@ Langage : Java 8 (SE)
 - Ajout de l'ennemie plante
 - Détection et annimation (v1) de la plante
 - Implémentation de 'Box' de détection
+- Prise en charge de l'audio (v1)
+- Amélioration des animations
 
 
 # Patchs
@@ -71,6 +73,7 @@ Langage : Java 8 (SE)
 - Amélioration des détections
 - Optimisation des collisions
 - Stabilité au lancement
+
 
 # Pistes de réflexion
 - Ajout de son / ambiance musicale

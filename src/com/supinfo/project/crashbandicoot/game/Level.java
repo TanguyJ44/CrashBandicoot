@@ -36,7 +36,7 @@ public class Level {
     private static Player player = new Player(10, 80);
     private static AkuAku akuaku = new AkuAku(8, 90);
     private static Fish fish = new Fish(792, 150);
-    private static Crab crab = new Crab(880, 125);
+    private static Crab crab = new Crab(880, 135);
     private static Plant plant = new Plant(350, 115);
 
     ObjectsAnimation animFruits;
@@ -87,9 +87,10 @@ public class Level {
         texturePique = Texture.pique;
 
         for (int i = 0; i < width; i++) {
-            if(i != 28 && i != 48 && i != 49) {
-                solidTile[i][7] = new Tile(i, 7, 0, 0, Tile.Tiles.COL);
-                solidTile[i][8] = new Tile(i, 8, 0, 0, Tile.Tiles.COL);
+            for (int j = 7; j < 15; j++) {
+                if(i != 28 && i != 48 && i != 49) {
+                    solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
+                }
             }
         }
 

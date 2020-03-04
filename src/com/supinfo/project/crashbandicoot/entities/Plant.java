@@ -7,7 +7,15 @@ import com.supinfo.project.crashbandicoot.graphics.Texture;
 
 public class Plant extends Entity{
 
-    int dir;
+    private int length;
+    private int speed;
+    private int time;
+
+    private int dir;
+
+    private int swing;
+    private int swingCount;
+
 
     boolean eating = false;
 
@@ -19,13 +27,43 @@ public class Plant extends Entity{
 
     @Override
     public void init(Level level) {
+        length = 60;
+        speed = 2;
+        time = 0;
+
         dir = 1;
+
+        swing = 0;
+        swingCount = 0;
     }
 
     @Override
     public void update() {
         if (Player.playerX < x && dir == 0) dir = 1;
         else if (Player.playerX > x && dir == 1) dir = 0;
+
+        if (true) {
+            time++;
+            if (time > speed) {
+
+                if (swingCount > 8) {
+                    swingCount = 0;
+                    if (swing == 0) {
+                        swing = 1;
+                        y+= 1;
+                    }
+                    else {
+                        swing = 0;
+                        y-= 1;
+                    }
+                }
+
+
+                swingCount++;
+
+                time = 0;
+            }
+        }
 
         // Plant collide detection
         if ((Player.playerX >= x + 32)
@@ -47,7 +85,7 @@ public class Plant extends Entity{
     @Override
     public void render() {
         texture.bind();
-            Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, 0);
+            Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, swing);
         texture.unbind();
     }
 }
