@@ -51,6 +51,13 @@ Langage : Java 8 (SE)
 - Ajout écran de chargement
 - Ajout des touches de debugs
 - Amélioration des pièges (fonction random)
+- Ajout de nouvelles textures
+- Ajout de l'ennemie crabe
+- Déplacement et détection du crabe
+- Ajout de l'ennemie plante
+- Détection et annimation (v1) de la plante
+- Implémentation de 'Box' de détection
+
 
 # Patchs
 #### PA01-2020-02-20 
@@ -59,4 +66,15 @@ Langage : Java 8 (SE)
 - Traitement des calculs différé
 - Amélioration des méthodes de rendu
 
+#### PA02-2020-03-04 
+- Correction de bugs mineurs
+- Amélioration des détections
+- Optimisation des collisions
+- Stabilité au lancement
 
+# Pistes de réflexion
+- Ajout de son / ambiance musicale
+- Prise en charge des contrôleurs de jeux
+- Mise en place d'un driver
+- Dialogue launcheur / jeu
+- Système de MaJ dynamique 

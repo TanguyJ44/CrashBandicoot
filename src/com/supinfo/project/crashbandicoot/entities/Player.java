@@ -10,15 +10,21 @@ import org.lwjgl.input.Keyboard;
 
 public class Player extends Entity{
 
+    public static int playerBoxWidth = 32;
+    public static int playerBoxHeight = 40;
+
     Animation anim;
     public static int dir = 0;
 
     boolean isJump = false;
+    public static boolean tornadoAttack = false;
 
     public static float playerX, playerY;
 
     public static int numberFruits = 0;
     public static int playerLife = 3;
+
+    public static boolean killPlayer = false;
 
     public Player(int x, int y) {
         super(x, y);
@@ -103,12 +109,7 @@ public class Player extends Entity{
 
         // Limite de chute
         if(y > 220) {
-            if(playerLife > 0) playerLife--;
-            x = 10;
-            y = 80;
-            dir = 0;
-            numberFruits = 0;
-            level.reloadObject();
+            killPlayer = true;
         }
 
         int xStep = (int) Math.abs(xa * 100);
@@ -138,8 +139,16 @@ public class Player extends Entity{
             }
         }
 
-        // Détection des piques
-        if((int)x > 627 && (int)x < 643 && (170 - Traps.animPique.getCurrentCoord()) < 150){
+        xa *= drag;
+        ya *= drag;
+
+        playerDeath();
+
+    }
+
+    public void playerDeath () {
+        if(killPlayer == true) {
+            killPlayer = false;
             if(playerLife > 0) playerLife--;
             x = 10;
             y = 80;
@@ -147,10 +156,6 @@ public class Player extends Entity{
             numberFruits = 0;
             level.reloadObject();
         }
-
-        xa *= drag;
-        ya *= drag;
-
     }
 
     @Override

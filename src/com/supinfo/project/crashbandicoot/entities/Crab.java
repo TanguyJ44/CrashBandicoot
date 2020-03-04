@@ -5,37 +5,31 @@ import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 
-public class Fish extends Entity {
+public class Crab extends Entity {
 
     private int length;
     private int speed;
     private int time;
     private int coord;
 
-    Texture textureFishCover;
+    boolean invert = false;
 
-    public Fish(int x, int y) {
+    public Crab(int x, int y) {
         super(x, y);
 
-        texture = Texture.fish;
+        texture = Texture.crab;
     }
 
     @Override
     public void init(Level level) {
-        length = 50;
-        speed = 0;
+        length = 60;
+        speed = 2;
         time = 0;
         coord = 0;
-
-        textureFishCover = Texture.fishCover;
     }
-
-    boolean invert = false;
-    int dir = 0;
 
     @Override
     public void update() {
-
         if (true) {
             time++;
             if (time > speed) {
@@ -43,28 +37,35 @@ public class Fish extends Entity {
                 if(coord <= length && invert == true) coord--;
                 if (coord == length) {
                     invert = true;
-                    dir = 1;
                 }
                 if (coord == 0) {
                     invert = false;
-                    dir = 0;
                 }
                 time = 0;
             }
         }
 
+        // Crab collide detection
+        if ((Player.playerX >= x + coord + 35)
+                || (Player.playerX + Player.playerBoxWidth <= x + coord)
+                || (Player.playerY >= y + 35)
+                || (Player.playerY + Player.playerBoxHeight <= y)){
+            // Player is not in a area
+        } else {
+            if (Player.tornadoAttack == false) {
+                // Player death
+                Player.killPlayer = true;
+            } else {
+                // Crab kill
+            }
 
+        }
     }
 
     @Override
     public void render() {
         texture.bind();
-            Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
+            Renderer.renderEntity(x + coord, y, 35, 35, Colors.WHITE, 1f, 0, 0);
         texture.unbind();
-
-        textureFishCover.bind();
-            Renderer.renderEntity(790, 150, 25, 35, Colors.WHITE, 1f, 0, 0);
-        textureFishCover.unbind();
     }
-
 }

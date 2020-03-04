@@ -27,6 +27,9 @@ public class Texture {
     public static Texture pique = loadTexture("./res/images/pique.png");
 
     public static Texture fish = loadTexture("./res/images/sprite_fish.png");
+    public static Texture fishCover = loadTexture("./res/images/fish_cover.png");
+    public static Texture crab = loadTexture("./res/images/crab.png");
+    public static Texture plant = loadTexture("./res/images/sprite_plant.png");
 
     int width, height;
     int id;

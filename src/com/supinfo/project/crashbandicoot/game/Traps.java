@@ -1,5 +1,6 @@
 package com.supinfo.project.crashbandicoot.game;
 
+import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
 
 public class Traps {
@@ -32,6 +33,17 @@ public class Traps {
                 time = 0;
             }
         }
+
+        // Traps collide detection
+        if ((Player.playerX >= 643 + 32)
+                || (Player.playerX + Player.playerBoxWidth <= 643)
+                || (Player.playerY >= animPique.getCurrentCoord() + 64)
+                || (Player.playerY + Player.playerBoxHeight <= animPique.getCurrentCoord())){
+            // Player is not in a area
+        } else {
+            Player.killPlayer = true;
+        }
+
     }
 
 }
