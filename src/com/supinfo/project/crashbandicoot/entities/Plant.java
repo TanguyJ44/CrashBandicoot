@@ -4,6 +4,7 @@ import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
+import com.supinfo.project.crashbandicoot.utiles.Delay;
 
 public class Plant extends Entity{
 
@@ -16,8 +17,9 @@ public class Plant extends Entity{
     private int swing;
     private int swingCount;
 
-
     boolean eating = false;
+
+    Delay delay;
 
     public Plant(int x, int y) {
         super(x, y);
@@ -35,6 +37,8 @@ public class Plant extends Entity{
 
         swing = 0;
         swingCount = 0;
+
+        delay = new Delay(2, true);
     }
 
     @Override
@@ -72,7 +76,11 @@ public class Plant extends Entity{
             // Player is not in a area
         } else {
             if (Player.tornadoAttack == false) {
-                if(eating == true) Player.killPlayer = true; // Player death
+                if(eating == true && delay.talk() == true) {
+                    Player.killPlayer = true; // Player death
+
+                    delay.start();
+                }
             } else {
                 // Plant kill
             }

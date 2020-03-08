@@ -4,6 +4,7 @@ import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
+import com.supinfo.project.crashbandicoot.utiles.Delay;
 
 public class Crab extends Entity {
 
@@ -16,6 +17,8 @@ public class Crab extends Entity {
     private int dirCount;
 
     boolean invert = false;
+
+    Delay delay;
 
     public Crab(int x, int y) {
         super(x, y);
@@ -32,6 +35,8 @@ public class Crab extends Entity {
 
         dir = 0;
         dirCount = 0;
+
+        delay = new Delay(2, true);
     }
 
     @Override
@@ -63,13 +68,11 @@ public class Crab extends Entity {
                 || (Player.playerY + Player.playerBoxHeight <= y)){
             // Player is not in a area
         } else {
-            if (Player.tornadoAttack == false) {
+            if (Player.tornadoAttack == false && delay.talk() == true) {
                 // Player death
                 Player.killPlayer = true;
 
-                if(Player.dir == 0) x +=5;
-                else x-=5;
-
+                delay.start();
             } else {
                 // Crab kill
             }

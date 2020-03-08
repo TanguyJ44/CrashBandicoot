@@ -1,6 +1,7 @@
 package com.supinfo.project.crashbandicoot.game;
 
 import com.supinfo.project.crashbandicoot.entities.Player;
+import com.supinfo.project.crashbandicoot.utiles.Delay;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
 
 public class Traps {
@@ -10,8 +11,12 @@ public class Traps {
 
     public static ObjectsAnimation animPique;
 
+    static Delay delay;
+
     public static void init() {
         animPique = new ObjectsAnimation(50, 0, false);
+
+        delay = new Delay(2, true);
     }
 
     static int rand;
@@ -41,7 +46,11 @@ public class Traps {
                 || (Player.playerY + Player.playerBoxHeight <= 170 - animPique.getCurrentCoord())){
             // Player is not in a area
         } else {
-            Player.killPlayer = true;
+            if(delay.talk() == true) {
+                Player.killPlayer = true;
+
+                delay.start();
+            }
         }
 
     }

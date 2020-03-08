@@ -4,6 +4,7 @@ import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
+import com.supinfo.project.crashbandicoot.utiles.Delay;
 
 public class Fish extends Entity {
 
@@ -13,6 +14,8 @@ public class Fish extends Entity {
     private int coord;
 
     Texture textureFishCover;
+
+    Delay delay;
 
     public Fish(int x, int y) {
         super(x, y);
@@ -28,6 +31,8 @@ public class Fish extends Entity {
         coord = 0;
 
         textureFishCover = Texture.fishCover;
+
+        delay = new Delay(2, true);
     }
 
     boolean invert = false;
@@ -50,6 +55,20 @@ public class Fish extends Entity {
                     dir = 0;
                 }
                 time = 0;
+            }
+        }
+
+
+        // Fish collide detection
+        if ((Player.playerX >= x + 25)
+                || (Player.playerX + Player.playerBoxWidth <= x)
+                || (Player.playerY >= y - coord + 35)
+                || (Player.playerY + Player.playerBoxHeight <= y - coord)){
+            // Player is not in a area
+        } else {
+            if(delay.talk() == true) {
+                Player.killPlayer = true;
+                delay.start();
             }
         }
 

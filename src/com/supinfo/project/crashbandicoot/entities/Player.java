@@ -25,6 +25,7 @@ public class Player extends Entity{
     public static int playerLife = 3;
 
     public static boolean killPlayer = false;
+    public static boolean playerIsDead = false;
 
     public static boolean keysEnable = false;
 
@@ -158,9 +159,8 @@ public class Player extends Entity{
 
     public void playerDeath () {
         if(killPlayer == true) {
-            killPlayer = false;
             keysEnable = false;
-
+            playerIsDead = true;
 
             if(playerLife > 0) playerLife--;
             x = 10;
@@ -168,6 +168,11 @@ public class Player extends Entity{
             dir = 0;
             numberFruits = 0;
             level.reloadObject();
+
+            playerIsDead = false;
+            keysEnable = true;
+
+            killPlayer = false;
         }
     }
 

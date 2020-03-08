@@ -60,6 +60,9 @@ Langage : Java 8 (SE)
 - Prise en charge de l'audio (v1)
 - Amélioration des animations
 - Audio ramassage des fruits
+- Gestion des délais d'exécution
+- Amélioration mort du personnage
+- Détection du poisson
 
 
 # Patchs
