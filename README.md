@@ -59,6 +59,7 @@ Langage : Java 8 (SE)
 - Implémentation de 'Box' de détection
 - Prise en charge de l'audio (v1)
 - Amélioration des animations
+- Audio ramassage des fruits
 
 
 # Patchs

@@ -8,9 +8,11 @@ import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.objects.Boxes;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
+import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
 import com.supinfo.project.crashbandicoot.utiles.ScreenLoader;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,8 @@ public class Level {
     private static Plant plant = new Plant(350, 115);
 
     ObjectsAnimation animFruits;
+
+    public static AudioControl wompasSound = new AudioControl();
 
     public Level(int width, int height) {
         this.width = width;
@@ -100,6 +104,8 @@ public class Level {
         Traps.init();
 
         Header.init();
+
+        wompasSound.init(new File("./res/sounds/wompas.wav"));
 
         ScreenLoader.init();
     }

@@ -17,8 +17,6 @@ public class AudioControl implements LineListener {
 
     private static Thread audioThread;
 
-    private int duration;
-
     public void init(File audioFilePath) {
 
         try {
@@ -39,8 +37,6 @@ public class AudioControl implements LineListener {
 
             audioClip.open(audioStream);
 
-            duration = (int) audioClip.getMicrosecondLength() / 1000000;
-
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(AudioControl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -57,7 +53,6 @@ public class AudioControl implements LineListener {
     }
 
     public static int realTime = 0;
-    int cursorTime = 0;
 
     public void play() {
 
@@ -82,7 +77,6 @@ public class AudioControl implements LineListener {
                     }
                 }
 
-                audioClip.close();
                 audioThread.currentThread().interrupt();
             }
         });
@@ -101,13 +95,17 @@ public class AudioControl implements LineListener {
         LineEvent.Type type = event.getType();
 
         if (type == LineEvent.Type.START) {
-            System.out.println("Playback started.");
+            //System.out.println("Playback started.");
 
         } else if (type == LineEvent.Type.STOP) {
             playCompleted = true;
-            System.out.println("Playback completed.");
+            //System.out.println("Playback completed.");
         }
 
+    }
+
+    public static void destroy() {
+        audioClip.close();
     }
 
     public static float getVolume() {

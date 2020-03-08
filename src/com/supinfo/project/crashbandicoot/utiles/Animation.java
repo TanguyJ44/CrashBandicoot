@@ -1,5 +1,7 @@
 package com.supinfo.project.crashbandicoot.utiles;
 
+import com.supinfo.project.crashbandicoot.entities.Player;
+
 public class Animation {
 
     private int frame = 0;
@@ -17,6 +19,7 @@ public class Animation {
     }
 
     public void update() {
+
         if (playing) {
             time++;
             if (time > speed) {

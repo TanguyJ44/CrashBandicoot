@@ -66,6 +66,10 @@ public class Crab extends Entity {
             if (Player.tornadoAttack == false) {
                 // Player death
                 Player.killPlayer = true;
+
+                if(Player.dir == 0) x +=5;
+                else x-=5;
+
             } else {
                 // Crab kill
             }

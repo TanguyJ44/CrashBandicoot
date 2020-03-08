@@ -48,8 +48,11 @@ public class Component {
         int frames = 0;
 
         while (run) {
-            if(Display.isCloseRequested())
+            if(Display.isCloseRequested()){
                 destroy();
+                Level.wompasSound.destroy();
+                System.out.println("Audio destroy !");
+            }
 
             Display.update();
             Display.sync(200);

@@ -58,7 +58,6 @@ public class Plant extends Entity{
                     }
                 }
 
-
                 swingCount++;
 
                 time = 0;

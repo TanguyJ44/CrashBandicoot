@@ -1,6 +1,7 @@
 package com.supinfo.project.crashbandicoot.utiles;
 
 import com.supinfo.project.crashbandicoot.Component;
+import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
@@ -25,7 +26,10 @@ public class ScreenLoader {
         }
 
         if(time < 501) time++;
-        if(time == 2) isVisible = false;
+        if(time == 2) {
+            isVisible = false;
+            Player.keysEnable = true;
+        }
 
     }
 
