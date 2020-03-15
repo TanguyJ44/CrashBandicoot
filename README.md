@@ -63,6 +63,7 @@ Langage : Java 8 (SE)
 - Gestion des délais d'exécution
 - Amélioration mort du personnage
 - Détection du poisson
+- Prise en charge des manettes de jeu
 
 
 # Patchs

@@ -2,10 +2,10 @@ package com.supinfo.project.crashbandicoot;
 
 import com.supinfo.project.crashbandicoot.game.Game;
 import com.supinfo.project.crashbandicoot.game.Level;
+import com.supinfo.project.crashbandicoot.utiles.driver.Interaction;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -93,6 +93,7 @@ public class Component {
 
     public void exit(){
         Display.destroy();
+        Interaction.disconnect();
         System.exit(0);
     }
 
@@ -140,6 +141,10 @@ public class Component {
     }
 
     public static void main(String[] args) {
+
+        //if(args[0] != null) Interaction.connect(Integer.parseInt(args[0]));
+        Interaction.connect(2236);
+
         Component component = new Component();
         component.launch();
     }

@@ -1,7 +1,6 @@
 package com.supinfo.project.crashbandicoot.entities;
 
 import com.supinfo.project.crashbandicoot.game.Level;
-import com.supinfo.project.crashbandicoot.game.Traps;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
@@ -49,6 +48,11 @@ public class Player extends Entity{
 
     int old_dir;
 
+    public static boolean moveRight = false;
+    public static boolean moveLeft = false;
+    public static boolean moveJump = false;
+    public static boolean gamepadB = false;
+
     @Override
     public void update() {
         ya += level.gravity * mass;
@@ -64,11 +68,25 @@ public class Player extends Entity{
             if(dir != 0) dir = 0;
             anim.play();
         }
+        if(keysEnable == true && x < 990 && moveRight == true) {
+            xa += speed;
+            if(dir != 0) dir = 0;
+            anim.play();
+        }
+
+
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
             xa -= speed;
             if(dir != 1) dir = 1;
             anim.play();
         }
+        if(keysEnable == true && x > 0 && moveLeft == true) {
+            xa -= speed;
+            if(dir != 1) dir = 1;
+            anim.play();
+        }
+
+
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
             if(dir != 2) {
                 anim.pause();
@@ -80,10 +98,26 @@ public class Player extends Entity{
                 ya -= 20;
             }
         }
+        if(keysEnable == true && moveJump == true) {
+            moveJump = false;
+            if(dir != 2) {
+                anim.pause();
+                anim.setCurrentFrame(dir);
+                old_dir = dir;
+                dir = 2;
+            }
+            if(isGrounded()) {
+                ya -= 20;
+            }
+        }
+
+
+
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ya = speed;
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_F1) || gamepadB == true) {
+            gamepadB = false;
             playerLife = 3;
             AkuAku.akuakuLife = 0;
             AkuAku.invokAkuaku = false;
@@ -154,7 +188,6 @@ public class Player extends Entity{
         ya *= drag;
 
         playerDeath();
-
     }
 
     public void playerDeath () {
