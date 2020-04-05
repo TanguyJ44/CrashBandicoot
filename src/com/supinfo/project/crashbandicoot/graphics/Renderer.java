@@ -35,11 +35,14 @@ public class Renderer {
 
     static boolean loop = true;
     static boolean drawText = false;
+    static boolean invert = false;
 
     static int time = 0;
     static int frame = 0;
 
     static float alpha = 0f;
+
+    static int count = 0;
 
     static String gameOverText = "GAME OVER ! \n\n Appuyer sur [F5] pour lancer\n une nouvelle partie";
 
@@ -60,12 +63,22 @@ public class Renderer {
             time++;
             if (time > 15) {
                 frame++;
-                if(alpha < 1.1f){
-                    alpha += 0.1f;
+                if(invert == false) {
+                    if(alpha < 1.1f){
+                        alpha += 0.1f;
+                    } else {
+                        loop = false;
+                        if (type == 1) Level.levelNumber += 1;
+                        drawText = true;
+                    }
                 } else {
-                    loop = false;
-                    Level.levelNumber += 1;
-                    drawText = true;
+                    if(alpha > 0f){
+                        alpha -= 0.1f;
+                    } else {
+                        loop = false;
+                        count = 0;
+                        invert = false;
+                    }
                 }
                 time = 0;
             }
@@ -77,7 +90,17 @@ public class Renderer {
             } else if(type == 2) {
                 Header.fontBlackOut.drawString((screenScroller + (Component.frameWidth /2)) - (Header.fontBlackOut.getWidth(gameOverText)/2), Component.frameHeight / 3, gameOverText);
             }
+
+            if(type == 1) {
+                count++;
+                if(count > 300) {
+                    invert = true;
+                    loop = true;
+                    drawText = false;
+                }
+            }
         }
+
 
     }
 

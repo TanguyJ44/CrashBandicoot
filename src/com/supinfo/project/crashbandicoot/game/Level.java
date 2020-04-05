@@ -94,7 +94,7 @@ public class Level {
 
         for (int i = 0; i < width; i++) {
             for (int j = 7; j < 15; j++) {
-                if(i != 28 && i != 48 && i != 49) {
+                if(Level.levelNumber == 1 && i != 28 && i != 48 && i != 49) {
                     solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
                 }
             }
@@ -180,11 +180,11 @@ public class Level {
     }
 
     public void level2Objects() {
-
+        Header.render();
     }
 
     public void level3Objects() {
-
+        Header.render();
     }
 
     public void load1AfterPlayer() {

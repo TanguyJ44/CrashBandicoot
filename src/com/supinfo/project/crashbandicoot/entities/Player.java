@@ -140,6 +140,19 @@ public class Player extends Entity{
 
         if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
             Level.levelFinished = false;
+            Level.levelNumber = 1;
+
+            keysEnable = false;
+            playerIsDead = false;
+            killPlayer = false;
+
+            x = 10;
+            y = 80;
+            dir = 0;
+
+            playerLife = 3;
+            numberFruits = 0;
+            level.reloadObject();
         }
 
         if(x > 970) {
