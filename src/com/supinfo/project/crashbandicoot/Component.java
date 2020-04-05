@@ -143,7 +143,7 @@ public class Component {
     public static void main(String[] args) {
 
         //if(args[0] != null) Interaction.connect(Integer.parseInt(args[0]));
-        Interaction.connect(2236);
+        //Interaction.connect(2236);
 
         Component component = new Component();
         component.launch();

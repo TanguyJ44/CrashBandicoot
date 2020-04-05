@@ -2,6 +2,7 @@ package com.supinfo.project.crashbandicoot.game.tiles;
 
 import com.supinfo.project.crashbandicoot.Component;
 import com.supinfo.project.crashbandicoot.game.Game;
+import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
@@ -38,11 +39,19 @@ public class Tile {
         float y1 = y + 1 + Game.yScroll / 32;
 
         if(x1 < 0 || y1 < 0 || x0 > Component.frameWidth / 16 || y0 > Component.frameHeight / 16) return;
-        Texture.tiles.bind();
-            glBegin(GL_QUADS);
+        if(Level.levelNumber == 1) {
+            Texture.tilesLvl1.bind();
+                glBegin(GL_QUADS);
                 Renderer.quadData(x * size, y * size, size, size, Colors.WHITE, 32.0f, xo, yo);
-            glEnd();
-        Texture.tiles.unbind();
+                glEnd();
+            Texture.tilesLvl1.unbind();
+        } else if (Level.levelNumber == 2) {
+            Texture.tilesLvl2.bind();
+                glBegin(GL_QUADS);
+                Renderer.quadData(x * size, y * size, size, size, Colors.WHITE, 32.0f, xo, yo);
+                glEnd();
+            Texture.tilesLvl2.unbind();
+        }
     }
 
 }

@@ -15,7 +15,8 @@ import static org.lwjgl.opengl.GL12.*;
 public class Texture {
 
     public static Texture load = loadTexture("./res/images/load.png");
-    public static Texture tiles = loadTexture("./res/images/new_map.png");
+    public static Texture tilesLvl1 = loadTexture("./res/images/lvl1.png");
+    public static Texture tilesLvl2 = loadTexture("./res/images/lvl2.png");
 
     public static Texture player = loadTexture("./res/images/sprite_perso.png");
     public static Texture head_player = loadTexture("./res/images/head_cb.png");

@@ -12,7 +12,6 @@ import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
 import com.supinfo.project.crashbandicoot.utiles.ScreenLoader;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,9 @@ public class Level {
     List<Tile> tiles = new ArrayList<Tile>();
 
     List<Entity> entities = new ArrayList<>();
+
+    public static boolean levelFinished = false;
+    public static int levelNumber = 1;
 
     Texture textureFruit;
     Texture textureBoxe;
@@ -105,7 +107,7 @@ public class Level {
 
         Header.init();
 
-        wompasSound.init(new File("./res/sounds/wompas.wav"));
+        //wompasSound.init(new File("./res/sounds/wompas.wav"));
 
         ScreenLoader.init();
     }
@@ -151,7 +153,7 @@ public class Level {
         fruits.add(new Fruit(950, 90, false));
     }
 
-    public void levelObjects() {
+    public void level1Objects() {
         Header.render();
 
         textureFruit.bind();
@@ -177,8 +179,28 @@ public class Level {
         }
     }
 
-    public void loadAfterPlayer() {
+    public void level2Objects() {
+
+    }
+
+    public void level3Objects() {
+
+    }
+
+    public void load1AfterPlayer() {
         ScreenLoader.render();
+
+        if(levelFinished == true) {
+            Renderer.renderBlackOut(1);
+        }
+    }
+
+    public void load2AfterPlayer() {
+
+    }
+
+    public void load3AfterPlayer() {
+
     }
 
     public void reloadObject() {

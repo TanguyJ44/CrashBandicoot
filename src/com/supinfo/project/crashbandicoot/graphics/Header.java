@@ -10,23 +10,30 @@ import java.awt.*;
 
 public class Header {
 
-    public static UnicodeFont font, font2;
+    public static Font awtFont;
+    public static UnicodeFont font, font2, fontBlackOut;
 
     public static Texture textureFruit;
     public static Texture headPlayer;
 
     public static void init() {
-        Font awtFont = new Font("Arial", Font.BOLD, 20);
+        awtFont = new Font("Arial", Font.BOLD, 20);
         font = new UnicodeFont(awtFont);
         font2 = new UnicodeFont(awtFont);
+        fontBlackOut = new UnicodeFont(awtFont);
         font.getEffects().add(new ColorEffect(java.awt.Color.white));
         font2.getEffects().add(new ColorEffect(java.awt.Color.white));
+        fontBlackOut.getEffects().add(new ColorEffect(java.awt.Color.white));
         font.addAsciiGlyphs();
         font2.addAsciiGlyphs();
+        fontBlackOut.addAsciiGlyphs();
+
+
 
         try {
             font.loadGlyphs();
             font2.loadGlyphs();
+            fontBlackOut.loadGlyphs();
         } catch (SlickException ex) {
             System.err.println(ex.toString());
         }

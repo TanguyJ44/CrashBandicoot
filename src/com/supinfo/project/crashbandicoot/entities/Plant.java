@@ -91,8 +91,10 @@ public class Plant extends Entity{
 
     @Override
     public void render() {
-        texture.bind();
-            Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, swing);
-        texture.unbind();
+        if(Level.levelFinished != true) {
+            texture.bind();
+                Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, swing);
+            texture.unbind();
+        }
     }
 }

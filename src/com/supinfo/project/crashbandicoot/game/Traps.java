@@ -40,10 +40,10 @@ public class Traps {
         }
 
         // Traps collide detection
-        if ((Player.playerX >= 643 + 32)
-                || (Player.playerX + Player.playerBoxWidth <= 643)
-                || (Player.playerY >= 170 - animPique.getCurrentCoord() + 64)
-                || (Player.playerY + Player.playerBoxHeight <= 170 - animPique.getCurrentCoord())){
+        if ((Player.playerX+10 >= 643 + 32)
+                || (Player.playerX+10 + Player.playerBoxWidth-20 <= 643)
+                || (Player.playerY+10 >= 170 - animPique.getCurrentCoord() + 64)
+                || (Player.playerY+10 + Player.playerBoxHeight-20 <= 170 - animPique.getCurrentCoord())){
             // Player is not in a area
         } else {
             if(delay.talk() == true) {

@@ -138,6 +138,22 @@ public class Player extends Entity{
             if(AkuAku.akuakuLife < 2) AkuAku.akuakuLife++;
         }
 
+        if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+            Level.levelFinished = false;
+        }
+
+        if(x > 970) {
+            if(Level.levelNumber == 1) {
+                Level.levelFinished = true;
+                keysEnable = false;
+
+                x = 10;
+                y = 80;
+                dir = 0;
+            }
+        }
+
+
         // Jump
         if (ya == 0.9f && dir == 2) {
             anim.play();
@@ -169,10 +185,10 @@ public class Player extends Entity{
         // Détection des fruits
         for (int i = 0; i < level.fruits.size(); i++) {
             // Fruit collide detection
-            if ((Player.playerX+5 >= level.fruits.get(i).getX() + 20)
-                    || (Player.playerX+5 + Player.playerBoxWidth-5 <= level.fruits.get(i).getX())
-                    || (Player.playerY+5 >= level.fruits.get(i).getY() + 20)
-                    || (Player.playerY+5 + Player.playerBoxHeight-5 <= level.fruits.get(i).getY())){
+            if ((Player.playerX+10 >= level.fruits.get(i).getX() + 20)
+                    || (Player.playerX+10 + Player.playerBoxWidth-20 <= level.fruits.get(i).getX())
+                    || (Player.playerY+10 >= level.fruits.get(i).getY() + 20)
+                    || (Player.playerY+10 + Player.playerBoxHeight-20 <= level.fruits.get(i).getY())){
                 // Player is not in a area
             } else {
                 if(level.fruits.get(i).getEat() == false) {
@@ -196,27 +212,37 @@ public class Player extends Entity{
             playerIsDead = true;
 
             if(playerLife > 0) playerLife--;
+
             x = 10;
             y = 80;
             dir = 0;
             numberFruits = 0;
             level.reloadObject();
 
-            playerIsDead = false;
-            keysEnable = true;
+            if(playerLife != 0) {
+                playerIsDead = false;
+                keysEnable = true;
 
-            killPlayer = false;
+                killPlayer = false;
+            }
         }
     }
 
     @Override
     public void render() {
-        level.levelObjects();
+        if(Level.levelNumber == 1) level.level1Objects();
+        else if(Level.levelNumber == 2) level.level2Objects();
+        else if(Level.levelNumber == 3) level.level3Objects();
 
         texture.bind();
             Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, anim.getCurrentFrame());
         texture.unbind();
 
-        level.loadAfterPlayer();
+        if(Level.levelNumber == 1) level.load1AfterPlayer();
+        else if(Level.levelNumber == 2) level.load2AfterPlayer();
+        else if(Level.levelNumber == 3) level.load3AfterPlayer();
+
+        if(Level.levelFinished == true) Renderer.renderBlackOut(1);
+        if(playerLife == 0) Renderer.renderBlackOut(2);
     }
 }

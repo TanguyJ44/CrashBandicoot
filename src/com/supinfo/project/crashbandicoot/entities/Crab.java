@@ -62,10 +62,10 @@ public class Crab extends Entity {
         }
 
         // Crab collide detection
-        if ((Player.playerX >= x + coord + 35)
-                || (Player.playerX + Player.playerBoxWidth <= x + coord)
-                || (Player.playerY >= y + 35)
-                || (Player.playerY + Player.playerBoxHeight <= y)){
+        if ((Player.playerX+10 >= x + coord + 35)
+                || (Player.playerX+10 + Player.playerBoxWidth-20 <= x + coord)
+                || (Player.playerY+10 >= y + 35)
+                || (Player.playerY+10 + Player.playerBoxHeight-20 <= y)){
             // Player is not in a area
         } else {
             if (Player.tornadoAttack == false && delay.talk() == true) {
@@ -82,8 +82,10 @@ public class Crab extends Entity {
 
     @Override
     public void render() {
-        texture.bind();
-            Renderer.renderEntity(x + coord, y, 25, 25, Colors.WHITE, 2f, dir, 0);
-        texture.unbind();
+        if(Level.levelFinished != true) {
+            texture.bind();
+                Renderer.renderEntity(x + coord, y, 25, 25, Colors.WHITE, 2f, dir, 0);
+            texture.unbind();
+        }
     }
 }

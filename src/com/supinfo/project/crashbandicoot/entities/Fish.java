@@ -60,10 +60,10 @@ public class Fish extends Entity {
 
 
         // Fish collide detection
-        if ((Player.playerX >= x + 25)
-                || (Player.playerX + Player.playerBoxWidth <= x)
-                || (Player.playerY >= y - coord + 35)
-                || (Player.playerY + Player.playerBoxHeight <= y - coord)){
+        if ((Player.playerX+10 >= x + 25)
+                || (Player.playerX+10 + Player.playerBoxWidth-20 <= x)
+                || (Player.playerY+10 >= y - coord + 35)
+                || (Player.playerY+10 + Player.playerBoxHeight-20 <= y - coord)){
             // Player is not in a area
         } else {
             if(delay.talk() == true) {
@@ -77,13 +77,13 @@ public class Fish extends Entity {
 
     @Override
     public void render() {
-        texture.bind();
-            Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
-        texture.unbind();
+        if(Level.levelFinished != true) {
+            texture.bind();Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
+            texture.unbind();
 
-        textureFishCover.bind();
-            Renderer.renderEntity(790, 150, 25, 35, Colors.WHITE, 1f, 0, 0);
-        textureFishCover.unbind();
+            textureFishCover.bind();Renderer.renderEntity(790, 150, 25, 35, Colors.WHITE, 1f, 0, 0);
+            textureFishCover.unbind();
+        }
     }
 
 }
