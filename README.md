@@ -64,6 +64,10 @@ Langage : Java 8 (SE)
 - Amélioration mort du personnage
 - Détection du poisson
 - Prise en charge des manettes de jeu
+- Changement de niveau
+- Message & animation chengement de niveau
+- Gestion du Game-Over
+- Message & animation game-over
 
 
 # Patchs

@@ -59,6 +59,8 @@ public class Renderer {
             glVertex2f(screenScroller, Component.frameHeight);
         glEnd();
 
+        //System.out.println("Level n° " + Level.levelNumber);
+
         if (loop) {
             time++;
             if (time > 15) {
@@ -66,18 +68,19 @@ public class Renderer {
                 if(invert == false) {
                     if(alpha < 1.1f){
                         alpha += 0.1f;
+                        System.out.println("p1 : " + alpha);
                     } else {
+                        System.out.println("p2 : " + alpha);
                         loop = false;
                         if (type == 1) Level.levelNumber += 1;
+                        System.out.println("call !!");
                         drawText = true;
                     }
                 } else {
                     if(alpha > 0f){
                         alpha -= 0.1f;
                     } else {
-                        loop = false;
-                        count = 0;
-                        invert = false;
+                        renderBlackOutReload();
                     }
                 }
                 time = 0;
@@ -100,8 +103,17 @@ public class Renderer {
                 }
             }
         }
+    }
 
+    public static void renderBlackOutReload() {
+        drawText = false;
+        loop = true;
+        count = 0;
+        invert = false;
+        time = 0;
+        frame = 0;
 
+        Level.levelFinished = false;
     }
 
 }

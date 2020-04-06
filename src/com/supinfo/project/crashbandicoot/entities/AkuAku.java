@@ -51,8 +51,10 @@ public class AkuAku extends Entity {
 
     @Override
     public void render() {
-        texture.bind();
-            Renderer.renderEntity(x, y, 25, 25, Colors.WHITE, 5.3f, akuakuLife, akuakuDir);
-        texture.unbind();
+        if(invokAkuaku == true) {
+            texture.bind();
+                Renderer.renderEntity(x, y, 25, 25, Colors.WHITE, 5.3f, akuakuLife, akuakuDir);
+            texture.unbind();
+        }
     }
 }

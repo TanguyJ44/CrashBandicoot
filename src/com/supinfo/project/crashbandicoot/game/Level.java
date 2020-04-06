@@ -34,14 +34,15 @@ public class Level {
     Texture textureBoxe;
     Texture texturePique;
 
-    public ArrayList<Fruit> fruits = new ArrayList<Fruit>();
-    public ArrayList<Boxes> boxes = new ArrayList<Boxes>();
+    ArrayList<Fruit> fruits = new ArrayList<>();
+    ArrayList<Boxes> boxes = new ArrayList<Boxes>();
+
+    ArrayList<Crab> crabs = new ArrayList<>();
+    ArrayList<Fish> fishs = new ArrayList<>();
+    ArrayList<Plant> plants = new ArrayList<>();
 
     private static Player player = new Player(10, 80);
     private static AkuAku akuaku = new AkuAku(8, 90);
-    private static Fish fish = new Fish(792, 150);
-    private static Crab crab = new Crab(880, 135);
-    private static Plant plant = new Plant(350, 115);
 
     ObjectsAnimation animFruits;
 
@@ -68,17 +69,9 @@ public class Level {
     public void spawner() {
         player.init(this);
         akuaku.init(this);
-        fish.init(this);
-        crab.init(this);
-        plant.init(this);
 
         addEntity(player);
-        if(AkuAku.invokAkuaku == true)
-            addEntity(akuaku);
-
-        addEntity(fish);
-        addEntity(crab);
-        addEntity(plant);
+        addEntity(akuaku);
     }
 
     public Tile getSolidTile(int x, int y) {
@@ -96,11 +89,14 @@ public class Level {
             for (int j = 7; j < 15; j++) {
                 if(Level.levelNumber == 1 && i != 28 && i != 48 && i != 49) {
                     solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
+                } else if(Level.levelNumber == 2){
+                    solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
                 }
             }
         }
 
         initObjects();
+        initEntities();
         animFruits.play();
 
         Traps.init();
@@ -143,14 +139,35 @@ public class Level {
     }
 
     public void initObjects() {
-        fruits.add(new Fruit(120, 120, false));
-        fruits.add(new Fruit(200, 80, false));
-        fruits.add(new Fruit(290, 120, false));
-        fruits.add(new Fruit(450, 90, false));
-        fruits.add(new Fruit(550, 90, false));
-        fruits.add(new Fruit(750, 90, false));
-        fruits.add(new Fruit(850, 120, false));
-        fruits.add(new Fruit(950, 90, false));
+        fruits.add(new Fruit(120, 120, false, 1));
+        fruits.add(new Fruit(200, 80, false, 1));
+        fruits.add(new Fruit(290, 120, false, 1));
+        fruits.add(new Fruit(450, 90, false, 1));
+        fruits.add(new Fruit(550, 90, false, 1));
+        fruits.add(new Fruit(750, 90, false, 1));
+        fruits.add(new Fruit(850, 120, false, 1));
+        fruits.add(new Fruit(950, 90, false, 1));
+    }
+
+    public void initEntities() {
+        crabs.add(new Crab(880, 135, 1));
+        fishs.add(new Fish(792, 150, 1));
+        plants.add(new Plant(350, 115, 1));
+
+        for (int i = 0; i < crabs.size(); i++) {
+            crabs.get(i).init(this);
+            addEntity(crabs.get(i));
+        }
+
+        for (int i = 0; i < fishs.size(); i++) {
+            fishs.get(i).init(this);
+            addEntity(fishs.get(i));
+        }
+
+        for (int i = 0; i < plants.size(); i++) {
+            plants.get(i).init(this);
+            addEntity(plants.get(i));
+        }
     }
 
     public void level1Objects() {
@@ -158,7 +175,7 @@ public class Level {
 
         textureFruit.bind();
         for (int i = 0; i < fruits.size(); i++) {
-            if (fruits.get(i).getEat() == false)
+            if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 1)
                 Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 37, 37, Colors.WHITE, 0.5f, 0, 0);
         }
         textureFruit.unbind();
@@ -175,7 +192,8 @@ public class Level {
         texturePique.unbind();
 
         for (int i = 0; i < fruits.size(); i++) {
-            fruits.get(i).setY(fruits.get(i).getDefaultY() + animFruits.getCurrentCoord());
+            if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 1)
+                fruits.get(i).setY(fruits.get(i).getDefaultY() + animFruits.getCurrentCoord());
         }
     }
 

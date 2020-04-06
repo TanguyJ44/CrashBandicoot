@@ -8,6 +8,8 @@ import com.supinfo.project.crashbandicoot.utiles.Delay;
 
 public class Fish extends Entity {
 
+    int level;
+
     private int length;
     private int speed;
     private int time;
@@ -17,8 +19,10 @@ public class Fish extends Entity {
 
     Delay delay;
 
-    public Fish(int x, int y) {
+    public Fish(int x, int y, int level) {
         super(x, y);
+
+        this.level = level;
 
         texture = Texture.fish;
     }
@@ -40,44 +44,43 @@ public class Fish extends Entity {
 
     @Override
     public void update() {
+        if(Level.levelNumber == level) {
+            if (true) {
+                time++;
+                if (time > speed) {
+                    if (coord <= length && invert == false) coord++;
+                    if(coord <= length && invert == true) coord--;
+                    if (coord == length) {
+                        invert = true;
+                        dir = 1;
+                    }
+                    if (coord == 0) {
+                        invert = false;
+                        dir = 0;
+                    }
+                    time = 0;
+                }
+            }
 
-        if (true) {
-            time++;
-            if (time > speed) {
-                if (coord <= length && invert == false) coord++;
-                if(coord <= length && invert == true) coord--;
-                if (coord == length) {
-                    invert = true;
-                    dir = 1;
+
+            // Fish collide detection
+            if ((Player.playerX+10 >= x + 25)
+                    || (Player.playerX+10 + Player.playerBoxWidth-20 <= x)
+                    || (Player.playerY+10 >= y - coord + 35)
+                    || (Player.playerY+10 + Player.playerBoxHeight-20 <= y - coord)){
+                // Player is not in a area
+            } else {
+                if(delay.talk() == true) {
+                    Player.killPlayer = true;
+                    delay.start();
                 }
-                if (coord == 0) {
-                    invert = false;
-                    dir = 0;
-                }
-                time = 0;
             }
         }
-
-
-        // Fish collide detection
-        if ((Player.playerX+10 >= x + 25)
-                || (Player.playerX+10 + Player.playerBoxWidth-20 <= x)
-                || (Player.playerY+10 >= y - coord + 35)
-                || (Player.playerY+10 + Player.playerBoxHeight-20 <= y - coord)){
-            // Player is not in a area
-        } else {
-            if(delay.talk() == true) {
-                Player.killPlayer = true;
-                delay.start();
-            }
-        }
-
-
     }
 
     @Override
     public void render() {
-        if(Level.levelFinished != true) {
+        if(Level.levelFinished != true && Level.levelNumber == level) {
             texture.bind();Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
             texture.unbind();
 
@@ -85,5 +88,7 @@ public class Fish extends Entity {
             textureFishCover.unbind();
         }
     }
+
+    public int getLevel() { return level; }
 
 }

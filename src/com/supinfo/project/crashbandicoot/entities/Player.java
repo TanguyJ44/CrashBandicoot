@@ -150,6 +150,8 @@ public class Player extends Entity{
             y = 80;
             dir = 0;
 
+            Renderer.renderBlackOutReload();
+
             playerLife = 3;
             numberFruits = 0;
             level.reloadObject();

@@ -5,11 +5,13 @@ public class Fruit {
     int x, y;
     boolean eat;
     int defaultY;
+    int level;
 
-    public Fruit(int x, int y, boolean eat) {
+    public Fruit(int x, int y, boolean eat, int level) {
         this.x = x;
         this.y = y;
         this.eat = eat;
+        this.level = level;
 
         defaultY = y;
     }
@@ -23,6 +25,8 @@ public class Fruit {
     }
 
     public boolean getEat() { return eat; }
+
+    public int getLevel() { return level; }
 
     public int getDefaultY() { return defaultY; }
 

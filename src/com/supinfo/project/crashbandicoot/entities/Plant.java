@@ -8,6 +8,8 @@ import com.supinfo.project.crashbandicoot.utiles.Delay;
 
 public class Plant extends Entity{
 
+    int level;
+
     private int length;
     private int speed;
     private int time;
@@ -21,8 +23,10 @@ public class Plant extends Entity{
 
     Delay delay;
 
-    public Plant(int x, int y) {
+    public Plant(int x, int y, int level) {
         super(x, y);
+
+        this.level = level;
 
         texture = Texture.plant;
     }
@@ -43,58 +47,60 @@ public class Plant extends Entity{
 
     @Override
     public void update() {
-        if (Player.playerX < x && dir == 0) dir = 1;
-        else if (Player.playerX > x && dir == 1) dir = 0;
+        if(Level.levelNumber == level) {
+            if (Player.playerX < x && dir == 0) dir = 1;
+            else if (Player.playerX > x && dir == 1) dir = 0;
 
-        if (true) {
-            time++;
-            if (time > speed) {
+            if (true) {
+                time++;
+                if (time > speed) {
 
-                if (swingCount > 8) {
-                    swingCount = 0;
-                    if (swing == 0) {
-                        swing = 1;
-                        y+= 1;
+                    if (swingCount > 8) {
+                        swingCount = 0;
+                        if (swing == 0) {
+                            swing = 1;
+                            y+= 1;
+                        }
+                        else {
+                            swing = 0;
+                            y-= 1;
+                        }
                     }
-                    else {
-                        swing = 0;
-                        y-= 1;
-                    }
+
+                    swingCount++;
+
+                    time = 0;
                 }
-
-                swingCount++;
-
-                time = 0;
             }
-        }
 
-        // Plant collide detection
-        if ((Player.playerX >= x + 32)
-                || (Player.playerX + Player.playerBoxWidth <= x)
-                || (Player.playerY >= y + 40)
-                || (Player.playerY + Player.playerBoxHeight <= y)){
-            // Player is not in a area
-        } else {
-            if (Player.tornadoAttack == false) {
-                if(eating == true && delay.talk() == true) {
-                    Player.killPlayer = true; // Player death
-
-                    delay.start();
-                }
+            // Plant collide detection
+            if ((Player.playerX >= x + 32)
+                    || (Player.playerX + Player.playerBoxWidth <= x)
+                    || (Player.playerY >= y + 40)
+                    || (Player.playerY + Player.playerBoxHeight <= y)){
+                // Player is not in a area
             } else {
-                // Plant kill
+                if (Player.tornadoAttack == false) {
+                    if(eating == true && delay.talk() == true) {
+                        Player.killPlayer = true; // Player death
+
+                        delay.start();
+                    }
+                } else {
+                    // Plant kill
+                }
             }
         }
-
-
     }
 
     @Override
     public void render() {
-        if(Level.levelFinished != true) {
+        if(Level.levelFinished != true && Level.levelNumber == level) {
             texture.bind();
                 Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, swing);
             texture.unbind();
         }
     }
+
+    public int getLevel() { return level; }
 }
