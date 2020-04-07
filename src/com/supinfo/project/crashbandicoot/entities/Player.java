@@ -63,12 +63,12 @@ public class Player extends Entity{
         playerX = x;
         playerY = y;
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 990) {
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)/* && x < 990*/) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
         }
-        if(keysEnable == true && x < 990 && moveRight == true) {
+        if(keysEnable == true /*&& x < 990*/ && moveRight == true) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
@@ -110,7 +110,6 @@ public class Player extends Entity{
                 ya -= 20;
             }
         }
-
 
 
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
@@ -209,7 +208,7 @@ public class Player extends Entity{
                 if(level.fruits.get(i).getEat() == false) {
                     level.fruits.get(i).setEat(true);
                     numberFruits++;
-                    Level.wompasSound.play();
+                    //Level.wompasSound.play();
                 }
             }
 

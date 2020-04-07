@@ -33,5 +33,4 @@ public class Fruit {
     public void setY(int newY) { y = newY; }
 
     public void setEat(boolean newEat) { eat = newEat; }
-
 }

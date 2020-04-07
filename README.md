@@ -68,6 +68,8 @@ Langage : Java 8 (SE)
 - Message & animation chengement de niveau
 - Gestion du Game-Over
 - Message & animation game-over
+- Convertion des piques en objets
+- Amélioration du changement de niveau
 
 
 # Patchs

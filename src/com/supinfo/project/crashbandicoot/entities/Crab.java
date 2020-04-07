@@ -76,7 +76,7 @@ public class Crab extends Entity {
                 if (Player.tornadoAttack == false && delay.talk() == true) {
                     // Player death
                     Player.killPlayer = true;
-
+                    System.out.println("[Player] was killed by Crab !");
                     delay.start();
                 } else {
                     // Crab kill

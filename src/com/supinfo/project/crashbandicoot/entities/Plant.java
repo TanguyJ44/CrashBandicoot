@@ -83,7 +83,7 @@ public class Plant extends Entity{
                 if (Player.tornadoAttack == false) {
                     if(eating == true && delay.talk() == true) {
                         Player.killPlayer = true; // Player death
-
+                        System.out.println("[Player] was killed by Plant !");
                         delay.start();
                     }
                 } else {

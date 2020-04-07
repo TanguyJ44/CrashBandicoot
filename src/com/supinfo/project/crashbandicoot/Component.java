@@ -114,7 +114,7 @@ public class Component {
 
             Display.setTitle("Demake Crash Bandicoot - 1PROJ");
 
-            Display.setResizable(true);
+            Display.setResizable(false);
             Display.setFullscreen(false);
 
             Display.create();

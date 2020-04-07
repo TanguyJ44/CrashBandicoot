@@ -32,14 +32,15 @@ public class Level {
 
     Texture textureFruit;
     Texture textureBoxe;
-    Texture texturePique;
 
-    ArrayList<Fruit> fruits = new ArrayList<>();
+    public static ArrayList<Fruit> fruits = new ArrayList<>();
     ArrayList<Boxes> boxes = new ArrayList<Boxes>();
 
     ArrayList<Crab> crabs = new ArrayList<>();
     ArrayList<Fish> fishs = new ArrayList<>();
     ArrayList<Plant> plants = new ArrayList<>();
+
+    ArrayList<Traps> traps = new ArrayList<>();
 
     private static Player player = new Player(10, 80);
     private static AkuAku akuaku = new AkuAku(8, 90);
@@ -47,6 +48,8 @@ public class Level {
     ObjectsAnimation animFruits;
 
     public static AudioControl wompasSound = new AudioControl();
+
+    int loadLevel = 0;
 
     public Level(int width, int height) {
         this.width = width;
@@ -83,29 +86,31 @@ public class Level {
         solidTile = new Tile[width][height];
         textureFruit = Texture.apple;
         textureBoxe = Texture.boxe;
-        texturePique = Texture.pique;
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 7; j < 15; j++) {
-                if(Level.levelNumber == 1 && i != 28 && i != 48 && i != 49) {
-                    solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
-                } else if(Level.levelNumber == 2){
-                    solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
-                }
-            }
-        }
+        //texturePique = Texture.pique;
 
         initObjects();
         initEntities();
         animFruits.play();
 
-        Traps.init();
+        //Traps.init();
 
         Header.init();
 
         //wompasSound.init(new File("./res/sounds/wompas.wav"));
 
         ScreenLoader.init();
+    }
+
+    public void mapInit() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 7; j < 15; j++) {
+                if(Level.levelNumber == 1 && i != 28 && i != 48 && i != 49) {
+                    solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
+                } else if(Level.levelNumber == 2 && i != 5){
+                    solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
+                }
+            }
+        }
     }
 
     public void addEntity(Entity e) {
@@ -123,9 +128,18 @@ public class Level {
             e.update();
         }
 
-        Traps.update();
+        for (int i = 0; i < traps.size(); i++) {
+            traps.get(i).update();
+        }
+        //Traps.update();
 
         animFruits.update();
+
+        if(loadLevel < Level.levelNumber) {
+            loadLevel = Level.levelNumber;
+            mapInit();
+            initObjects();
+        }
     }
 
     public void render() {
@@ -139,20 +153,28 @@ public class Level {
     }
 
     public void initObjects() {
-        fruits.add(new Fruit(120, 120, false, 1));
-        fruits.add(new Fruit(200, 80, false, 1));
-        fruits.add(new Fruit(290, 120, false, 1));
-        fruits.add(new Fruit(450, 90, false, 1));
-        fruits.add(new Fruit(550, 90, false, 1));
-        fruits.add(new Fruit(750, 90, false, 1));
-        fruits.add(new Fruit(850, 120, false, 1));
-        fruits.add(new Fruit(950, 90, false, 1));
+        fruits.clear();
+
+        if(Level.levelNumber == 1) {
+            fruits.add(new Fruit(120, 120, false, 1));
+            fruits.add(new Fruit(200, 80, false, 1));
+            fruits.add(new Fruit(290, 120, false, 1));
+            fruits.add(new Fruit(450, 90, false, 1));
+            fruits.add(new Fruit(550, 90, false, 1));
+            fruits.add(new Fruit(750, 90, false, 1));
+            fruits.add(new Fruit(850, 120, false, 1));
+            fruits.add(new Fruit(950, 90, false, 1));
+        } else if(Level.levelNumber == 2) {
+
+        }
     }
 
     public void initEntities() {
         crabs.add(new Crab(880, 135, 1));
         fishs.add(new Fish(792, 150, 1));
         plants.add(new Plant(350, 115, 1));
+
+        traps.add(new Traps(643, 170, 1));
 
         for (int i = 0; i < crabs.size(); i++) {
             crabs.get(i).init(this);
@@ -187,9 +209,13 @@ public class Level {
         }
         textureBoxe.unbind();
 
-        texturePique.bind();
+        for (int i = 0; i < traps.size(); i++) {
+            traps.get(i).render();
+        }
+
+        /*texturePique.bind();
             Renderer.renderEntity(643, 170 - Traps.animPique.getCurrentCoord(), 32, 64, Colors.WHITE, 2f, 0, 0);
-        texturePique.unbind();
+        texturePique.unbind();*/
 
         for (int i = 0; i < fruits.size(); i++) {
             if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 1)

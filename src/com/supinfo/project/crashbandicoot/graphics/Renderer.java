@@ -68,12 +68,9 @@ public class Renderer {
                 if(invert == false) {
                     if(alpha < 1.1f){
                         alpha += 0.1f;
-                        System.out.println("p1 : " + alpha);
                     } else {
-                        System.out.println("p2 : " + alpha);
                         loop = false;
                         if (type == 1) Level.levelNumber += 1;
-                        System.out.println("call !!");
                         drawText = true;
                     }
                 } else {

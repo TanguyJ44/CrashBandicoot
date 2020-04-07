@@ -73,6 +73,7 @@ public class Fish extends Entity {
                 if(delay.talk() == true) {
                     Player.killPlayer = true;
                     delay.start();
+                    System.out.println("[Player] was killed by Fish !");
                 }
             }
         }
