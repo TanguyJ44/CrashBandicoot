@@ -11,7 +11,7 @@ public class Game {
     public static float xScroll, yScroll;
 
     public Game() {
-        level = new Level(80, 80);
+        level = new Level(160, 160);
     }
 
     public void init() {
@@ -28,7 +28,7 @@ public class Game {
         level.update();
 
         if(Level.getPlayer().getX() > Component.frameWidth / 2 - 16) {
-            if (Player.playerX < 839)
+            if (Level.levelNumber == 1 && Player.playerX < 839 || Level.levelNumber == 2 && Player.playerX < 1698)
                 xa = -Level.getPlayer().getX() + Component.frameWidth / 2 - 16;
         } else {
             xa = -0.3f;

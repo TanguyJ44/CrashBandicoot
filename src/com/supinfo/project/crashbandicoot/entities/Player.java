@@ -64,10 +64,12 @@ public class Player extends Entity{
         playerX = x;
         playerY = y;
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 990) {
-            xa += speed;
-            if(dir != 0) dir = 0;
-            anim.play();
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) /*&& x < 990*/) {
+            if(Level.levelNumber == 1 & x < 990 || Level.levelNumber == 2 & x < 1980) {
+                xa += speed;
+                if(dir != 0) dir = 0;
+                anim.play();
+            }
         }
         if(keysEnable == true && x < 990 && moveRight == true) {
             xa += speed;

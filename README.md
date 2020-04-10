@@ -73,6 +73,7 @@ Langage : Java 8 (SE)
 - Image Game-Over
 - Ajout de l'effet Tornade (V1)
 - Action gamepad sur la tornade
+- Gestion de la longueur des niveaux
 
 
 # Patchs
