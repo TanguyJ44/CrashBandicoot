@@ -88,7 +88,10 @@ public class Renderer {
             if(type == 1) {
                 Header.fontBlackOut.drawString((screenScroller + (Component.frameWidth /2)) - (Header.fontBlackOut.getWidth("LEVEL " + Level.levelNumber)/2), Component.frameHeight / 3, "LEVEL " + Level.levelNumber);
             } else if(type == 2) {
-                Header.fontBlackOut.drawString((screenScroller + (Component.frameWidth /2)) - (Header.fontBlackOut.getWidth(gameOverText)/2), Component.frameHeight / 3, gameOverText);
+                //Header.fontBlackOut.drawString((screenScroller + (Component.frameWidth /2)) - (Header.fontBlackOut.getWidth(gameOverText)/2), Component.frameHeight / 3, gameOverText);
+                Texture.game_over.bind();
+                    Renderer.renderEntity(0, 0, Component.frameWidth, Component.frameHeight, Colors.WHITE, 1f, 0, 0);
+                Texture.game_over.unbind();
             }
 
             if(type == 1) {

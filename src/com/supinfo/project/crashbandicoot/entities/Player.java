@@ -52,6 +52,7 @@ public class Player extends Entity{
     public static boolean moveLeft = false;
     public static boolean moveJump = false;
     public static boolean gamepadB = false;
+    public static boolean gamepadTornado = false;
 
     @Override
     public void update() {
@@ -63,12 +64,12 @@ public class Player extends Entity{
         playerX = x;
         playerY = y;
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)/* && x < 990*/) {
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && x < 990) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
         }
-        if(keysEnable == true /*&& x < 990*/ && moveRight == true) {
+        if(keysEnable == true && x < 990 && moveRight == true) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
@@ -115,6 +116,18 @@ public class Player extends Entity{
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ya = speed;
         }
+
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+            if(tornadoAttack == false) {
+                tornadoAttack = true;
+            }
+        }
+        if(keysEnable == true && gamepadTornado == true) {
+            if(tornadoAttack == false) {
+                tornadoAttack = true;
+            }
+        }
+
         if (Keyboard.isKeyDown(Keyboard.KEY_F1) || gamepadB == true) {
             gamepadB = false;
             playerLife = 3;
@@ -218,6 +231,7 @@ public class Player extends Entity{
         ya *= drag;
 
         playerDeath();
+        onTornadoAttack();
     }
 
     public void playerDeath () {
@@ -242,15 +256,42 @@ public class Player extends Entity{
         }
     }
 
+    int time = 0;
+    int tornadoTime = 0;
+    public void onTornadoAttack () {
+        if(tornadoAttack == true) {
+
+            if (true) {
+                time++;
+                if (time > 10) {
+                    tornadoTime++;
+                    if(tornadoTime == 7) {
+                        tornadoAttack = false;
+                        tornadoTime = 0;
+                    }
+
+                    time = 0;
+                }
+            }
+
+        }
+    }
+
     @Override
     public void render() {
         if(Level.levelNumber == 1) level.level1Objects();
         else if(Level.levelNumber == 2) level.level2Objects();
         else if(Level.levelNumber == 3) level.level3Objects();
 
-        texture.bind();
-            Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, anim.getCurrentFrame());
-        texture.unbind();
+        if(tornadoAttack == false) {
+            texture.bind();
+                Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, anim.getCurrentFrame());
+            texture.unbind();
+        } else {
+            texture.bind();
+                Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, 3, 0);
+            texture.unbind();
+        }
 
         if(Level.levelNumber == 1) level.load1AfterPlayer();
         else if(Level.levelNumber == 2) level.load2AfterPlayer();

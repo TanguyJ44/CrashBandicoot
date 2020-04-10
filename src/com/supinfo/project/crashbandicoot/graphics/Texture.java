@@ -32,6 +32,8 @@ public class Texture {
     public static Texture crab = loadTexture("./res/images/crab.png");
     public static Texture plant = loadTexture("./res/images/sprite_plant.png");
 
+    public static Texture game_over = loadTexture("./res/images/game_over.png");
+
     int width, height;
     int id;
 

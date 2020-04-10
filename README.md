@@ -70,6 +70,9 @@ Langage : Java 8 (SE)
 - Message & animation game-over
 - Convertion des piques en objets
 - Amélioration du changement de niveau
+- Image Game-Over
+- Ajout de l'effet Tornade (V1)
+- Action gamepad sur la tornade
 
 
 # Patchs

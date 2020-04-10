@@ -61,7 +61,7 @@ public class Interaction {
                                     System.out.println("JUMP");
                                     break;
                                 case "TORNADO":
-                                    // code block
+                                    System.out.println("TORNADO");
                                     break;
                                 case "B":
                                     Player.gamepadB = true;
