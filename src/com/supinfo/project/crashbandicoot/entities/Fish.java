@@ -10,6 +10,8 @@ public class Fish extends Entity {
 
     int level;
 
+    boolean isEnabled = true;
+
     private int length;
     private int speed;
     private int time;
@@ -91,5 +93,7 @@ public class Fish extends Entity {
     }
 
     public int getLevel() { return level; }
+
+    public boolean getEnabled() { return isEnabled; }
 
 }

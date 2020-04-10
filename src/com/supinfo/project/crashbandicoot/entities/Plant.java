@@ -10,6 +10,8 @@ public class Plant extends Entity{
 
     int level;
 
+    boolean isEnabled = true;
+
     private int length;
     private int speed;
     private int time;
@@ -80,6 +82,7 @@ public class Plant extends Entity{
                     || (Player.playerY + Player.playerBoxHeight <= y)){
                 // Player is not in a area
             } else {
+                eating = true;
                 if (Player.tornadoAttack == false) {
                     if(eating == true && delay.talk() == true) {
                         Player.killPlayer = true; // Player death
@@ -87,7 +90,7 @@ public class Plant extends Entity{
                         delay.start();
                     }
                 } else {
-                    // Plant kill
+                    isEnabled = false;
                 }
             }
         }
@@ -103,4 +106,6 @@ public class Plant extends Entity{
     }
 
     public int getLevel() { return level; }
+
+    public boolean getEnabled() { return isEnabled; }
 }

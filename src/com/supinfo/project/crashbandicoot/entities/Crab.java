@@ -10,6 +10,8 @@ public class Crab extends Entity {
 
     int level;
 
+    boolean isEnabled = true;
+
     private int length;
     private int speed;
     private int time;
@@ -79,7 +81,7 @@ public class Crab extends Entity {
                     System.out.println("[Player] was killed by Crab !");
                     delay.start();
                 } else {
-                    // Crab kill
+                    isEnabled = false;
                 }
 
             }
@@ -96,5 +98,7 @@ public class Crab extends Entity {
     }
 
     public int getLevel() { return level; }
+
+    public boolean getEnabled() { return isEnabled; }
 
 }

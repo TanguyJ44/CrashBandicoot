@@ -140,6 +140,8 @@ public class Level {
             mapInit();
             initObjects();
         }
+
+        verifEntitiesIsDisabled();
     }
 
     public void render() {
@@ -189,6 +191,23 @@ public class Level {
         for (int i = 0; i < plants.size(); i++) {
             plants.get(i).init(this);
             addEntity(plants.get(i));
+        }
+    }
+
+    public void verifEntitiesIsDisabled() {
+        for (int i = 0; i < crabs.size(); i++) {
+            if(crabs.get(i).getEnabled() == false)
+                removeEntity(crabs.get(i));
+        }
+
+        for (int i = 0; i < fishs.size(); i++) {
+            if(fishs.get(i).getEnabled() == false)
+                removeEntity(fishs.get(i));
+        }
+
+        for (int i = 0; i < plants.size(); i++) {
+            if(plants.get(i).getEnabled() == false)
+                removeEntity(plants.get(i));
         }
     }
 
