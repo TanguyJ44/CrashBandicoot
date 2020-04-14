@@ -54,9 +54,14 @@ public class Player extends Entity{
     public static boolean gamepadB = false;
     public static boolean gamepadTornado = false;
 
+    public static boolean moveR = true;
+    public static boolean moveL = true;
+    public static boolean moveT = true;
+    public static boolean gravityEnabled = true;
+
     @Override
     public void update() {
-        ya += level.gravity * mass;
+        if(gravityEnabled == true) ya += level.gravity * mass;
 
         anim.update();
         anim.pause();
@@ -64,33 +69,33 @@ public class Player extends Entity{
         playerX = x;
         playerY = y;
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT) /*&& x < 990*/) {
+        if (keysEnable == true && moveR == true && (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) /*&& x < 990*/) {
             if(Level.levelNumber == 1 & x < 990 || Level.levelNumber == 2 & x < 1980) {
                 xa += speed;
                 if(dir != 0) dir = 0;
                 anim.play();
             }
         }
-        if(keysEnable == true && x < 990 && moveRight == true) {
+        if(keysEnable == true && moveR == true && x < 990 && moveRight == true) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
         }
 
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
+        if (keysEnable == true && moveL == true && Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
             xa -= speed;
             if(dir != 1) dir = 1;
             anim.play();
         }
-        if(keysEnable == true && x > 0 && moveLeft == true) {
+        if(keysEnable == true && moveL == true && x > 0 && moveLeft == true) {
             xa -= speed;
             if(dir != 1) dir = 1;
             anim.play();
         }
 
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+        if (keysEnable == true && moveT == true && Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
             if(dir != 2) {
                 anim.pause();
                 anim.setCurrentFrame(dir);
@@ -100,8 +105,9 @@ public class Player extends Entity{
             if(isGrounded()) {
                 ya -= 20;
             }
+            gravityEnabled = true;
         }
-        if(keysEnable == true && moveJump == true) {
+        if(keysEnable == true && moveT == true && moveJump == true) {
             moveJump = false;
             if(dir != 2) {
                 anim.pause();
@@ -115,9 +121,9 @@ public class Player extends Entity{
         }
 
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+        /*if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ya = speed;
-        }
+        }*/
 
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
             if(tornadoAttack == false) {

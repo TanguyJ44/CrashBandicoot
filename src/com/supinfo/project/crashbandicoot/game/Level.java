@@ -31,10 +31,10 @@ public class Level {
     public static int levelNumber = 1;
 
     Texture textureFruit;
-    Texture textureBoxe;
+    //Texture textureBoxe;
 
     public static ArrayList<Fruit> fruits = new ArrayList<>();
-    ArrayList<Boxes> boxes = new ArrayList<Boxes>();
+    public static ArrayList<Boxes> boxes = new ArrayList<Boxes>();
 
     ArrayList<Crab> crabs = new ArrayList<>();
     ArrayList<Fish> fishs = new ArrayList<>();
@@ -85,7 +85,7 @@ public class Level {
     public void init() {
         solidTile = new Tile[width][height];
         textureFruit = Texture.apple;
-        textureBoxe = Texture.boxe;
+        //textureBoxe = Texture.boxe;
         //texturePique = Texture.pique;
 
         initObjects();
@@ -99,6 +99,10 @@ public class Level {
         //wompasSound.init(new File("./res/sounds/wompas.wav"));
 
         ScreenLoader.init();
+
+        boxes.add(new Boxes(70, 130,5,true,false, Boxes.BoxType.BASIC,1));
+        /*boxes.add(new Boxes(150, 130,5,true,false, Boxes.BoxType.TNT,1));
+        boxes.add(new Boxes(230, 130,5,true,false, Boxes.BoxType.NITRO,1));*/
     }
 
     public void mapInit() {
@@ -132,6 +136,11 @@ public class Level {
             traps.get(i).update();
         }
         //Traps.update();
+
+        for (int i = 0; i < boxes.size(); i++) {
+            if(boxes.get(i).getBreak() != true)
+                boxes.get(i).update();
+        }
 
         animFruits.update();
 
@@ -221,12 +230,17 @@ public class Level {
         }
         textureFruit.unbind();
 
-        textureBoxe.bind();
+        for (int i = 0; i < boxes.size(); i++) {
+            if(boxes.get(i).getBreak() != true)
+                boxes.get(i).render();
+        }
+
+        /*textureBoxe.bind();
         for (int i = 0; i < boxes.size(); i++) {
             if (boxes.get(i).getBreak() == false)
                 Renderer.renderEntity(boxes.get(i).getX(), boxes.get(i).getY(), 32, 32, Colors.WHITE, 1f, 0, 0);
         }
-        textureBoxe.unbind();
+        textureBoxe.unbind();*/
 
         for (int i = 0; i < traps.size(); i++) {
             traps.get(i).render();
@@ -251,6 +265,7 @@ public class Level {
     }
 
     public void load1AfterPlayer() {
+
         ScreenLoader.render();
 
         if(levelFinished == true) {
@@ -274,7 +289,8 @@ public class Level {
 
         // Reload boxes
         for (int i = 0; i < boxes.size(); i++) {
-            if(boxes.get(i).getBreak() == true) boxes.get(i).setBreak(false);
+            if(boxes.get(i).getBreak() == true)
+                boxes.get(i).setBreak(false);
         }
     }
 
