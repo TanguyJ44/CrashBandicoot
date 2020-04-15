@@ -43,7 +43,7 @@ public class Player extends Entity{
         this.level = level;
     }
 
-    float xa, ya;
+    public static float xa, ya;
     float speed = 0.8f;
 
     int old_dir;
@@ -54,14 +54,11 @@ public class Player extends Entity{
     public static boolean gamepadB = false;
     public static boolean gamepadTornado = false;
 
-    public static boolean moveR = true;
-    public static boolean moveL = true;
-    public static boolean moveT = true;
-    public static boolean gravityEnabled = true;
+    public static boolean lockJump = false;
 
     @Override
     public void update() {
-        if(gravityEnabled == true) ya += level.gravity * mass;
+        ya += level.gravity * mass;
 
         anim.update();
         anim.pause();
@@ -69,33 +66,33 @@ public class Player extends Entity{
         playerX = x;
         playerY = y;
 
-        if (keysEnable == true && moveR == true && (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) /*&& x < 990*/) {
+        if (keysEnable == true && (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) /*&& x < 990*/) {
             if(Level.levelNumber == 1 & x < 990 || Level.levelNumber == 2 & x < 1980) {
                 xa += speed;
                 if(dir != 0) dir = 0;
                 anim.play();
             }
         }
-        if(keysEnable == true && moveR == true && x < 990 && moveRight == true) {
+        if(keysEnable == true && x < 990 && moveRight == true) {
             xa += speed;
             if(dir != 0) dir = 0;
             anim.play();
         }
 
 
-        if (keysEnable == true && moveL == true && Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
             xa -= speed;
             if(dir != 1) dir = 1;
             anim.play();
         }
-        if(keysEnable == true && moveL == true && x > 0 && moveLeft == true) {
+        if(keysEnable == true && x > 0 && moveLeft == true) {
             xa -= speed;
             if(dir != 1) dir = 1;
             anim.play();
         }
 
 
-        if (keysEnable == true && moveT == true && Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
             if(dir != 2) {
                 anim.pause();
                 anim.setCurrentFrame(dir);
@@ -105,9 +102,11 @@ public class Player extends Entity{
             if(isGrounded()) {
                 ya -= 20;
             }
-            gravityEnabled = true;
+            lockJump = false;
+        } else {
+            if(lockJump == false) lockJump = true;
         }
-        if(keysEnable == true && moveT == true && moveJump == true) {
+        if(keysEnable == true && moveJump == true) {
             moveJump = false;
             if(dir != 2) {
                 anim.pause();
@@ -202,7 +201,7 @@ public class Player extends Entity{
 
         int xStep = (int) Math.abs(xa * 100);
         for (int i = 0; i < xStep; i++) {
-            if (!isSolidTile(xa / xStep, 0)) {
+            if (!isSolidTile(xa / xStep, 0) && !Level.checkCollideAllBoxesX()) {
                 x += xa / xStep;
             } else {
                 xa = 0;
@@ -210,10 +209,16 @@ public class Player extends Entity{
         }
         int yStep = (int) Math.abs(ya * 100);
         for (int i = 0; i < yStep; i++) {
-            if (!isSolidTile(0, ya / yStep)) {
+            if (!isSolidTile(0, ya / yStep) && !Level.checkCollideAllBoxesY()) {
                 y += ya / yStep;
             } else {
-                ya = 0;
+                switchLockJump();
+
+                if(!isSolidTile(0, ya / yStep) && lockJump == false) {
+                    y += ya / yStep;
+                } else {
+                    ya = 0;
+                }
             }
         }
 
@@ -240,6 +245,14 @@ public class Player extends Entity{
 
         playerDeath();
         onTornadoAttack();
+    }
+
+    static boolean switchEnabled = true;
+    public static void switchLockJump () {
+        if(lockJump == false && switchEnabled == true) {
+            switchEnabled = false;
+            lockJump = true;
+        }
     }
 
     public void playerDeath () {

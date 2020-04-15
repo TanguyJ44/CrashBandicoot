@@ -101,8 +101,8 @@ public class Level {
         ScreenLoader.init();
 
         boxes.add(new Boxes(70, 130,5,true,false, Boxes.BoxType.BASIC,1));
-        /*boxes.add(new Boxes(150, 130,5,true,false, Boxes.BoxType.TNT,1));
-        boxes.add(new Boxes(230, 130,5,true,false, Boxes.BoxType.NITRO,1));*/
+        boxes.add(new Boxes(150, 130,5,true,false, Boxes.BoxType.TNT,1));
+        boxes.add(new Boxes(230, 130,5,true,false, Boxes.BoxType.NITRO,1));
     }
 
     public void mapInit() {
@@ -292,6 +292,25 @@ public class Level {
             if(boxes.get(i).getBreak() == true)
                 boxes.get(i).setBreak(false);
         }
+    }
+
+    public static boolean checkCollideAllBoxesX() {
+        for (int i = 0; i < boxes.size(); i++) {
+            if(!boxes.get(i).getBreak()) {
+                if(Level.boxes.get(i).getCollideX()) return true;
+            }
+        }
+
+        return false;
+    }
+    public static boolean checkCollideAllBoxesY() {
+        for (int i = 0; i < boxes.size(); i++) {
+            if(!boxes.get(i).getBreak()) {
+                if(Level.boxes.get(i).getCollideY()) return true;
+            }
+        }
+
+        return false;
     }
 
     public static Player getPlayer() {

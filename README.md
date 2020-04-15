@@ -74,6 +74,8 @@ Langage : Java 8 (SE)
 - Ajout de l'effet Tornade (V1)
 - Action gamepad sur la tornade
 - Gestion de la longueur des niveaux
+- Système de caisses (V2)
+- Optimisation sur le système de rendu des caisses
 
 
 # Patchs

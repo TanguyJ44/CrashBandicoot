@@ -78,16 +78,41 @@ public class Boxes {
         }
     }
 
-    public boolean getCollide () {
-        if ((Player.playerX >= x + 35)
-                || (Player.playerX + Player.playerBoxWidth+10 <= x)
-                || (Player.playerY >= y + 35)
-                || (Player.playerY + Player.playerBoxHeight+10 <= y)){
+    public boolean getCollideX () {
+        float px = Player.playerX + Player.xa;
+        float py = Player.playerY + Player.ya;
+
+        if ((px >= x + 25) || (px + Player.playerBoxWidth <= x) || (py >= y + 25) || (py + Player.playerBoxHeight <= y+20)){
             return false;
         } else {
             return true;
         }
     }
+
+    public boolean getCollideY () {
+        float px = Player.playerX + Player.xa;
+        float py = Player.playerY + Player.ya;
+
+        if ((px >= x + 25) || (px + Player.playerBoxWidth <= x) || (py >= y + 25) || (py + Player.playerBoxHeight <= y+4)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /*public boolean getCollideY () {
+        float px = Player.playerX + Player.xa;
+        float py = Player.playerY + Player.ya;
+
+        if ((px >= x + 25)
+                || (px + Player.playerBoxWidth <= x)
+                || (py >= y+4 + 25)
+                || (py + Player.playerBoxHeight <= y+4)){
+            return false;
+        } else {
+            return true;
+        }
+    }*/
 
     public void update() {
 
