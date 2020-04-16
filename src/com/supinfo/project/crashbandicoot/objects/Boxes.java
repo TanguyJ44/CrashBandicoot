@@ -16,6 +16,8 @@ public class Boxes {
     int ssPositionX;
     int ssPositionY;
 
+    int constY;
+
     Texture texture;
 
     BoxType boxType;
@@ -32,6 +34,9 @@ public class Boxes {
         this.isBreak = isBreak;
         this.boxType = boxType;
         this.level = level;
+
+        constY = y;
+        refY = y+5;
 
         texture = Texture.boxe;
 
@@ -100,62 +105,35 @@ public class Boxes {
         }
     }
 
-    /*public boolean getCollideY () {
-        float px = Player.playerX + Player.xa;
-        float py = Player.playerY + Player.ya;
-
-        if ((px >= x + 25)
-                || (px + Player.playerBoxWidth <= x)
-                || (py >= y+4 + 25)
-                || (py + Player.playerBoxHeight <= y+4)){
-            return false;
-        } else {
-            return true;
-        }
-    }*/
+    boolean animate = false;
+    boolean switchY = false;
+    int refY;
 
     public void update() {
 
-        /*if ((Player.playerX >= x + 35)
-                || (Player.playerX + Player.playerBoxWidth+10 <= x)
-                || (Player.playerY >= y + 35)
-                || (Player.playerY + Player.playerBoxHeight+10 <= y)){
+        if(numberBreak > 0 && getCollideY() && (Player.playerY +40 > y)) {
+            if(!animate) animate = true;
+        }
 
-            System.out.println("!!");
-
-        }*/
-
-        /*if ((Player.playerX >= x + 35)
-                || (Player.playerX + Player.playerBoxWidth+10 <= x)
-                || (Player.playerY >= y + 35)
-                || (Player.playerY + Player.playerBoxHeight+10 <= y)){
-            // Player is not in a area
-
-            //if(Player.moveR == false) Player.moveR = true;
-            //if(Player.moveL == false) Player.moveL = true;
-            //if(Player.gravityEnabled == false) Player.gravityEnabled = true;
-        } else {
-            if(Player.tornadoAttack == false) {
-                /*Player.moveR = true;
-
-                if(Player.playerX < x && (Player.playerY+Player.playerBoxHeight) > y+5) {
-                    Player.moveR = false;
+        if(animate) {
+            if(!switchY) {
+                if(y < refY) y++;
+                if(y == refY) {
+                    switchY = true;
+                    refY -=5;
                 }
-
-                if(Player.playerX > x+2) {
-                    Player.moveL = false;
-                    //System.out.println("right");
-                }
-                if((Player.playerY + Player.playerBoxHeight) < y) {
-                    Player.gravityEnabled = false;
-                    if(Player.moveR == false) Player.moveR = true;
-                }
-
             } else {
-                isBreak = true;
+                if(y > refY) y--;
+                if(y == refY) {
+                    switchY = false;
+                    animate = false;
+                    y = constY;
+                    refY = constY + 5;
+                    numberBreak--;
+                    if(numberBreak == 0) isBreak = true;
+                }
             }
-
-        }*/
+        }
 
     }
 

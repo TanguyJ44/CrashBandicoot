@@ -76,6 +76,7 @@ Langage : Java 8 (SE)
 - Gestion de la longueur des niveaux
 - Système de caisses (V2)
 - Optimisation sur le système de rendu des caisses
+- Animation des caisses (v1)
 
 
 # Patchs
@@ -90,6 +91,11 @@ Langage : Java 8 (SE)
 - Amélioration des détections
 - Optimisation des collisions
 - Stabilité au lancement
+
+#### PA03-2020-04-16
+- Correction de bugs mineurs
+- Optimisation des collisions
+- Changement version JDK
 
 
 # Pistes de réflexion
