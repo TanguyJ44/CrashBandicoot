@@ -4,6 +4,9 @@ import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
+import com.supinfo.project.crashbandicoot.utiles.AudioControl;
+
+import java.io.File;
 
 public class Boxes {
 
@@ -17,8 +20,11 @@ public class Boxes {
     int ssPositionY;
 
     int constY;
+    int constNumberBreak;
 
     Texture texture;
+
+    AudioControl audioControl;
 
     BoxType boxType;
 
@@ -35,8 +41,12 @@ public class Boxes {
         this.boxType = boxType;
         this.level = level;
 
+        audioControl = new AudioControl();
+        audioControl.init(new File("./res/sounds/explosion.wav"));
+
         constY = y;
         refY = y+5;
+        constNumberBreak = numberBreak;
 
         texture = Texture.boxe;
 
@@ -107,12 +117,16 @@ public class Boxes {
 
     boolean animate = false;
     boolean switchY = false;
+    boolean tnt = false;
+    boolean explosion = false;
     int refY;
+    int time = 0;
+    int count = 3;
 
     public void update() {
 
         if(numberBreak > 0 && getCollideY() && (Player.playerY +40 > y)) {
-            if(!animate) animate = true;
+            if(!animate && !tnt) animate = true;
         }
 
         if(animate) {
@@ -130,17 +144,98 @@ public class Boxes {
                     y = constY;
                     refY = constY + 5;
                     numberBreak--;
-                    if(numberBreak == 0) isBreak = true;
+                    if(numberBreak == 0) {
+                        isBreak = true;
+                        reset();
+                    }
+                    if(boxType == BoxType.TNT) {
+                        tnt = true;
+                        audioControl.init(new File("./res/sounds/explosion.wav"));
+                        audioControl.play();
+                    }
                 }
+            }
+        }
+
+        if (tnt) {
+            time++;
+
+            if(count == 3) {
+                ssPositionX = 0;
+                ssPositionY = 2;
+                count --;
+            }
+
+            if (time > 60) {
+
+                if(count == 2) {
+                    ssPositionX = 1;
+                    ssPositionY = 2;
+                }else if(count == 1) {
+                    ssPositionX = 2;
+                    ssPositionY = 2;
+                } else if (count == 0) {
+                    tnt = false;
+                    count = 3;
+
+                    ssPositionX = 0;
+                    ssPositionY = 0;
+                    explosion = true;
+                }
+
+                time = 0;
+                count --;
+            }
+        }
+
+        if (explosion) {
+            time++;
+
+            if(count == 3) {
+                texture = Texture.explosion1;
+                count --;
+            }
+
+            if (time > 20) {
+
+                if(count == 2) {
+                    texture = Texture.explosion2;
+                }else if(count == 1) {
+                    texture = Texture.explosion3;
+                } else if (count == 0) {
+                    isBreak = true;
+                    reset();
+                }
+
+                time = 0;
+                count --;
             }
         }
 
     }
 
+    public void reset() {
+        numberBreak = constNumberBreak;
+        animate = false;
+        switchY = false;
+        tnt = false;
+        explosion = false;
+        time = 0;
+        count = 3;
+
+        initSpriteSheet();
+    }
+
     public void render() {
-        texture.bind();
-            Renderer.renderEntity(x, y, 25, 25, Colors.WHITE, 4.4f, ssPositionX, ssPositionY);
-        texture.unbind();
+        if(!explosion) {
+            texture.bind();
+                Renderer.renderEntity(x, y, 25, 25, Colors.WHITE, 4.4f, ssPositionX, ssPositionY);
+            texture.unbind();
+        } else {
+            texture.bind();
+                Renderer.renderEntity(x-50, y-75, 100, 100, Colors.WHITE, 1f, ssPositionX, ssPositionY);
+            texture.unbind();
+        }
     }
 
     public int getX() {

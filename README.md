@@ -77,6 +77,7 @@ Langage : Java 8 (SE)
 - Système de caisses (V2)
 - Optimisation sur le système de rendu des caisses
 - Animation des caisses (v1)
+- Ajout des sons caisses TnT/Nitro
 
 
 # Patchs

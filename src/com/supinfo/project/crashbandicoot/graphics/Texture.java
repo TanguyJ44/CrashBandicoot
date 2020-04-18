@@ -34,6 +34,10 @@ public class Texture {
 
     public static Texture game_over = loadTexture("./res/images/game_over.png");
 
+    public static Texture explosion1 = loadTexture("./res/images/explosion1.png");
+    public static Texture explosion2 = loadTexture("./res/images/explosion2.png");
+    public static Texture explosion3 = loadTexture("./res/images/explosion3.png");
+
     int width, height;
     int id;
 

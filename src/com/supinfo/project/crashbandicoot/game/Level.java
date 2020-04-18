@@ -12,6 +12,7 @@ import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
 import com.supinfo.project.crashbandicoot.utiles.ScreenLoader;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class Level {
     public static int levelNumber = 1;
 
     Texture textureFruit;
-    //Texture textureBoxe;
 
     public static ArrayList<Fruit> fruits = new ArrayList<>();
     public static ArrayList<Boxes> boxes = new ArrayList<Boxes>();
@@ -85,24 +85,20 @@ public class Level {
     public void init() {
         solidTile = new Tile[width][height];
         textureFruit = Texture.apple;
-        //textureBoxe = Texture.boxe;
-        //texturePique = Texture.pique;
 
         initObjects();
         initEntities();
         animFruits.play();
 
-        //Traps.init();
-
         Header.init();
 
-        //wompasSound.init(new File("./res/sounds/wompas.wav"));
+        wompasSound.init(new File("./res/sounds/wompas.wav"));
 
         ScreenLoader.init();
 
         boxes.add(new Boxes(70, 130,5,true,false, Boxes.BoxType.BASIC,1));
-        boxes.add(new Boxes(150, 130,5,true,false, Boxes.BoxType.TNT,1));
-        boxes.add(new Boxes(230, 130,5,true,false, Boxes.BoxType.NITRO,1));
+        boxes.add(new Boxes(150, 130,2,true,false, Boxes.BoxType.TNT,1));
+        boxes.add(new Boxes(230, 130,1,true,false, Boxes.BoxType.NITRO,1));
     }
 
     public void mapInit() {
@@ -135,7 +131,6 @@ public class Level {
         for (int i = 0; i < traps.size(); i++) {
             traps.get(i).update();
         }
-        //Traps.update();
 
         for (int i = 0; i < boxes.size(); i++) {
             if(boxes.get(i).getBreak() != true)
@@ -235,20 +230,9 @@ public class Level {
                 boxes.get(i).render();
         }
 
-        /*textureBoxe.bind();
-        for (int i = 0; i < boxes.size(); i++) {
-            if (boxes.get(i).getBreak() == false)
-                Renderer.renderEntity(boxes.get(i).getX(), boxes.get(i).getY(), 32, 32, Colors.WHITE, 1f, 0, 0);
-        }
-        textureBoxe.unbind();*/
-
         for (int i = 0; i < traps.size(); i++) {
             traps.get(i).render();
         }
-
-        /*texturePique.bind();
-            Renderer.renderEntity(643, 170 - Traps.animPique.getCurrentCoord(), 32, 64, Colors.WHITE, 2f, 0, 0);
-        texturePique.unbind();*/
 
         for (int i = 0; i < fruits.size(); i++) {
             if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 1)

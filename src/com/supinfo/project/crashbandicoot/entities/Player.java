@@ -7,6 +7,8 @@ import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.utiles.Animation;
 import org.lwjgl.input.Keyboard;
 
+import java.io.File;
+
 public class Player extends Entity{
 
     public static int playerBoxWidth = 32;
@@ -119,11 +121,6 @@ public class Player extends Entity{
             }
         }
 
-
-        /*if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            ya = speed;
-        }*/
-
         if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
             if(tornadoAttack == false) {
                 tornadoAttack = true;
@@ -234,7 +231,8 @@ public class Player extends Entity{
                 if(level.fruits.get(i).getEat() == false) {
                     level.fruits.get(i).setEat(true);
                     numberFruits++;
-                    //Level.wompasSound.play();
+                    Level.wompasSound.init(new File("./res/sounds/wompas.wav"));
+                    Level.wompasSound.play();
                 }
             }
 
