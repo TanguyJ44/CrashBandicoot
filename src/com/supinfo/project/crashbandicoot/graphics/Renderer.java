@@ -4,10 +4,15 @@ import com.supinfo.project.crashbandicoot.Component;
 import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.Game;
 import com.supinfo.project.crashbandicoot.game.Level;
+import com.supinfo.project.crashbandicoot.utiles.AudioControl;
+
+import java.io.File;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
+
+    public static AudioControl gameoverSound = new AudioControl();
 
     public static void quadData(float x, float y, int width, int height, float[] color, float size, int xo, int yo) {
         glColor4f(color[0], color[1], color[2], color[3]);
@@ -72,6 +77,8 @@ public class Renderer {
                         loop = false;
                         if (type == 1) Level.levelNumber += 1;
                         drawText = true;
+                        gameoverSound.init(new File("./res/sounds/gameover.wav"));
+                        gameoverSound.play();
                     }
                 } else {
                     if(alpha > 0f){

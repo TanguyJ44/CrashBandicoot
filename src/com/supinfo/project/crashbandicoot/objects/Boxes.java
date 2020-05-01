@@ -1,6 +1,8 @@
 package com.supinfo.project.crashbandicoot.objects;
 
+import com.supinfo.project.crashbandicoot.entities.AkuAku;
 import com.supinfo.project.crashbandicoot.entities.Player;
+import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
@@ -42,7 +44,6 @@ public class Boxes {
         this.level = level;
 
         audioControl = new AudioControl();
-        audioControl.init(new File("./res/sounds/explosion.wav"));
 
         constY = y;
         refY = y+5;
@@ -144,19 +145,50 @@ public class Boxes {
                     y = constY;
                     refY = constY + 5;
                     numberBreak--;
-                    if(numberBreak == 0) {
+                    if(numberBreak == 0 && boxType != BoxType.TNT && boxType != BoxType.NITRO) {
                         isBreak = true;
                         reset();
-                    }
-                    if(boxType == BoxType.TNT) {
+                        System.out.println("!!");
+                    } else if(boxType == BoxType.JUMP) {
+                        Player.numberFruits+=1;
+                        audioControl.init(new File("./res/sounds/wompas.wav"));
+                        audioControl.play();
+                    } else if(boxType == BoxType.ARROW) {
+                        Player.ya -=25;
+                    } else if(boxType == BoxType.CRASH) {
+                        if(Player.playerLife < 3) {
+                            Player.playerLife++;
+                            audioControl.init(new File("./res/sounds/uplife.wav"));
+                            audioControl.play();
+                        }
+                    } else if(boxType == BoxType.AKUAKU) {
+                        if(!Level.akuaku.getInvokAkuaku()) {
+                            Level.akuaku.setAkuakuLife(0);
+                            Level.akuaku.setInvokAkuaku(true);
+                        } else {
+                            if(Level.akuaku.getAkuakuLife() < 2) Level.akuaku.setAkuakuLife(Level.akuaku.getAkuakuLife() +1);
+                        }
+                    } else if(boxType == BoxType.TNT) {
                         tnt = true;
+                        audioControl.init(new File("./res/sounds/countdown.wav"));
+                        audioControl.play();
+                    } else if(boxType == BoxType.NITRO) {
+                        reset();
+                        count = 4;
+
+                        texture = Texture.explosion1;
+
+                        ssPositionX = 0;
+                        ssPositionY = 0;
+
                         audioControl.init(new File("./res/sounds/explosion.wav"));
                         audioControl.play();
+
+                        explosion = true;
                     }
                 }
             }
         }
-
         if (tnt) {
             time++;
 
@@ -176,10 +208,14 @@ public class Boxes {
                     ssPositionY = 2;
                 } else if (count == 0) {
                     tnt = false;
-                    count = 3;
+                    count = 4;
 
                     ssPositionX = 0;
                     ssPositionY = 0;
+
+                    audioControl.init(new File("./res/sounds/explosion.wav"));
+                    audioControl.play();
+
                     explosion = true;
                 }
 

@@ -78,6 +78,10 @@ Langage : Java 8 (SE)
 - Optimisation sur le système de rendu des caisses
 - Animation des caisses (v1)
 - Ajout des sons caisses TnT/Nitro
+- Ajout des designs de toutes les caisses
+- Ajout des sons de toutes les caisses
+- Intération et action des caisses
+- Action de l'attaque tornade sur les caisses
 
 
 # Patchs

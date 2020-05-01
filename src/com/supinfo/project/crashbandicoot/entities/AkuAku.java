@@ -8,7 +8,7 @@ import com.supinfo.project.crashbandicoot.graphics.Texture;
 public class AkuAku extends Entity {
 
     public static boolean invokAkuaku = false;
-    public static int akuakuLife = 2; // De 0 à 2
+    public static int akuakuLife = 0; // De 0 à 2
 
     public AkuAku(int x, int y) {
         super(x, y);
@@ -57,4 +57,10 @@ public class AkuAku extends Entity {
             texture.unbind();
         }
     }
+
+    public boolean getInvokAkuaku () { return invokAkuaku; }
+    public int getAkuakuLife () { return akuakuLife; }
+
+    public void setInvokAkuaku (boolean value) { invokAkuaku = value; }
+    public void setAkuakuLife (int value) { akuakuLife = value; }
 }

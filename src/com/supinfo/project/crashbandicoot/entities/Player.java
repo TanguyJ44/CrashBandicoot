@@ -5,6 +5,7 @@ import com.supinfo.project.crashbandicoot.graphics.Colors;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.utiles.Animation;
+import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import org.lwjgl.input.Keyboard;
 
 import java.io.File;
@@ -57,6 +58,8 @@ public class Player extends Entity{
     public static boolean gamepadTornado = false;
 
     public static boolean lockJump = false;
+
+    public static AudioControl killSound = new AudioControl();
 
     @Override
     public void update() {
@@ -171,6 +174,8 @@ public class Player extends Entity{
             playerLife = 3;
             numberFruits = 0;
             level.reloadObject();
+
+            Renderer.gameoverSound.stop();
         }
 
         if(x > 970) {
@@ -271,6 +276,9 @@ public class Player extends Entity{
                 keysEnable = true;
 
                 killPlayer = false;
+
+                killSound.init(new File("./res/sounds/lowlife.wav"));
+                killSound.play();
             }
         }
     }

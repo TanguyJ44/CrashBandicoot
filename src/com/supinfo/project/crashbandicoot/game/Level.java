@@ -43,11 +43,11 @@ public class Level {
     ArrayList<Traps> traps = new ArrayList<>();
 
     private static Player player = new Player(10, 80);
-    private static AkuAku akuaku = new AkuAku(8, 90);
+    public static AkuAku akuaku = new AkuAku(8, 90);
 
     ObjectsAnimation animFruits;
 
-    public static AudioControl wompasSound = new AudioControl();
+    public static AudioControl wompasSound;
 
     int loadLevel = 0;
 
@@ -92,13 +92,18 @@ public class Level {
 
         Header.init();
 
-        wompasSound.init(new File("./res/sounds/wompas.wav"));
+        wompasSound = new AudioControl();
 
         ScreenLoader.init();
 
-        boxes.add(new Boxes(70, 130,5,true,false, Boxes.BoxType.BASIC,1));
-        boxes.add(new Boxes(150, 130,2,true,false, Boxes.BoxType.TNT,1));
-        boxes.add(new Boxes(230, 130,1,true,false, Boxes.BoxType.NITRO,1));
+        boxes.add(new Boxes(70, 130,0,true,false, Boxes.BoxType.BASIC,1));
+        boxes.add(new Boxes(150, 130,1,false,false, Boxes.BoxType.TNT,1));
+        boxes.add(new Boxes(230, 130,1,false,false, Boxes.BoxType.NITRO,1));
+        boxes.add(new Boxes(310, 130,0,false,false, Boxes.BoxType.IRON,1));
+        boxes.add(new Boxes(390, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
+        boxes.add(new Boxes(470, 130,10,true,false, Boxes.BoxType.JUMP,1));
+        boxes.add(new Boxes(550, 130,5,true,false, Boxes.BoxType.ARROW,1));
+        boxes.add(new Boxes(630, 130,1,true,false, Boxes.BoxType.CRASH,1));
     }
 
     public void mapInit() {
@@ -281,7 +286,14 @@ public class Level {
     public static boolean checkCollideAllBoxesX() {
         for (int i = 0; i < boxes.size(); i++) {
             if(!boxes.get(i).getBreak()) {
-                if(Level.boxes.get(i).getCollideX()) return true;
+                if(Level.boxes.get(i).getCollideX()) {
+                    if(boxes.get(i).getTornadoBreak() && Player.tornadoAttack) {
+                        boxes.get(i).setBreak(true);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
             }
         }
 
