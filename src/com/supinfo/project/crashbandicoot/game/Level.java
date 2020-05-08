@@ -96,20 +96,15 @@ public class Level {
 
         ScreenLoader.init();
 
-        /*boxes.add(new Boxes(70, 130,0,true,false, Boxes.BoxType.BASIC,1));
-        boxes.add(new Boxes(150, 130,1,false,false, Boxes.BoxType.TNT,1));
-        boxes.add(new Boxes(230, 130,1,false,false, Boxes.BoxType.NITRO,1));
-        boxes.add(new Boxes(310, 130,0,false,false, Boxes.BoxType.IRON,1));
-        boxes.add(new Boxes(390, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
-        boxes.add(new Boxes(470, 130,10,true,false, Boxes.BoxType.JUMP,1));
-        boxes.add(new Boxes(550, 130,5,true,false, Boxes.BoxType.ARROW,1));
-        boxes.add(new Boxes(630, 130,1,true,false, Boxes.BoxType.CRASH,1));*/
+        boxes.add(new Boxes(250, 110,0,true,false, Boxes.BoxType.BASIC,1));
+        boxes.add(new Boxes(280, 80,0,false,false, Boxes.BoxType.IRON,1));
+        boxes.add(new Boxes(380, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
     }
 
     public void mapInit() {
         for (int i = 0; i < width; i++) {
             for (int j = 7; j < 15; j++) {
-                if(Level.levelNumber == 1 && i != 28 && i != 48 && i != 49) {
+                if(Level.levelNumber == 1/* && i != 28 && i != 48 && i != 49*/) {
                     solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
                 } else if(Level.levelNumber == 2 && i != 5){
                     solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
@@ -167,23 +162,25 @@ public class Level {
         fruits.clear();
 
         if(Level.levelNumber == 1) {
-            fruits.add(new Fruit(120, 120, false, 1));
-            fruits.add(new Fruit(200, 80, false, 1));
-            fruits.add(new Fruit(290, 120, false, 1));
-            fruits.add(new Fruit(450, 90, false, 1));
-            fruits.add(new Fruit(550, 90, false, 1));
-            fruits.add(new Fruit(750, 90, false, 1));
-            fruits.add(new Fruit(850, 120, false, 1));
-            fruits.add(new Fruit(950, 90, false, 1));
+            fruits.add(new Fruit(70, 120, false, 1));
+            fruits.add(new Fruit(100, 90, false, 1));
+            fruits.add(new Fruit(130, 120, false, 1));
+
+            fruits.add(new Fruit(300, 45, false, 1));
+            fruits.add(new Fruit(320, 25, false, 1));
+            fruits.add(new Fruit(340, 5, false, 1));
         } else if(Level.levelNumber == 2) {
 
         }
     }
 
     public void initEntities() {
-        crabs.add(new Crab(880, 135, 1));
+        crabs.add(new Crab(160, 135, 1));
+        crabs.add(new Crab(280, 135, 1));
+
+
         fishs.add(new Fish(792, 150, 1));
-        plants.add(new Plant(350, 115, 1));
+        //plants.add(new Plant(350, 115, 1));
 
         traps.add(new Traps(643, 170, 1));
 

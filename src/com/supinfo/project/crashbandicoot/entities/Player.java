@@ -76,7 +76,7 @@ public class Player extends Entity{
         playerY = y;
 
         if (keysEnable == true && (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) /*&& x < 990*/) {
-            if(Level.levelNumber == 1 && x < 990 || Level.levelNumber == 2 && x < 1980 || Level.levelNumber == 3 && x < 1980) {
+            if((Level.levelNumber == 1 && x < 990) || (Level.levelNumber == 2 && x < 2010) || (Level.levelNumber == 3 && x < 2010)) {
                 xa += speed;
                 if(dir != 0) dir = 0;
                 anim.play();
@@ -128,7 +128,7 @@ public class Player extends Entity{
             }
         }
 
-        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+        if (keysEnable == true && Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
             if(tornadoAttack == false) {
                 tornadoAttack = true;
             }
@@ -160,12 +160,15 @@ public class Player extends Entity{
             if(AkuAku.invokAkuaku == false) AkuAku.invokAkuaku = true;
             if(AkuAku.akuakuLife < 2) AkuAku.akuakuLife++;
         }
+        if (Keyboard.isKeyDown(Keyboard.KEY_F9)) {
+            x += 10;
+        }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
             Level.levelFinished = false;
             Level.levelNumber = 1;
 
-            keysEnable = false;
+            keysEnable = true;
             playerIsDead = false;
             killPlayer = false;
 
@@ -190,6 +193,19 @@ public class Player extends Entity{
                 x = 10;
                 y = 80;
                 dir = 0;
+            }
+        }
+        if(x > 2005) {
+            if(Level.levelNumber == 2) {
+                Level.levelFinished = true;
+                keysEnable = false;
+
+                x = 10;
+                y = 80;
+                dir = 0;
+            } else if(Level.levelNumber == 3) {
+                keysEnable = false;
+                // game finished
             }
         }
 

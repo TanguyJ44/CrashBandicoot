@@ -123,6 +123,7 @@ public class Renderer {
         frame = 0;
 
         Level.levelFinished = false;
+        Player.keysEnable = true;
     }
 
 }
