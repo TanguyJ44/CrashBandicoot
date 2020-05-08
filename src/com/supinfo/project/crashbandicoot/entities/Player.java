@@ -31,6 +31,8 @@ public class Player extends Entity{
 
     public static boolean keysEnable = false;
 
+    AudioControl audioControl;
+
     public Player(int x, int y) {
         super(x, y);
         texture = Texture.player;
@@ -39,6 +41,8 @@ public class Player extends Entity{
 
         mass = 0.5f;
         drag = 0.70f;
+
+        audioControl = new AudioControl();
     }
 
     @Override
@@ -72,7 +76,7 @@ public class Player extends Entity{
         playerY = y;
 
         if (keysEnable == true && (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) /*&& x < 990*/) {
-            if(Level.levelNumber == 1 & x < 990 || Level.levelNumber == 2 & x < 1980) {
+            if(Level.levelNumber == 1 && x < 990 || Level.levelNumber == 2 && x < 1980 || Level.levelNumber == 3 && x < 1980) {
                 xa += speed;
                 if(dir != 0) dir = 0;
                 anim.play();
@@ -175,7 +179,7 @@ public class Player extends Entity{
             numberFruits = 0;
             level.reloadObject();
 
-            Renderer.gameoverSound.stop();
+            Renderer.audioControl.stop();
         }
 
         if(x > 970) {

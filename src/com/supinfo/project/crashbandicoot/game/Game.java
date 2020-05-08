@@ -28,7 +28,7 @@ public class Game {
         level.update();
 
         if(Level.getPlayer().getX() > Component.frameWidth / 2 - 16) {
-            if (Level.levelNumber == 1 && Player.playerX < 839 || Level.levelNumber == 2 && Player.playerX < 1698)
+            if (Level.levelNumber == 1 && Player.playerX < 839 || Level.levelNumber == 2 && Player.playerX < 1698 || Level.levelNumber == 3 && Player.playerX < 1698)
                 xa = -Level.getPlayer().getX() + Component.frameWidth / 2 - 16;
         } else {
             xa = -0.3f;

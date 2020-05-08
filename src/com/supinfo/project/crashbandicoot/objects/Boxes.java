@@ -83,6 +83,7 @@ public class Boxes {
             case TNT:
                 ssPositionX = 2;
                 ssPositionY = 1;
+                System.out.println("tnt");
                 break;
             case NITRO:
                 ssPositionX = 3;
@@ -148,13 +149,14 @@ public class Boxes {
                     if(numberBreak == 0 && boxType != BoxType.TNT && boxType != BoxType.NITRO) {
                         isBreak = true;
                         reset();
-                        System.out.println("!!");
                     } else if(boxType == BoxType.JUMP) {
                         Player.numberFruits+=1;
                         audioControl.init(new File("./res/sounds/wompas.wav"));
                         audioControl.play();
                     } else if(boxType == BoxType.ARROW) {
                         Player.ya -=25;
+                        audioControl.init(new File("./res/sounds/jump.wav"));
+                        audioControl.play();
                     } else if(boxType == BoxType.CRASH) {
                         if(Player.playerLife < 3) {
                             Player.playerLife++;
@@ -258,6 +260,8 @@ public class Boxes {
         explosion = false;
         time = 0;
         count = 3;
+
+        texture = Texture.boxe;
 
         initSpriteSheet();
     }

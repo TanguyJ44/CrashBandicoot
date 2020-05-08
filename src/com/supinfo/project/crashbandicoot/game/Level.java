@@ -96,14 +96,14 @@ public class Level {
 
         ScreenLoader.init();
 
-        boxes.add(new Boxes(70, 130,0,true,false, Boxes.BoxType.BASIC,1));
+        /*boxes.add(new Boxes(70, 130,0,true,false, Boxes.BoxType.BASIC,1));
         boxes.add(new Boxes(150, 130,1,false,false, Boxes.BoxType.TNT,1));
         boxes.add(new Boxes(230, 130,1,false,false, Boxes.BoxType.NITRO,1));
         boxes.add(new Boxes(310, 130,0,false,false, Boxes.BoxType.IRON,1));
         boxes.add(new Boxes(390, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
         boxes.add(new Boxes(470, 130,10,true,false, Boxes.BoxType.JUMP,1));
         boxes.add(new Boxes(550, 130,5,true,false, Boxes.BoxType.ARROW,1));
-        boxes.add(new Boxes(630, 130,1,true,false, Boxes.BoxType.CRASH,1));
+        boxes.add(new Boxes(630, 130,1,true,false, Boxes.BoxType.CRASH,1));*/
     }
 
     public void mapInit() {

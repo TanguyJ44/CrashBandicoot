@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
 
-    public static AudioControl gameoverSound = new AudioControl();
+    public static AudioControl audioControl = new AudioControl();
 
     public static void quadData(float x, float y, int width, int height, float[] color, float size, int xo, int yo) {
         glColor4f(color[0], color[1], color[2], color[3]);
@@ -49,8 +49,6 @@ public class Renderer {
 
     static int count = 0;
 
-    static String gameOverText = "GAME OVER ! \n\n Appuyer sur [F5] pour lancer\n une nouvelle partie";
-
     // type 1 = next level, type 2 = game over
     public static void renderBlackOut(int type) {
 
@@ -64,8 +62,6 @@ public class Renderer {
             glVertex2f(screenScroller, Component.frameHeight);
         glEnd();
 
-        //System.out.println("Level n° " + Level.levelNumber);
-
         if (loop) {
             time++;
             if (time > 15) {
@@ -75,10 +71,16 @@ public class Renderer {
                         alpha += 0.1f;
                     } else {
                         loop = false;
-                        if (type == 1) Level.levelNumber += 1;
+                        if (type == 1) {
+                            Level.levelNumber += 1;
+                            audioControl.init(new File("./res/sounds/nextlvl.wav"));
+                            audioControl.play();
+                        }
                         drawText = true;
-                        gameoverSound.init(new File("./res/sounds/gameover.wav"));
-                        gameoverSound.play();
+                        if (type == 2) {
+                            audioControl.init(new File("./res/sounds/gameover.wav"));
+                            audioControl.play();
+                        }
                     }
                 } else {
                     if(alpha > 0f){

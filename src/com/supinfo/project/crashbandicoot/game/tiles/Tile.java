@@ -51,6 +51,12 @@ public class Tile {
                     Renderer.quadData(x * size, y * size, size, size, Colors.WHITE, 64.0f, xo, yo);
                 glEnd();
             Texture.tilesLvl2.unbind();
+        }else if (Level.levelNumber == 3) {
+            Texture.tilesLvl3.bind();
+                glBegin(GL_QUADS);
+                    Renderer.quadData(x * size, y * size, size, size, Colors.WHITE, 64.0f, xo, yo);
+                glEnd();
+            Texture.tilesLvl3.unbind();
         }
     }
 
