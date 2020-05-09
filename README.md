@@ -82,6 +82,7 @@ Langage : Java 8 (SE)
 - Ajout des sons de toutes les caisses
 - Intération et action des caisses
 - Action de l'attaque tornade sur les caisses
+- Construction du niveau 01
 
 
 # Patchs

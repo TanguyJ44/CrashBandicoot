@@ -95,16 +95,12 @@ public class Level {
         wompasSound = new AudioControl();
 
         ScreenLoader.init();
-
-        boxes.add(new Boxes(250, 110,0,true,false, Boxes.BoxType.BASIC,1));
-        boxes.add(new Boxes(280, 80,0,false,false, Boxes.BoxType.IRON,1));
-        boxes.add(new Boxes(380, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
     }
 
     public void mapInit() {
         for (int i = 0; i < width; i++) {
             for (int j = 7; j < 15; j++) {
-                if(Level.levelNumber == 1/* && i != 28 && i != 48 && i != 49*/) {
+                if(Level.levelNumber == 1 && i != 28 && i != 29 /* && i != 28 && i != 48 && i != 49*/) {
                     solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
                 } else if(Level.levelNumber == 2 && i != 5){
                     solidTile[i][j] = new Tile(i, j, 0, 0, Tile.Tiles.COL);
@@ -169,7 +165,31 @@ public class Level {
             fruits.add(new Fruit(300, 45, false, 1));
             fruits.add(new Fruit(320, 25, false, 1));
             fruits.add(new Fruit(340, 5, false, 1));
+
+            fruits.add(new Fruit(445, 95, false, 1));
+            fruits.add(new Fruit(470, 80, false, 1));
+            fruits.add(new Fruit(495, 95, false, 1));
+
+            fruits.add(new Fruit(735, 80, false, 1));
+
+            fruits.add(new Fruit(805, 80, false, 1));
+            fruits.add(new Fruit(870, 105, false, 1));
+
+            fruits.add(new Fruit(925, 80, false, 1));
+            fruits.add(new Fruit(925, 50, false, 1));
+            fruits.add(new Fruit(925, 20, false, 1));
+
+            boxes.add(new Boxes(250, 110,0,true,false, Boxes.BoxType.BASIC,1));
+            boxes.add(new Boxes(280, 80,0,false,false, Boxes.BoxType.IRON,1));
+            boxes.add(new Boxes(380, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
+            boxes.add(new Boxes(540, 130,1,true,false, Boxes.BoxType.BASIC,1));
+            boxes.add(new Boxes(660, 130,1,false,false, Boxes.BoxType.TNT,1));
+            boxes.add(new Boxes(800, 130,0,true,false, Boxes.BoxType.BASIC,1));
+            boxes.add(new Boxes(920, 130,5,true,false, Boxes.BoxType.ARROW,1));
+
         } else if(Level.levelNumber == 2) {
+
+        } else if(Level.levelNumber == 3) {
 
         }
     }
@@ -179,10 +199,10 @@ public class Level {
         crabs.add(new Crab(280, 135, 1));
 
 
-        fishs.add(new Fish(792, 150, 1));
-        //plants.add(new Plant(350, 115, 1));
+        fishs.add(new Fish(733, 150, 1));
+        plants.add(new Plant(600, 115, 1));
 
-        traps.add(new Traps(643, 170, 1));
+        //traps.add(new Traps(643, 170, 1));
 
         for (int i = 0; i < crabs.size(); i++) {
             crabs.get(i).init(this);

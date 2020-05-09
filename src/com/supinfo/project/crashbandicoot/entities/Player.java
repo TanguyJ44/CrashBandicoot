@@ -161,7 +161,7 @@ public class Player extends Entity{
             if(AkuAku.akuakuLife < 2) AkuAku.akuakuLife++;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_F9)) {
-            x += 10;
+            x = 2000;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {

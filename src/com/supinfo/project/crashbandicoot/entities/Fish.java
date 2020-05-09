@@ -87,7 +87,7 @@ public class Fish extends Entity {
             texture.bind();Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
             texture.unbind();
 
-            textureFishCover.bind();Renderer.renderEntity(790, 150, 25, 35, Colors.WHITE, 1f, 0, 0);
+            textureFishCover.bind();Renderer.renderEntity(x, y, 25, 35, Colors.WHITE, 1f, 0, 0);
             textureFishCover.unbind();
         }
     }
