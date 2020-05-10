@@ -83,6 +83,8 @@ Langage : Java 8 (SE)
 - Intération et action des caisses
 - Action de l'attaque tornade sur les caisses
 - Construction du niveau 01
+- Ajout du son de démarrage (initialisation)
+- Construction du niveau 02
 
 
 # Patchs

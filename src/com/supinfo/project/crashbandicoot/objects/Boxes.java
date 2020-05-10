@@ -83,7 +83,6 @@ public class Boxes {
             case TNT:
                 ssPositionX = 2;
                 ssPositionY = 1;
-                System.out.println("tnt");
                 break;
             case NITRO:
                 ssPositionX = 3;
@@ -150,7 +149,7 @@ public class Boxes {
                         isBreak = true;
                         reset();
                     } else if(boxType == BoxType.JUMP) {
-                        Player.numberFruits+=1;
+                        Player.numberFruits+=10;
                         audioControl.init(new File("./res/sounds/wompas.wav"));
                         audioControl.play();
                     } else if(boxType == BoxType.ARROW) {

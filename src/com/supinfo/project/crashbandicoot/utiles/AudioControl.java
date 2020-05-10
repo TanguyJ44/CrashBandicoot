@@ -24,7 +24,7 @@ public class AudioControl implements LineListener {
             audioStream = AudioSystem.getAudioInputStream(audioFilePath);
 
             if (audioStream != null) {
-                System.out.println("Audio init !");
+                System.out.println("Playing sound > " + audioFilePath.getName());
             }
 
             format = audioStream.getFormat();
