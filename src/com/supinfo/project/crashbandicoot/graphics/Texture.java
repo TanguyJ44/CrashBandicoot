@@ -25,8 +25,9 @@ public class Texture {
 
     public static Texture apple = loadTexture("./res/images/fruit.png");
     public static Texture boxe = loadTexture("./res/images/case.png");
-
     public static Texture pique = loadTexture("./res/images/pique.png");
+    public static Texture postCP = loadTexture("./res/images/post_cp.png");
+    public static Texture flagCP = loadTexture("./res/images/flag_cp.png");
 
     public static Texture fish = loadTexture("./res/images/sprite_fish.png");
     public static Texture fishCover = loadTexture("./res/images/fish_cover.png");

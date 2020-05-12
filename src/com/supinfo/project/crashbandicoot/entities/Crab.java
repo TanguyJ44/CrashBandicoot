@@ -101,4 +101,6 @@ public class Crab extends Entity {
 
     public boolean getEnabled() { return isEnabled; }
 
+    public void setEnabled(boolean value) { isEnabled = value; }
+
 }

@@ -7,6 +7,7 @@ import com.supinfo.project.crashbandicoot.graphics.Header;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.objects.Boxes;
+import com.supinfo.project.crashbandicoot.objects.CheckPoint;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
 import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
@@ -35,6 +36,7 @@ public class Level {
 
     public static ArrayList<Fruit> fruits = new ArrayList<>();
     public static ArrayList<Boxes> boxes = new ArrayList<Boxes>();
+    public static ArrayList<CheckPoint> checkpoints = new ArrayList<CheckPoint>();
 
     ArrayList<Crab> crabs = new ArrayList<>();
     ArrayList<Fish> fishs = new ArrayList<>();
@@ -136,6 +138,10 @@ public class Level {
                 boxes.get(i).update();
         }
 
+        for (int i = 0; i < checkpoints.size(); i++) {
+            checkpoints.get(i).update();
+        }
+
         animFruits.update();
 
         if(loadLevel < Level.levelNumber) {
@@ -160,6 +166,7 @@ public class Level {
     public void initObjects() {
         fruits.clear();
         boxes.clear();
+        checkpoints.clear();
 
         if(Level.levelNumber == 1) {
             fruits.add(new Fruit(70, 120, false, 1));
@@ -186,23 +193,20 @@ public class Level {
             boxes.add(new Boxes(800, 130,0,true,false, Boxes.BoxType.BASIC,1));
             boxes.add(new Boxes(920, 130,5,true,false, Boxes.BoxType.ARROW,1));
 
+            checkpoints.add(new CheckPoint(425, 121, false, 1));
+
         } else if(Level.levelNumber == 2) {
             fruits.add(new Fruit(100, 100, false, 2));
             fruits.add(new Fruit(130, 100, false, 2));
             fruits.add(new Fruit(160, 100, false, 2));
-
             fruits.add(new Fruit(455, 90, false, 2));
             fruits.add(new Fruit(495, 60, false, 2));
-
             fruits.add(new Fruit(725, 100, false, 2));
-
             fruits.add(new Fruit(845, 100, false, 2));
             fruits.add(new Fruit(875, 100, false, 2));
             fruits.add(new Fruit(905, 100, false, 2));
-
             fruits.add(new Fruit(1260, 100, false, 2));
             fruits.add(new Fruit(1290, 100, false, 2));
-
             fruits.add(new Fruit(1750, 110, false, 2));
             fruits.add(new Fruit(1780, 100, false, 2));
             fruits.add(new Fruit(1810, 110, false, 2));
@@ -222,8 +226,11 @@ public class Level {
             boxes.add(new Boxes(1570, 70,0,false,false, Boxes.BoxType.IRON,2));
             boxes.add(new Boxes(1600, 40,1,true,false, Boxes.BoxType.JUMP,2));
             boxes.add(new Boxes(1690, 130,1,false,false, Boxes.BoxType.TNT,2));
+
+            checkpoints.add(new CheckPoint(1280, 125, false, 2));
         } else if(Level.levelNumber == 3) {
 
+            checkpoints.add(new CheckPoint(1280, 125, false, 2));
         }
     }
 
@@ -296,6 +303,10 @@ public class Level {
             traps.get(i).render();
         }
 
+        for (int i = 0; i < checkpoints.size(); i++) {
+            checkpoints.get(i).render();
+        }
+
         for (int i = 0; i < fruits.size(); i++) {
             if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 1)
                 fruits.get(i).setY(fruits.get(i).getDefaultY() + animFruits.getCurrentCoord());
@@ -315,6 +326,10 @@ public class Level {
         for (int i = 0; i < boxes.size(); i++) {
             if(boxes.get(i).getBreak() != true)
                 boxes.get(i).render();
+        }
+
+        for (int i = 0; i < checkpoints.size(); i++) {
+            checkpoints.get(i).render();
         }
 
         for (int i = 0; i < traps.size(); i++) {
@@ -358,6 +373,14 @@ public class Level {
         for (int i = 0; i < boxes.size(); i++) {
             if(boxes.get(i).getBreak() == true)
                 boxes.get(i).setBreak(false);
+        }
+
+        for (int i = 0; i < crabs.size(); i++) {
+            if(crabs.get(i).getEnabled() == false) crabs.get(i).setEnabled(true);
+        }
+
+        for (int i = 0; i < plants.size(); i++) {
+            if(plants.get(i).getEnabled() == false) plants.get(i).setEnabled(true);
         }
     }
 

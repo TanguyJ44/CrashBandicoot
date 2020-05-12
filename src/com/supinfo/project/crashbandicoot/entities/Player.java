@@ -285,11 +285,45 @@ public class Player extends Entity{
 
             if(playerLife > 0) playerLife--;
 
-            x = 10;
-            y = 80;
-            dir = 0;
-            numberFruits = 0;
-            level.reloadObject();
+            if(playerLife != 0) {
+                if(Level.levelNumber == 1) {
+                    for (int i = 0; i < Level.checkpoints.size(); i++) {
+                        if(Level.checkpoints.get(i).getLevel() == 1) {
+                            if(Level.checkpoints.get(i).getChecked() == true) {
+                                x = Level.checkpoints.get(i).getX();
+                            } else {
+                                x = 10;
+                            }
+                        }
+                    }
+                } else if(Level.levelNumber == 2) {
+                    for (int i = 0; i < Level.checkpoints.size(); i++) {
+                        if(Level.checkpoints.get(i).getLevel() == 2) {
+                            if(Level.checkpoints.get(i).getChecked() == true) {
+                                x = Level.checkpoints.get(i).getX();
+                            } else {
+                                x = 10;
+                            }
+                        }
+                    }
+                } else if(Level.levelNumber == 3) {
+                    for (int i = 0; i < Level.checkpoints.size(); i++) {
+                        if(Level.checkpoints.get(i).getLevel() == 3) {
+                            if(Level.checkpoints.get(i).getChecked() == true) {
+                                x = Level.checkpoints.get(i).getX();
+                            } else {
+                                x = 10;
+                            }
+                        }
+                    }
+                }
+
+
+                y = 80;
+                dir = 0;
+                numberFruits = 0;
+                level.reloadObject();
+            }
 
             if(playerLife != 0) {
                 playerIsDead = false;

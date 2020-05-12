@@ -108,4 +108,6 @@ public class Plant extends Entity{
     public int getLevel() { return level; }
 
     public boolean getEnabled() { return isEnabled; }
+
+    public void setEnabled(boolean value) { isEnabled = value; }
 }

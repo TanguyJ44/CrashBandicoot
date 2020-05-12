@@ -40,8 +40,8 @@ public class ScreenLoader {
             Level.wompasSound.play();
         }
 
-        if(time < 501) time++;
-        if(time == 100) {
+        if(time < 801) time++;
+        if(time == 800) {
             isVisible = false;
             Player.keysEnable = true;
         }

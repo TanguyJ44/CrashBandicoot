@@ -85,6 +85,10 @@ Langage : Java 8 (SE)
 - Construction du niveau 01
 - Ajout du son de démarrage (initialisation)
 - Construction du niveau 02
+- Ajout des CheckPoints dans les niveaux
+- Configuration du respawn sur le checkpoint
+- Implémentation des son sur les checkpoints
+
 
 
 # Patchs
