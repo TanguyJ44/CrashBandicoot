@@ -29,7 +29,7 @@ public class ScreenLoader {
     public static void render() {
         if(isVisible == true) {
             loadScreen.bind();
-                Renderer.renderEntity(0, 0, Component.frameWidth, Component.frameHeight, Colors.WHITE, 1f, 0, 0);
+                Renderer.renderEntity(0, 0, Component.frameWidth+2, Component.frameHeight+2, Colors.WHITE, 1f, 0, 0);
             loadScreen.unbind();
         }
 

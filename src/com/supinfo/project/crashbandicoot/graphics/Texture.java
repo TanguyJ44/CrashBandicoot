@@ -35,6 +35,7 @@ public class Texture {
     public static Texture plant = loadTexture("./res/images/sprite_plant.png");
 
     public static Texture game_over = loadTexture("./res/images/game_over.png");
+    public static Texture turtle = loadTexture("./res/images/turtle.png");
 
     public static Texture explosion1 = loadTexture("./res/images/explosion1.png");
     public static Texture explosion2 = loadTexture("./res/images/explosion2.png");

@@ -2,6 +2,7 @@ package com.supinfo.project.crashbandicoot.entities;
 
 import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
+import com.supinfo.project.crashbandicoot.graphics.Header;
 import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.utiles.Animation;
@@ -111,6 +112,12 @@ public class Player extends Entity{
             if(isGrounded()) {
                 ya -= 20;
             }
+
+            if(Level.levelNumber == 2 && x > 514 && x < 516) {
+                System.out.println(">> Player find a mystery object !");
+                Header.mysteryObject = true;
+            }
+
             lockJump = false;
         } else {
             if(lockJump == false) lockJump = true;
@@ -125,6 +132,11 @@ public class Player extends Entity{
             }
             if(isGrounded()) {
                 ya -= 20;
+            }
+
+            if(Level.levelNumber == 2 && x > 514 && x < 516) {
+                System.out.println(">> Player find a mystery object !");
+                Header.mysteryObject = true;
             }
         }
 
@@ -317,7 +329,6 @@ public class Player extends Entity{
                         }
                     }
                 }
-
 
                 y = 80;
                 dir = 0;

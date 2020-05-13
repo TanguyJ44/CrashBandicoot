@@ -15,6 +15,9 @@ public class Header {
 
     public static Texture textureFruit;
     public static Texture headPlayer;
+    public static Texture turtle;
+
+    public static boolean mysteryObject = false;
 
     public static void init() {
         awtFont = new Font("Arial", Font.BOLD, 20);
@@ -41,6 +44,7 @@ public class Header {
 
         textureFruit = Texture.apple;
         headPlayer = Texture.head_player;
+        turtle = Texture.turtle;
     }
 
     static float screenScroller;
@@ -58,6 +62,12 @@ public class Header {
         headPlayer.bind();
             Renderer.renderEntity(screenScroller + 90, 6, 37, 37, Colors.WHITE, 0.5f, 0, 0);
         headPlayer.unbind();
+
+        if(mysteryObject == true) {
+            turtle.bind();
+                Renderer.renderEntity(screenScroller + 170, 6, 37, 37, Colors.WHITE, 0.5f, 0, 0);
+            turtle.unbind();
+        }
     }
 
 }
