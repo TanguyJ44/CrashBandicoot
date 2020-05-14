@@ -88,7 +88,10 @@ Langage : Java 8 (SE)
 - Ajout des CheckPoints dans les niveaux
 - Configuration du respawn sur le checkpoint
 - Implémentation des son sur les checkpoints
-
+- Modification des certaines textures
+- Attaque tornade (V2)
+- Gestion du respawn et de la vie (v2)
+- Meilleur gestion d'AkuAku
 
 
 # Patchs

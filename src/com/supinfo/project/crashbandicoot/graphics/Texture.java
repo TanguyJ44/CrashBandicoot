@@ -20,6 +20,7 @@ public class Texture {
     public static Texture tilesLvl3 = loadTexture("./res/images/lvl3.png");
 
     public static Texture player = loadTexture("./res/images/sprite_perso.png");
+    public static Texture tornado = loadTexture("./res/images/sprite_tornado.png");
     public static Texture head_player = loadTexture("./res/images/head_cb.png");
     public static Texture akuaku = loadTexture("./res/images/sprite_akuaku.png");
 

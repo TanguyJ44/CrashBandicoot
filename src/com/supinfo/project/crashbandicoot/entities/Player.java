@@ -17,6 +17,7 @@ public class Player extends Entity{
     public static int playerBoxHeight = 40;
 
     Animation anim;
+    Animation tornadoAnim;
     public static int dir = 0;
 
     boolean isJump = false;
@@ -34,11 +35,16 @@ public class Player extends Entity{
 
     AudioControl audioControl;
 
+    Texture tornado;
+
     public Player(int x, int y) {
         super(x, y);
         texture = Texture.player;
+        tornado = Texture.tornado;
 
         anim = new Animation(2, 10, true);
+        tornadoAnim = new Animation(3, 12, true);
+        tornadoAnim.play();
 
         mass = 0.5f;
         drag = 0.70f;
@@ -72,6 +78,7 @@ public class Player extends Entity{
 
         anim.update();
         anim.pause();
+        tornadoAnim.update();
 
         playerX = x;
         playerY = y;
@@ -113,7 +120,7 @@ public class Player extends Entity{
                 ya -= 20;
             }
 
-            if(Level.levelNumber == 2 && x > 514 && x < 516) {
+            if(Level.levelNumber == 2 && x > 514 && x < 516 && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
                 System.out.println(">> Player find a mystery object !");
                 Header.mysteryObject = true;
             }
@@ -205,6 +212,8 @@ public class Player extends Entity{
                 x = 10;
                 y = 80;
                 dir = 0;
+
+                if(Level.akuaku.getInvokAkuaku() == true) Level.akuaku.setX(20);
             }
         }
         if(x > 2005) {
@@ -270,6 +279,15 @@ public class Player extends Entity{
                     numberFruits++;
                     Level.wompasSound.init(new File("./res/sounds/wompas.wav"));
                     Level.wompasSound.play();
+
+                    if(numberFruits == 100 && Level.akuaku.getAkuakuLife() < 2) {
+                        if(Level.akuaku.getInvokAkuaku() == false) {
+                            Level.akuaku.setAkuakuLife(0);
+                            Level.akuaku.setInvokAkuaku(true);
+                        } else {
+                            Level.akuaku.setAkuakuLife(Level.akuaku.getAkuakuLife()+1);
+                        }
+                    }
                 }
             }
 
@@ -295,56 +313,89 @@ public class Player extends Entity{
             keysEnable = false;
             playerIsDead = true;
 
-            if(playerLife > 0) playerLife--;
+            if(Level.akuaku.getInvokAkuaku() == true) {
 
-            if(playerLife != 0) {
-                if(Level.levelNumber == 1) {
-                    for (int i = 0; i < Level.checkpoints.size(); i++) {
-                        if(Level.checkpoints.get(i).getLevel() == 1) {
-                            if(Level.checkpoints.get(i).getChecked() == true) {
-                                x = Level.checkpoints.get(i).getX();
-                            } else {
-                                x = 10;
+                if(Level.akuaku.getAkuakuLife() > 0) {
+                    Level.akuaku.setAkuakuLife(Level.akuaku.getAkuakuLife()-1);
+                    audioControl.init(new File("./res/sounds/akudroppen.wav"));
+                    audioControl.play();
+                } else {
+                    Level.akuaku.setInvokAkuaku(false);
+                    audioControl.init(new File("./res/sounds/akudroppen.wav"));
+                    audioControl.play();
+                }
+
+                x = Level.akuaku.getX();
+
+                if(playerLife != 0) {
+                    y = 80;
+                    dir = 0;
+
+                    playerIsDead = false;
+                    keysEnable = true;
+
+                    killPlayer = false;
+
+                    killSound.init(new File("./res/sounds/lowlife.wav"));
+                    killSound.play();
+                }
+
+            } else {
+
+                if(playerLife > 0) playerLife--;
+
+                if(playerLife != 0) {
+                    if(Level.levelNumber == 1) {
+                        for (int i = 0; i < Level.checkpoints.size(); i++) {
+                            if(Level.checkpoints.get(i).getLevel() == 1) {
+                                if(Level.checkpoints.get(i).getChecked() == true) {
+                                    x = Level.checkpoints.get(i).getX();
+                                } else {
+                                    x = 10;
+                                }
                             }
                         }
-                    }
-                } else if(Level.levelNumber == 2) {
-                    for (int i = 0; i < Level.checkpoints.size(); i++) {
-                        if(Level.checkpoints.get(i).getLevel() == 2) {
-                            if(Level.checkpoints.get(i).getChecked() == true) {
-                                x = Level.checkpoints.get(i).getX();
-                            } else {
-                                x = 10;
+                    } else if(Level.levelNumber == 2) {
+                        for (int i = 0; i < Level.checkpoints.size(); i++) {
+                            if(Level.checkpoints.get(i).getLevel() == 2) {
+                                if(Level.checkpoints.get(i).getChecked() == true) {
+                                    x = Level.checkpoints.get(i).getX();
+                                } else {
+                                    x = 10;
+                                }
                             }
                         }
-                    }
-                } else if(Level.levelNumber == 3) {
-                    for (int i = 0; i < Level.checkpoints.size(); i++) {
-                        if(Level.checkpoints.get(i).getLevel() == 3) {
-                            if(Level.checkpoints.get(i).getChecked() == true) {
-                                x = Level.checkpoints.get(i).getX();
-                            } else {
-                                x = 10;
+                    } else if(Level.levelNumber == 3) {
+                        for (int i = 0; i < Level.checkpoints.size(); i++) {
+                            if(Level.checkpoints.get(i).getLevel() == 3) {
+                                if(Level.checkpoints.get(i).getChecked() == true) {
+                                    x = Level.checkpoints.get(i).getX();
+                                } else {
+                                    x = 10;
+                                }
                             }
                         }
                     }
                 }
 
-                y = 80;
-                dir = 0;
-                numberFruits = 0;
-                level.reloadObject();
+                if(playerLife != 0) {
+                    y = 80;
+                    dir = 0;
+                    numberFruits = 0;
+                    level.reloadObject();
+
+                    playerIsDead = false;
+                    keysEnable = true;
+
+                    killPlayer = false;
+
+                    killSound.init(new File("./res/sounds/lowlife.wav"));
+                    killSound.play();
+                }
+
             }
 
-            if(playerLife != 0) {
-                playerIsDead = false;
-                keysEnable = true;
 
-                killPlayer = false;
-
-                killSound.init(new File("./res/sounds/lowlife.wav"));
-                killSound.play();
-            }
         }
     }
 
@@ -380,9 +431,9 @@ public class Player extends Entity{
                 Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, anim.getCurrentFrame());
             texture.unbind();
         } else {
-            texture.bind();
-                Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, 3, 0);
-            texture.unbind();
+            tornado.bind();
+                Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, tornadoAnim.getCurrentFrame(), 0);
+            tornado.unbind();
         }
 
         if(Level.levelNumber == 1) level.load1AfterPlayer();

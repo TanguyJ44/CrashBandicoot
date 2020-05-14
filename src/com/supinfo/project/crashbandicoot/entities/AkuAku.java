@@ -63,4 +63,6 @@ public class AkuAku extends Entity {
 
     public void setInvokAkuaku (boolean value) { invokAkuaku = value; }
     public void setAkuakuLife (int value) { akuakuLife = value; }
+
+    public void setX(int value) { x = value; }
 }
