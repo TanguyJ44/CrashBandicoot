@@ -53,7 +53,7 @@ public class Plant extends Entity{
 
     @Override
     public void update() {
-        if(Level.levelNumber == level) {
+        if(isEnabled && Level.levelNumber == level) {
             if (Player.playerX < x && dir == 0) dir = 1;
             else if (Player.playerX > x && dir == 1) dir = 0;
 
@@ -83,8 +83,6 @@ public class Plant extends Entity{
                             } else if(eatSteps == 3){
                                 eatSteps--;
                             }
-
-                            System.out.println("plant eat");
 
                             countSteps++;
                             if(countSteps == 3) {
@@ -134,7 +132,7 @@ public class Plant extends Entity{
 
     @Override
     public void render() {
-        if(Level.levelFinished != true && Level.levelNumber == level) {
+        if(isEnabled && Level.levelFinished != true && Level.levelNumber == level) {
             texture.bind();
                 Renderer.renderEntity(x, y, 32, 40, Colors.WHITE, 4.5f, dir, swing);
             texture.unbind();

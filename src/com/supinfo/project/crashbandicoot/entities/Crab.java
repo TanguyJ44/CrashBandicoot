@@ -47,7 +47,7 @@ public class Crab extends Entity {
 
     @Override
     public void update() {
-        if(Level.levelNumber == level) {
+        if(isEnabled && Level.levelNumber == level) {
             if (true) {
                 time++;
                 if (time > speed) {
@@ -68,7 +68,7 @@ public class Crab extends Entity {
                 }
             }
 
-            // Crab collide detection
+            // Crab collide detector
             if ((Player.playerX+10 >= x + coord + 35)
                     || (Player.playerX+10 + Player.playerBoxWidth-20 <= x + coord)
                     || (Player.playerY+10 >= y + 35)
@@ -80,17 +80,18 @@ public class Crab extends Entity {
                     Player.killPlayer = true;
                     System.out.println("[Player] was killed by Crab !");
                     delay.start();
-                } else {
+                } else if (Player.tornadoAttack == true && delay.talk() == true) {
                     isEnabled = false;
                 }
 
             }
+
         }
     }
 
     @Override
     public void render() {
-        if(Level.levelFinished != true && Level.levelNumber == level) {
+        if(isEnabled && Level.levelFinished != true && Level.levelNumber == level) {
             texture.bind();
                 Renderer.renderEntity(x + coord, y, 25, 25, Colors.WHITE, 2f, dir, 0);
             texture.unbind();

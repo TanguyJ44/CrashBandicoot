@@ -156,8 +156,6 @@ public class Level {
             mapInit();
             initObjects();
         }
-
-        verifEntitiesIsDisabled();
     }
 
     public void render() {
@@ -171,9 +169,8 @@ public class Level {
 
         ScreenLoader.render();
 
-        if(levelFinished == true) {
-            Renderer.renderBlackOut(1);
-        }
+        if(levelFinished == true) Renderer.renderBlackOut(1);
+        if(Player.playerLife == 0) Renderer.renderBlackOut(2);
     }
 
     public void initObjects() {
@@ -280,23 +277,6 @@ public class Level {
         }
     }
 
-    public void verifEntitiesIsDisabled() {
-        for (int i = 0; i < crabs.size(); i++) {
-            if(crabs.get(i).getEnabled() == false)
-                removeEntity(crabs.get(i));
-        }
-
-        for (int i = 0; i < fishs.size(); i++) {
-            if(fishs.get(i).getEnabled() == false)
-                removeEntity(fishs.get(i));
-        }
-
-        for (int i = 0; i < plants.size(); i++) {
-            if(plants.get(i).getEnabled() == false)
-                removeEntity(plants.get(i));
-        }
-    }
-
     public void level1Objects() {
         Header.render();
 
@@ -361,11 +341,7 @@ public class Level {
 
     public void load1AfterPlayer() {
 
-        //ScreenLoader.render();
 
-        /*if(levelFinished == true) {
-            Renderer.renderBlackOut(1);
-        }*/
     }
 
     public void load2AfterPlayer() {
@@ -395,6 +371,7 @@ public class Level {
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).getEnabled() == false) plants.get(i).setEnabled(true);
         }
+
     }
 
     public static void levelDischarge() {
@@ -436,7 +413,7 @@ public class Level {
                 lvl1Sound.init(new File("./res/sounds/lvl1.wav"));
                 lvl1Sound.play();
                 lvl1Sound.setVolume((float) gain / 100);
-            case 2:
+            /*case 2:
                 gain = 10;
                 lvl2Sound.init(new File("./res/sounds/lvl2.wav"));
                 lvl2Sound.play();
@@ -447,7 +424,7 @@ public class Level {
                 lvl3Sound.init(new File("./res/sounds/lvl3.wav"));
                 lvl3Sound.play();
                 lvl3Sound.setVolume((float) gain / 100);
-                break;
+                break;*/
             default:
                 break;
         }

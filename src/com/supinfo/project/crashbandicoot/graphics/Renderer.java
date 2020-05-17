@@ -74,7 +74,10 @@ public class Renderer {
                         if (type == 1) {
                             Level.levelNumber += 1;
 
+                            Level.lvl1Sound.setPlayCompleted(true);
                             Level.lvl1Sound.stop();
+                            Level.lvl1Sound.destroy();
+
                             Level.lvl2Sound.stop();
                             Level.lvl3Sound.stop();
 
@@ -83,6 +86,10 @@ public class Renderer {
                         }
                         drawText = true;
                         if (type == 2) {
+                            Level.lvl1Sound.setPlayCompleted(true);
+                            Level.lvl1Sound.stop();
+                            Level.lvl1Sound.destroy();
+
                             audioControl.init(new File("./res/sounds/gameover.wav"));
                             audioControl.play();
                         }
@@ -114,7 +121,6 @@ public class Renderer {
                     invert = true;
                     loop = true;
                     drawText = false;
-                    Level.startLevelSound(Level.levelNumber);
                 }
             }
         }

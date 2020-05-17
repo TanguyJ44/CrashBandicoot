@@ -121,4 +121,6 @@ public class AudioControl implements LineListener {
         gainControl.setValue(20f * (float) Math.log10(volume));
     }
 
+    public static void setPlayCompleted(boolean value) { playCompleted = value; }
+
 }
