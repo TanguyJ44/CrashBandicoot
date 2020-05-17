@@ -22,6 +22,10 @@ public class Plant extends Entity{
     private int swingCount;
 
     boolean eating = false;
+    boolean playerDetector = false;
+
+    int eatSteps = 2;
+    int countSteps = 0;
 
     Delay delay;
 
@@ -57,15 +61,38 @@ public class Plant extends Entity{
                 time++;
                 if (time > speed) {
 
-                    if (swingCount > 8) {
-                        swingCount = 0;
-                        if (swing == 0) {
-                            swing = 1;
-                            y+= 1;
+                    if(playerDetector == false) {
+                        if (swingCount > 8) {
+                            swingCount = 0;
+                            if (swing == 0) {
+                                swing = 1;
+                                y+= 1;
+                            }
+                            else {
+                                swing = 0;
+                                y-= 1;
+                            }
                         }
-                        else {
-                            swing = 0;
-                            y-= 1;
+                    } else {
+                        if (swingCount > 8) {
+                            swingCount = 0;
+
+                            swing = eatSteps;
+                            if(eatSteps == 2) {
+                                eatSteps++;
+                            } else if(eatSteps == 3){
+                                eatSteps--;
+                            }
+
+                            System.out.println("plant eat");
+
+                            countSteps++;
+                            if(countSteps == 3) {
+                                playerDetector = false;
+                                eatSteps = 2;
+                                countSteps = 0;
+                                swing = 1;
+                            }
                         }
                     }
 
@@ -81,6 +108,15 @@ public class Plant extends Entity{
                     || (Player.playerY >= y + 40)
                     || (Player.playerY + Player.playerBoxHeight <= y)){
                 // Player is not in a area
+
+                if(Player.dir == 0 && (Player.playerX + Player.playerBoxWidth) >= x-15) {
+                    if(playerDetector != true) playerDetector = true;
+                }
+
+                /*if(Player.dir == 1 && Player.playerX <= (x + 32 + 10)) {
+                    if(playerDetector != true) playerDetector = true;
+                }*/
+
             } else {
                 eating = true;
                 if (Player.tornadoAttack == false) {

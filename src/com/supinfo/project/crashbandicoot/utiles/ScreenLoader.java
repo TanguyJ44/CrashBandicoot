@@ -44,6 +44,8 @@ public class ScreenLoader {
         if(time == 800) {
             isVisible = false;
             Player.keysEnable = true;
+
+            Level.startLevelSound(1);
         }
 
     }

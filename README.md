@@ -90,8 +90,10 @@ Langage : Java 8 (SE)
 - Implémentation des son sur les checkpoints
 - Modification des certaines textures
 - Attaque tornade (V2)
-- Gestion du respawn et de la vie (v2)
+- Gestion du respawn et de la vie (V2)
 - Meilleur gestion d'AkuAku
+- Animation de la plante (V2)
+- Correction bug ordre de rendu
 
 
 # Patchs

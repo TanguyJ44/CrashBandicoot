@@ -50,6 +50,9 @@ public class Level {
     ObjectsAnimation animFruits;
 
     public static AudioControl wompasSound;
+    public static AudioControl lvl1Sound;
+    public static AudioControl lvl2Sound;
+    public static AudioControl lvl3Sound;
 
     int loadLevel = 0;
 
@@ -61,6 +64,10 @@ public class Level {
         spawner();
 
         animFruits = new ObjectsAnimation(5, 6, true);
+
+        lvl1Sound = new AudioControl();
+        lvl2Sound = new AudioControl();
+        lvl3Sound = new AudioControl();
     }
 
     public void generate() {
@@ -160,6 +167,12 @@ public class Level {
         for(int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
             e.render();
+        }
+
+        ScreenLoader.render();
+
+        if(levelFinished == true) {
+            Renderer.renderBlackOut(1);
         }
     }
 
@@ -348,11 +361,11 @@ public class Level {
 
     public void load1AfterPlayer() {
 
-        ScreenLoader.render();
+        //ScreenLoader.render();
 
-        if(levelFinished == true) {
+        /*if(levelFinished == true) {
             Renderer.renderBlackOut(1);
-        }
+        }*/
     }
 
     public void load2AfterPlayer() {
@@ -412,6 +425,32 @@ public class Level {
         }
 
         return false;
+    }
+
+    static double gain;
+
+    public static void startLevelSound(int lvl) {
+        switch (lvl) {
+            case 1:
+                gain = 10;
+                lvl1Sound.init(new File("./res/sounds/lvl1.wav"));
+                lvl1Sound.play();
+                lvl1Sound.setVolume((float) gain / 100);
+            case 2:
+                gain = 10;
+                lvl2Sound.init(new File("./res/sounds/lvl2.wav"));
+                lvl2Sound.play();
+                lvl2Sound.setVolume((float) gain / 100);
+                break;
+            case 3:
+                gain = 10;
+                lvl3Sound.init(new File("./res/sounds/lvl3.wav"));
+                lvl3Sound.play();
+                lvl3Sound.setVolume((float) gain / 100);
+                break;
+            default:
+                break;
+        }
     }
 
     public static Player getPlayer() {

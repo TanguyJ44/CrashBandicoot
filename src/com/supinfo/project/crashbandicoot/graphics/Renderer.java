@@ -73,6 +73,11 @@ public class Renderer {
                         loop = false;
                         if (type == 1) {
                             Level.levelNumber += 1;
+
+                            Level.lvl1Sound.stop();
+                            Level.lvl2Sound.stop();
+                            Level.lvl3Sound.stop();
+
                             audioControl.init(new File("./res/sounds/nextlvl.wav"));
                             audioControl.play();
                         }
@@ -85,6 +90,7 @@ public class Renderer {
                 } else {
                     if(alpha > 0f){
                         alpha -= 0.1f;
+                        //if(Level.levelFinished) Level.levelFinished = false;
                     } else {
                         renderBlackOutReload();
                     }
@@ -108,6 +114,7 @@ public class Renderer {
                     invert = true;
                     loop = true;
                     drawText = false;
+                    Level.startLevelSound(Level.levelNumber);
                 }
             }
         }
