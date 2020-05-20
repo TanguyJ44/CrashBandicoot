@@ -92,6 +92,8 @@ public class Renderer {
 
                             audioControl.init(new File("./res/sounds/gameover.wav"));
                             audioControl.play();
+
+                            Level.reloadGameOver();
                         }
                     }
                 } else {

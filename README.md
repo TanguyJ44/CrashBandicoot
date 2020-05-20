@@ -94,6 +94,10 @@ Langage : Java 8 (SE)
 - Meilleur gestion d'AkuAku
 - Animation de la plante (V2)
 - Correction bug ordre de rendu
+- Reload des checkpoints
+- Correction bug caisse AkuAku
+- Reload caisse TnT / Nitro
+- Répartition des évenements des caisses
 
 
 # Patchs

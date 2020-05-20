@@ -37,6 +37,8 @@ public class CheckPoint {
 
     public void update() {
 
+        if(!checked && yUp !=0) yUp = 0;
+
         if ((Player.playerX >= x + 20)
                 || (Player.playerX + Player.playerBoxWidth <= x)
                 || (Player.playerY >= y + 20)
@@ -51,6 +53,9 @@ public class CheckPoint {
             if (yUp == 0) {
                 controlSound.init(new File("./res/sounds/checkpoint.wav"));
                 controlSound.play();
+            }
+            if(yUp == 9) {
+                upFlag = false;
             }
             if(yUp < 9) yUp++;
         }
@@ -77,5 +82,7 @@ public class CheckPoint {
     public boolean getChecked() { return checked; }
 
     public int getLevel() { return level; }
+
+    public void setChecked(boolean value) { checked = value; }
 
 }

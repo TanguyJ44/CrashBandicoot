@@ -1,6 +1,5 @@
 package com.supinfo.project.crashbandicoot.objects;
 
-import com.supinfo.project.crashbandicoot.entities.AkuAku;
 import com.supinfo.project.crashbandicoot.entities.Player;
 import com.supinfo.project.crashbandicoot.game.Level;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
@@ -31,7 +30,7 @@ public class Boxes {
     BoxType boxType;
 
     public enum BoxType {
-        BASIC, JUMP, ARROW, AKUAKU, CRASH, IRON, TNT, NITRO
+        BASIC, JUMP, ARROW, AKU, CRASH, IRON, TNT, NITRO
     }
 
     public Boxes(int x, int y, int numberBreak, boolean tornadoBreak, boolean isBreak, BoxType boxType, int level) {
@@ -68,7 +67,7 @@ public class Boxes {
                 ssPositionX = 2;
                 ssPositionY = 0;
                 break;
-            case AKUAKU:
+            case AKU:
                 ssPositionX = 3;
                 ssPositionY = 0;
                 break;
@@ -149,43 +148,17 @@ public class Boxes {
                         isBreak = true;
                         reset();
                     } else if(boxType == BoxType.JUMP) {
-                        Player.numberFruits+=10;
+                        Player.numberFruits++;
                         audioControl.init(new File("./res/sounds/wompas.wav"));
                         audioControl.play();
                     } else if(boxType == BoxType.ARROW) {
                         Player.ya -=25;
                         audioControl.init(new File("./res/sounds/jump.wav"));
                         audioControl.play();
-                    } else if(boxType == BoxType.CRASH) {
-                        if(Player.playerLife < 3) {
-                            Player.playerLife++;
-                            audioControl.init(new File("./res/sounds/uplife.wav"));
-                            audioControl.play();
-                        }
-                    } else if(boxType == BoxType.AKUAKU) {
-                        if(!Level.akuaku.getInvokAkuaku()) {
-                            Level.akuaku.setAkuakuLife(0);
-                            Level.akuaku.setInvokAkuaku(true);
-                        } else {
-                            if(Level.akuaku.getAkuakuLife() < 2) Level.akuaku.setAkuakuLife(Level.akuaku.getAkuakuLife() +1);
-                        }
                     } else if(boxType == BoxType.TNT) {
-                        tnt = true;
-                        audioControl.init(new File("./res/sounds/countdown.wav"));
-                        audioControl.play();
+                        onAction();
                     } else if(boxType == BoxType.NITRO) {
-                        reset();
-                        count = 4;
-
-                        texture = Texture.explosion1;
-
-                        ssPositionX = 0;
-                        ssPositionY = 0;
-
-                        audioControl.init(new File("./res/sounds/explosion.wav"));
-                        audioControl.play();
-
-                        explosion = true;
+                        onAction();
                     }
                 }
             }
@@ -228,6 +201,11 @@ public class Boxes {
         if (explosion) {
             time++;
 
+            if(Player.playerX > x-80 && (Player.playerX+Player.playerBoxWidth) < x+60) {
+                Player.killPlayer = true;
+                System.out.println("[Player] was killed by " + getBoxType().toString() + " !");
+            }
+
             if(count == 3) {
                 texture = Texture.explosion1;
                 count --;
@@ -242,6 +220,7 @@ public class Boxes {
                 } else if (count == 0) {
                     isBreak = true;
                     reset();
+                    waitAction = false;
                 }
 
                 time = 0;
@@ -249,6 +228,50 @@ public class Boxes {
             }
         }
 
+    }
+
+    boolean waitAction = false;
+
+    public void onAction() {
+        if(boxType == BoxType.TNT && !waitAction) {
+            tnt = true;
+            audioControl.init(new File("./res/sounds/countdown.wav"));
+            audioControl.play();
+            waitAction = true;
+        } else if(boxType == BoxType.NITRO && !waitAction) {
+            reset();
+            count = 4;
+
+            texture = Texture.explosion1;
+
+            ssPositionX = 0;
+            ssPositionY = 0;
+
+            audioControl.init(new File("./res/sounds/explosion.wav"));
+            audioControl.play();
+
+            explosion = true;
+            waitAction = true;
+        } else if(boxType == BoxType.CRASH) {
+            if(Player.playerLife < 3) {
+                Player.playerLife++;
+                audioControl.init(new File("./res/sounds/uplife.wav"));
+                audioControl.play();
+            }
+        } else if(boxType == BoxType.AKU) {
+            if(!Level.akuaku.getInvokAkuaku()) {
+                Level.akuaku.setAkuakuLife(0);
+                Level.akuaku.setInvokAkuaku(true);
+            } else {
+                if(Level.akuaku.getAkuakuLife() < 2) Level.akuaku.setAkuakuLife(Level.akuaku.getAkuakuLife() +1);
+            }
+            audioControl.init(new File("./res/sounds/akupen.wav"));
+            audioControl.play();
+        } else if(boxType == BoxType.BASIC) {
+            Player.numberFruits+= 2;
+            audioControl.init(new File("./res/sounds/wompas.wav"));
+            audioControl.play();
+        }
     }
 
     public void reset() {

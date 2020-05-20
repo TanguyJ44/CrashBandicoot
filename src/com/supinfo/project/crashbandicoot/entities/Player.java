@@ -158,7 +158,7 @@ public class Player extends Entity{
             }
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_F1) || gamepadB == true) {
+        /*if (Keyboard.isKeyDown(Keyboard.KEY_F1) || gamepadB == true) {
             gamepadB = false;
             playerLife = 3;
             AkuAku.akuakuLife = 0;
@@ -202,7 +202,7 @@ public class Player extends Entity{
             level.reloadObject();
 
             Renderer.audioControl.stop();
-        }
+        }*/
 
         if(x > 970) {
             if(Level.levelNumber == 1) {

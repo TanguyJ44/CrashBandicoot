@@ -173,7 +173,7 @@ public class Level {
         if(Player.playerLife == 0) Renderer.renderBlackOut(2);
     }
 
-    public void initObjects() {
+    public static void initObjects() {
         fruits.clear();
         boxes.clear();
         checkpoints.clear();
@@ -195,9 +195,9 @@ public class Level {
             fruits.add(new Fruit(925, 50, false, 1));
             fruits.add(new Fruit(925, 20, false, 1));
 
-            boxes.add(new Boxes(250, 110,0,true,false, Boxes.BoxType.BASIC,1));
-            boxes.add(new Boxes(280, 80,0,false,false, Boxes.BoxType.IRON,1));
-            boxes.add(new Boxes(380, 130,1,true,false, Boxes.BoxType.AKUAKU,1));
+            boxes.add(new Boxes(250, 130,0,true,false, Boxes.BoxType.BASIC,1));
+            boxes.add(new Boxes(280, 100,0,false,false, Boxes.BoxType.IRON,1));
+            boxes.add(new Boxes(380, 130,0,true,false, Boxes.BoxType.AKU,1));
             boxes.add(new Boxes(540, 130,1,true,false, Boxes.BoxType.BASIC,1));
             boxes.add(new Boxes(660, 130,1,false,false, Boxes.BoxType.TNT,1));
             boxes.add(new Boxes(800, 130,0,true,false, Boxes.BoxType.BASIC,1));
@@ -226,15 +226,16 @@ public class Level {
 
             boxes.add(new Boxes(450, 130,0,false,false, Boxes.BoxType.IRON,2));
             boxes.add(new Boxes(490, 100,0,false,false, Boxes.BoxType.IRON,2));
-            boxes.add(new Boxes(780, 130,1,true,false, Boxes.BoxType.CRASH,2));
+            boxes.add(new Boxes(780, 130,0,true,false, Boxes.BoxType.CRASH,2));
             boxes.add(new Boxes(970, 130,1,false,false, Boxes.BoxType.TNT,2));
-            boxes.add(new Boxes(1020, 90,1,true,false, Boxes.BoxType.JUMP,2));
-            boxes.add(new Boxes(1340, 130,1,true,false, Boxes.BoxType.AKUAKU,2));
+            boxes.add(new Boxes(1010, 100,10,true,false, Boxes.BoxType.JUMP,2));
+            boxes.add(new Boxes(1340, 130,0,true,false, Boxes.BoxType.AKU,2));
             boxes.add(new Boxes(1460, 130,1,false,false, Boxes.BoxType.NITRO,2));
             boxes.add(new Boxes(1510, 130,0,false,false, Boxes.BoxType.IRON,2));
-            boxes.add(new Boxes(1540, 100,0,false,false, Boxes.BoxType.IRON,2));
-            boxes.add(new Boxes(1570, 70,0,false,false, Boxes.BoxType.IRON,2));
-            boxes.add(new Boxes(1600, 40,1,true,false, Boxes.BoxType.JUMP,2));
+            boxes.add(new Boxes(1540, 100,10,true,false, Boxes.BoxType.JUMP,2));
+            //boxes.add(new Boxes(1540, 100,0,false,false, Boxes.BoxType.IRON,2));
+            //boxes.add(new Boxes(1570, 70,0,false,false, Boxes.BoxType.IRON,2));
+            //boxes.add(new Boxes(1600, 40,10,true,false, Boxes.BoxType.JUMP,2));
             boxes.add(new Boxes(1690, 130,1,false,false, Boxes.BoxType.TNT,2));
 
             checkpoints.add(new CheckPoint(1280, 125, false, 2));
@@ -371,12 +372,18 @@ public class Level {
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).getEnabled() == false) plants.get(i).setEnabled(true);
         }
-
     }
 
-    public static void levelDischarge() {
+    public static void reloadGameOver() {
+        Level.levelNumber = 1;
+        initObjects();
 
+        for (int i = 0; i < checkpoints.size(); i++) {
+            if(checkpoints.get(i).getChecked() == true) checkpoints.get(i).setChecked(false);
+        }
     }
+
+    public static void levelDischarge() {}
 
     public static boolean checkCollideAllBoxesX() {
         for (int i = 0; i < boxes.size(); i++) {
@@ -384,8 +391,10 @@ public class Level {
                 if(Level.boxes.get(i).getCollideX()) {
                     if(boxes.get(i).getTornadoBreak() && Player.tornadoAttack) {
                         boxes.get(i).setBreak(true);
+                        boxes.get(i).onAction();
                         return false;
                     } else {
+                        if(Player.tornadoAttack) boxes.get(i).onAction();
                         return true;
                     }
                 }
