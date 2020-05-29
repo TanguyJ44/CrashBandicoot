@@ -240,25 +240,75 @@ public class Level {
 
             checkpoints.add(new CheckPoint(1280, 125, false, 2));
         } else if(Level.levelNumber == 3) {
+            fruits.add(new Fruit(70, 120, false, 3));
+            fruits.add(new Fruit(100, 90, false, 3));
+            fruits.add(new Fruit(130, 120, false, 3));
+            fruits.add(new Fruit(495, 40, false, 3));
+            fruits.add(new Fruit(525, 40, false, 3));
+            fruits.add(new Fruit(555, 70, false, 3));
+            fruits.add(new Fruit(585, 100, false, 3));
+            fruits.add(new Fruit(685, 20, false, 3));
+            fruits.add(new Fruit(910, 120, false, 3));
+            fruits.add(new Fruit(940, 90, false, 3));
+            fruits.add(new Fruit(970, 120, false, 3));
+            fruits.add(new Fruit(1090, 70, false, 3));
+            fruits.add(new Fruit(1090, 100, false, 3));
+            fruits.add(new Fruit(1090, 130, false, 3));
+            fruits.add(new Fruit(1490, 130, false, 3));
+            fruits.add(new Fruit(1540, 100, false, 3));
+            fruits.add(new Fruit(1590, 70, false, 3));
+            fruits.add(new Fruit(1610, 120, false, 3));
+            fruits.add(new Fruit(1630, 70, false, 3));
+            fruits.add(new Fruit(1680, 100, false, 3));
+            fruits.add(new Fruit(1730, 130, false, 3));
 
-            checkpoints.add(new CheckPoint(1280, 125, false, 2));
+            boxes.add(new Boxes(350, 130,0,true,false, Boxes.BoxType.AKU,3));
+            boxes.add(new Boxes(410, 130,0,false,false, Boxes.BoxType.IRON,3));
+            boxes.add(new Boxes(450, 100,0,true,false, Boxes.BoxType.BASIC,3));
+            //boxes.add(new Boxes(490, 70,0,false,false, Boxes.BoxType.IRON,3));
+            boxes.add(new Boxes(580, 130,1,false,false, Boxes.BoxType.TNT,3));
+            boxes.add(new Boxes(630, 130,5,true,false, Boxes.BoxType.ARROW,3));
+            boxes.add(new Boxes(680, 60,0,true,false, Boxes.BoxType.BASIC,3));
+            boxes.add(new Boxes(1020, 130,0,true,false, Boxes.BoxType.AKU,3));
+            boxes.add(new Boxes(1160, 130,1,false,false, Boxes.BoxType.NITRO,3));
+            boxes.add(new Boxes(1230, 130,0,false,false, Boxes.BoxType.IRON,3));
+            boxes.add(new Boxes(1280, 100,0,true,false, Boxes.BoxType.BASIC,3));
+            boxes.add(new Boxes(1330, 70,0,false,false, Boxes.BoxType.IRON,3));
+
+            checkpoints.add(new CheckPoint(1320, 115, false, 3));
         }
     }
 
     public void initEntities() {
+        // Level 1
         crabs.add(new Crab(160, 135, 1));
         crabs.add(new Crab(280, 135, 1));
+        // Level 2
         crabs.add(new Crab(100, 135, 2));
         crabs.add(new Crab(1070, 135, 2));
         crabs.add(new Crab(1580, 135, 2));
+        // Level 3
+        crabs.add(new Crab(250, 135, 3));
+        crabs.add(new Crab(740, 135, 3));
+        crabs.add(new Crab(1800, 135, 3));
 
+        // Level 1
         fishs.add(new Fish(733, 150, 1));
+        // Level 3
+        //fishs.add(new Fish(205, 150, 3));
+        fishs.add(new Fish(525, 150, 3));
 
+        // Level 1
         plants.add(new Plant(600, 115, 1));
+        // Level 2
         plants.add(new Plant(250, 115, 2));
         plants.add(new Plant(650, 115, 2));
         plants.add(new Plant(1950, 115, 2));
+        // Level 3
+        plants.add(new Plant(850, 115, 3));
+        plants.add(new Plant(1410, 115, 3));
 
+        // Level 2
         traps.add(new Traps(720, 170, 2));
         traps.add(new Traps(1400, 170, 2));
 
@@ -338,6 +388,31 @@ public class Level {
 
     public void level3Objects() {
         Header.render();
+
+        textureFruit.bind();
+        for (int i = 0; i < fruits.size(); i++) {
+            if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 3)
+                Renderer.renderEntity(fruits.get(i).getX(), fruits.get(i).getY(), 37, 37, Colors.WHITE, 0.5f, 0, 0);
+        }
+        textureFruit.unbind();
+
+        for (int i = 0; i < boxes.size(); i++) {
+            if(boxes.get(i).getBreak() != true)
+                boxes.get(i).render();
+        }
+
+        for (int i = 0; i < checkpoints.size(); i++) {
+            checkpoints.get(i).render();
+        }
+
+        for (int i = 0; i < traps.size(); i++) {
+            traps.get(i).render();
+        }
+
+        for (int i = 0; i < fruits.size(); i++) {
+            if (fruits.get(i).getEat() == false && fruits.get(i).getLevel() == 3)
+                fruits.get(i).setY(fruits.get(i).getDefaultY() + animFruits.getCurrentCoord());
+        }
     }
 
     public void load1AfterPlayer() {

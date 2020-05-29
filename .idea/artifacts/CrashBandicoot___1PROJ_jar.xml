@@ -8,6 +8,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/lwjgl_util.jar" path-in-jar="/" />
       <element id="library" level="project" name="lwjgl" />
       <element id="library" level="project" name="slick" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
     </root>
   </artifact>
 </component>

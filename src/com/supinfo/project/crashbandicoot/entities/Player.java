@@ -13,6 +13,10 @@ import java.io.File;
 
 public class Player extends Entity{
 
+    // ========= PASSER EN MODE DÉVELOPPEUR =========
+    boolean devMode = true;
+    // ==============================================
+
     public static int playerBoxWidth = 32;
     public static int playerBoxHeight = 40;
 
@@ -158,51 +162,54 @@ public class Player extends Entity{
             }
         }
 
-        /*if (Keyboard.isKeyDown(Keyboard.KEY_F1) || gamepadB == true) {
-            gamepadB = false;
-            playerLife = 3;
-            AkuAku.akuakuLife = 0;
-            AkuAku.invokAkuaku = false;
-            x = 10;
-            y = 80;
-            dir = 0;
-            numberFruits = 0;
-            level.reloadObject();
+        if(devMode == true) {
+            if (Keyboard.isKeyDown(Keyboard.KEY_F1) || gamepadB == true) {
+                gamepadB = false;
+                playerLife = 3;
+                AkuAku.akuakuLife = 0;
+                AkuAku.invokAkuaku = false;
+                x = 10;
+                y = 80;
+                dir = 0;
+                numberFruits = 0;
+                level.reloadObject();
+            }
+            if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
+                numberFruits++;
+            }
+            if (Keyboard.isKeyDown(Keyboard.KEY_F3)) {
+                if(playerLife < 3) playerLife++;
+            }
+            if (Keyboard.isKeyDown(Keyboard.KEY_F4)) {
+                if(AkuAku.invokAkuaku == false) AkuAku.invokAkuaku = true;
+                if(AkuAku.akuakuLife < 2) AkuAku.akuakuLife++;
+            }
+            if (Keyboard.isKeyDown(Keyboard.KEY_F9)) {
+                x = 2000;
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+                Level.levelFinished = false;
+                Level.levelNumber = 1;
+
+                keysEnable = true;
+                playerIsDead = false;
+                killPlayer = false;
+
+                x = 10;
+                y = 80;
+                dir = 0;
+
+                Renderer.renderBlackOutReload();
+
+                playerLife = 3;
+                numberFruits = 0;
+                level.reloadObject();
+
+                Renderer.audioControl.stop();
+            }
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
-            numberFruits++;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_F3)) {
-            if(playerLife < 3) playerLife++;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_F4)) {
-            if(AkuAku.invokAkuaku == false) AkuAku.invokAkuaku = true;
-            if(AkuAku.akuakuLife < 2) AkuAku.akuakuLife++;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_F9)) {
-            x = 2000;
-        }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
-            Level.levelFinished = false;
-            Level.levelNumber = 1;
-
-            keysEnable = true;
-            playerIsDead = false;
-            killPlayer = false;
-
-            x = 10;
-            y = 80;
-            dir = 0;
-
-            Renderer.renderBlackOutReload();
-
-            playerLife = 3;
-            numberFruits = 0;
-            level.reloadObject();
-
-            Renderer.audioControl.stop();
-        }*/
 
         if(x > 970) {
             if(Level.levelNumber == 1) {

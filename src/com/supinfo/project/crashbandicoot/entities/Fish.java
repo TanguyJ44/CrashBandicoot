@@ -84,11 +84,15 @@ public class Fish extends Entity {
     @Override
     public void render() {
         if(Level.levelFinished != true && Level.levelNumber == level) {
-            texture.bind();Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
+            texture.bind();
+                Renderer.renderEntity(x, y - coord, 25, 35, Colors.WHITE, 5f, dir, 0);
             texture.unbind();
 
-            textureFishCover.bind();Renderer.renderEntity(x, y, 25, 35, Colors.WHITE, 1f, 0, 0);
-            textureFishCover.unbind();
+            if(Level.levelNumber != 3) {
+                textureFishCover.bind();
+                    Renderer.renderEntity(x, y, 25, 35, Colors.WHITE, 1f, 0, 0);
+                textureFishCover.unbind();
+            }
         }
     }
 
