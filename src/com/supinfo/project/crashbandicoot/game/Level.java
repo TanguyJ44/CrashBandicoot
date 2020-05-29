@@ -312,7 +312,6 @@ public class Level {
         traps.add(new Traps(720, 170, 2));
         traps.add(new Traps(1400, 170, 2));
 
-
         for (int i = 0; i < crabs.size(); i++) {
             crabs.get(i).init(this);
             addEntity(crabs.get(i));
