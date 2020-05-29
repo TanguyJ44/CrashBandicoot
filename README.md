@@ -98,6 +98,7 @@ Langage : Java 8 (SE)
 - Correction bug caisse AkuAku
 - Reload caisse TnT / Nitro
 - Répartition des évenements des caisses
+- Création du level 3
 
 
 # Patchs

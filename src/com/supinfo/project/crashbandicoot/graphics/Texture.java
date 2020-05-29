@@ -27,11 +27,13 @@ public class Texture {
     public static Texture apple = loadTexture("./res/images/fruit.png");
     public static Texture boxe = loadTexture("./res/images/case.png");
     public static Texture pique = loadTexture("./res/images/pique.png");
+    public static Texture piqueCover = loadTexture("./res/images/traps_cover.png");
     public static Texture postCP = loadTexture("./res/images/post_cp.png");
     public static Texture flagCP = loadTexture("./res/images/flag_cp.png");
 
     public static Texture fish = loadTexture("./res/images/sprite_fish.png");
     public static Texture fishCover = loadTexture("./res/images/fish_cover.png");
+    public static Texture fishCoverLvl3 = loadTexture("./res/images/fish_cover_lvl3.png");
     public static Texture crab = loadTexture("./res/images/crab.png");
     public static Texture plant = loadTexture("./res/images/sprite_plant.png");
 

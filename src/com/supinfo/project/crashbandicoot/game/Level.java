@@ -295,7 +295,7 @@ public class Level {
         // Level 1
         fishs.add(new Fish(733, 150, 1));
         // Level 3
-        //fishs.add(new Fish(205, 150, 3));
+        fishs.add(new Fish(205, 150, 3));
         fishs.add(new Fish(525, 150, 3));
 
         // Level 1

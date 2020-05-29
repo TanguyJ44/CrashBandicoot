@@ -18,6 +18,7 @@ public class Fish extends Entity {
     private int coord;
 
     Texture textureFishCover;
+    Texture textureFishCoverLvl3;
 
     Delay delay;
 
@@ -37,6 +38,7 @@ public class Fish extends Entity {
         coord = 0;
 
         textureFishCover = Texture.fishCover;
+        textureFishCoverLvl3 = Texture.fishCoverLvl3;
 
         delay = new Delay(2, true);
     }
@@ -92,6 +94,10 @@ public class Fish extends Entity {
                 textureFishCover.bind();
                     Renderer.renderEntity(x, y, 25, 35, Colors.WHITE, 1f, 0, 0);
                 textureFishCover.unbind();
+            } else {
+                textureFishCoverLvl3.bind();
+                    Renderer.renderEntity(x-4, y+2, 52, 52, Colors.WHITE, 1f, 0, 0);
+                textureFishCoverLvl3.unbind();
             }
         }
     }
