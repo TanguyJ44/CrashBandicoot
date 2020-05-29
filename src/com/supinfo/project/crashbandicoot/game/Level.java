@@ -265,7 +265,7 @@ public class Level {
             boxes.add(new Boxes(350, 130,0,true,false, Boxes.BoxType.AKU,3));
             boxes.add(new Boxes(410, 130,0,false,false, Boxes.BoxType.IRON,3));
             boxes.add(new Boxes(450, 100,0,true,false, Boxes.BoxType.BASIC,3));
-            //boxes.add(new Boxes(490, 70,0,false,false, Boxes.BoxType.IRON,3));
+            boxes.add(new Boxes(490, 70,0,false,false, Boxes.BoxType.IRON,3));
             boxes.add(new Boxes(580, 130,1,false,false, Boxes.BoxType.TNT,3));
             boxes.add(new Boxes(630, 130,5,true,false, Boxes.BoxType.ARROW,3));
             boxes.add(new Boxes(680, 60,0,true,false, Boxes.BoxType.BASIC,3));
