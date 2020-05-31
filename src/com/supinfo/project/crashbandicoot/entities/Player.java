@@ -187,27 +187,29 @@ public class Player extends Entity{
             if (Keyboard.isKeyDown(Keyboard.KEY_F9)) {
                 x = 2000;
             }
+        }
 
-            if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
-                Level.levelFinished = false;
-                Level.levelNumber = 1;
+        if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+            Level.levelFinished = false;
+            Level.levelNumber = 1;
 
-                keysEnable = true;
-                playerIsDead = false;
-                killPlayer = false;
+            keysEnable = true;
+            playerIsDead = false;
+            killPlayer = false;
 
-                x = 10;
-                y = 80;
-                dir = 0;
+            x = 10;
+            y = 80;
+            dir = 0;
 
-                Renderer.renderBlackOutReload();
+            Renderer.renderBlackOutReload();
 
-                playerLife = 3;
-                numberFruits = 0;
-                level.reloadObject();
+            playerLife = 3;
+            numberFruits = 0;
+            level.reloadObject();
 
-                Renderer.audioControl.stop();
-            }
+            Renderer.audioControl.stop();
+            Level.lvl1Sound.stop();
+            Level.startLevelSound(1);
         }
 
 
@@ -233,6 +235,7 @@ public class Player extends Entity{
                 dir = 0;
             } else if(Level.levelNumber == 3) {
                 keysEnable = false;
+                System.exit(0);
                 // game finished
             }
         }

@@ -27,7 +27,6 @@ public class Texture {
     public static Texture apple = loadTexture("./res/images/fruit.png");
     public static Texture boxe = loadTexture("./res/images/case.png");
     public static Texture pique = loadTexture("./res/images/pique.png");
-    public static Texture piqueCover = loadTexture("./res/images/traps_cover.png");
     public static Texture postCP = loadTexture("./res/images/post_cp.png");
     public static Texture flagCP = loadTexture("./res/images/flag_cp.png");
 
@@ -39,6 +38,7 @@ public class Texture {
 
     public static Texture game_over = loadTexture("./res/images/game_over.png");
     public static Texture turtle = loadTexture("./res/images/turtle.png");
+    public static Texture cloud = loadTexture("./res/images/cloud.png");
 
     public static Texture explosion1 = loadTexture("./res/images/explosion1.png");
     public static Texture explosion2 = loadTexture("./res/images/explosion2.png");

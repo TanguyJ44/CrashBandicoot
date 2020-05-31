@@ -88,6 +88,7 @@ public class AudioControl implements LineListener {
         playCompleted = true;
         audioClip.close();
         audioThread.currentThread().interrupt();
+        System.out.println("Stopping sound");
     }
 
     @Override

@@ -99,6 +99,9 @@ Langage : Java 8 (SE)
 - Reload caisse TnT / Nitro
 - Répartition des évenements des caisses
 - Création du level 3
+- Ajout des nuages dynamiques
+- Animation des nuages
+- Fermeture du jeu en fin de niveau 3
 
 
 # Patchs
@@ -121,8 +124,8 @@ Langage : Java 8 (SE)
 
 
 # Pistes de réflexion
-- Ajout de son / ambiance musicale
-- Prise en charge des contrôleurs de jeux
-- Mise en place d'un driver
-- Dialogue launcheur / jeu
-- Système de MaJ dynamique 
+- Ajout de son / ambiance musicale [FAIT]
+- Prise en charge des contrôleurs de jeux [FAIT]
+- Mise en place d'un driver [FAIT]
+- Dialogue launcheur / jeu [FAIT]
+- Système de MaJ dynamique [EN RÉFLEXION]

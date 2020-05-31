@@ -8,6 +8,7 @@ import com.supinfo.project.crashbandicoot.graphics.Renderer;
 import com.supinfo.project.crashbandicoot.graphics.Texture;
 import com.supinfo.project.crashbandicoot.objects.Boxes;
 import com.supinfo.project.crashbandicoot.objects.CheckPoint;
+import com.supinfo.project.crashbandicoot.objects.Clouds;
 import com.supinfo.project.crashbandicoot.objects.Fruit;
 import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
@@ -37,6 +38,7 @@ public class Level {
     public static ArrayList<Fruit> fruits = new ArrayList<>();
     public static ArrayList<Boxes> boxes = new ArrayList<Boxes>();
     public static ArrayList<CheckPoint> checkpoints = new ArrayList<CheckPoint>();
+    public static ArrayList<Clouds> clouds = new ArrayList<Clouds>();
 
     ArrayList<Crab> crabs = new ArrayList<>();
     ArrayList<Fish> fishs = new ArrayList<>();
@@ -104,6 +106,21 @@ public class Level {
         wompasSound = new AudioControl();
 
         ScreenLoader.init();
+
+        clouds.clear();
+        clouds.add(new Clouds(-70, 30, 4, true));
+        clouds.add(new Clouds(40, 10, 4, true));
+        clouds.add(new Clouds(300, 45, 4, true));
+        clouds.add(new Clouds(550, 10, 4, true));
+        clouds.add(new Clouds(800, 15, 4, true));
+        clouds.add(new Clouds(950, 45, 4, true));
+
+        clouds.add(new Clouds(1050, 15, 4, false));
+        clouds.add(new Clouds(1200, 10, 4, false));
+        clouds.add(new Clouds(1350, 30, 4, false));
+        clouds.add(new Clouds(1500, 30, 4, false));
+        clouds.add(new Clouds(1680, 45, 4, false));
+        clouds.add(new Clouds(1800, 10, 4, false));
     }
 
     public void mapInit() {
@@ -150,6 +167,14 @@ public class Level {
         }
 
         animFruits.update();
+
+        for (int i = 0; i < clouds.size(); i++) {
+            if(levelNumber == 1) {
+                if(clouds.get(i).getLevel1() == true) clouds.get(i).update();
+            } else {
+                clouds.get(i).update();
+            }
+        }
 
         if(loadLevel < Level.levelNumber) {
             loadLevel = Level.levelNumber;
@@ -329,6 +354,12 @@ public class Level {
     }
 
     public void level1Objects() {
+        for (int i = 0; i < clouds.size(); i++) {
+            if(clouds.get(i).getLevel1() == true) {
+                clouds.get(i).render();
+            }
+        }
+
         Header.render();
 
         textureFruit.bind();
@@ -358,6 +389,10 @@ public class Level {
     }
 
     public void level2Objects() {
+        for (int i = 0; i < clouds.size(); i++) {
+            clouds.get(i).render();
+        }
+
         Header.render();
 
         textureFruit.bind();
@@ -387,6 +422,10 @@ public class Level {
     }
 
     public void level3Objects() {
+        for (int i = 0; i < clouds.size(); i++) {
+            clouds.get(i).render();
+        }
+
         Header.render();
 
         textureFruit.bind();
@@ -490,28 +529,29 @@ public class Level {
 
     static double gain;
 
+    public static int levelSoundIsPlaying = 0;
     public static void startLevelSound(int lvl) {
-        switch (lvl) {
-            case 1:
-                gain = 10;
-                lvl1Sound.init(new File("./res/sounds/lvl1.wav"));
-                lvl1Sound.play();
-                lvl1Sound.setVolume((float) gain / 100);
-            /*case 2:
-                gain = 10;
-                lvl2Sound.init(new File("./res/sounds/lvl2.wav"));
-                lvl2Sound.play();
-                lvl2Sound.setVolume((float) gain / 100);
-                break;
-            case 3:
-                gain = 10;
-                lvl3Sound.init(new File("./res/sounds/lvl3.wav"));
-                lvl3Sound.play();
-                lvl3Sound.setVolume((float) gain / 100);
-                break;*/
-            default:
-                break;
+
+        if(lvl == 1) {
+            gain = 10;
+            lvl1Sound.init(new File("./res/sounds/lvl1.wav"));
+            lvl1Sound.play();
+            lvl1Sound.setVolume((float) gain / 100);
+            levelSoundIsPlaying = 1;
+        } else if(lvl == 2) {
+            gain = 40;
+            lvl2Sound.init(new File("./res/sounds/lvl2.wav"));
+            lvl2Sound.play();
+            lvl2Sound.setVolume((float) gain / 100);
+            levelSoundIsPlaying = 2;
+        } else if(lvl == 3) {
+            gain = 40;
+            lvl3Sound.init(new File("./res/sounds/lvl3.wav"));
+            lvl3Sound.play();
+            lvl3Sound.setVolume((float) gain / 100);
+            levelSoundIsPlaying = 3;
         }
+
     }
 
     public static Player getPlayer() {

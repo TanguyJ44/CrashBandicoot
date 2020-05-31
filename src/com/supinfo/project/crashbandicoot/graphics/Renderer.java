@@ -86,9 +86,13 @@ public class Renderer {
                         }
                         drawText = true;
                         if (type == 2) {
-                            Level.lvl1Sound.setPlayCompleted(true);
+                            //Level.lvl1Sound.setPlayCompleted(true);
                             Level.lvl1Sound.stop();
                             Level.lvl1Sound.destroy();
+
+                            //Level.lvl2Sound.setPlayCompleted(true);
+                            Level.lvl2Sound.stop();
+                            Level.lvl2Sound.destroy();
 
                             audioControl.init(new File("./res/sounds/gameover.wav"));
                             audioControl.play();
@@ -138,6 +142,17 @@ public class Renderer {
 
         Level.levelFinished = false;
         Player.keysEnable = true;
+
+        if(Level.levelNumber == 2) {
+            Level.lvl1Sound.stop();
+            Level.lvl3Sound.stop();
+            Level.startLevelSound(2);
+        }
+        if(Level.levelNumber == 3) {
+            Level.lvl1Sound.stop();
+            Level.lvl2Sound.stop();
+            Level.startLevelSound(3);
+        }
     }
 
 }

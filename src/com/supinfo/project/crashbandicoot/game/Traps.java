@@ -16,7 +16,6 @@ public class Traps {
     static int speed = 50;
 
     static Texture texturePique;
-    static Texture texturePiqueCover;
 
     public static ObjectsAnimation animPique;
 
@@ -28,7 +27,6 @@ public class Traps {
         this.level = level;
 
         texturePique = Texture.pique;
-        texturePiqueCover = Texture.piqueCover;
 
         init();
     }
@@ -81,10 +79,6 @@ public class Traps {
             texturePique.bind();
                 Renderer.renderEntity(x, y - animPique.getCurrentCoord(), 32, 64, Colors.WHITE, 2f, 0, 0);
             texturePique.unbind();
-
-//            texturePiqueCover.bind();
-//                Renderer.renderEntity(x, y, 32, 64, Colors.WHITE, 2f, 0, 0);
-//            texturePiqueCover.unbind();
         }
     }
 
