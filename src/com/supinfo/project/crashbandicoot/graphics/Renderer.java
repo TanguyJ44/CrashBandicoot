@@ -74,25 +74,18 @@ public class Renderer {
                         if (type == 1) {
                             Level.levelNumber += 1;
 
-                            Level.lvl1Sound.setPlayCompleted(true);
-                            Level.lvl1Sound.stop();
-                            Level.lvl1Sound.destroy();
-
-                            Level.lvl2Sound.stop();
-                            Level.lvl3Sound.stop();
+                            if (Level.levelSoundIsPlaying == 1) Level.lvl1Sound.stop();
+                            if (Level.levelSoundIsPlaying == 2) Level.lvl2Sound.stop();
+                            if (Level.levelSoundIsPlaying == 3) Level.lvl3Sound.stop();
 
                             audioControl.init(new File("./res/sounds/nextlvl.wav"));
                             audioControl.play();
                         }
                         drawText = true;
                         if (type == 2) {
-                            //Level.lvl1Sound.setPlayCompleted(true);
-                            Level.lvl1Sound.stop();
-                            Level.lvl1Sound.destroy();
-
-                            //Level.lvl2Sound.setPlayCompleted(true);
-                            Level.lvl2Sound.stop();
-                            Level.lvl2Sound.destroy();
+                            if (Level.levelSoundIsPlaying == 1) Level.lvl1Sound.stop();
+                            if (Level.levelSoundIsPlaying == 2) Level.lvl2Sound.stop();
+                            if (Level.levelSoundIsPlaying == 3) Level.lvl3Sound.stop();
 
                             audioControl.init(new File("./res/sounds/gameover.wav"));
                             audioControl.play();
@@ -144,13 +137,13 @@ public class Renderer {
         Player.keysEnable = true;
 
         if(Level.levelNumber == 2) {
-            Level.lvl1Sound.stop();
-            Level.lvl3Sound.stop();
+            if (Level.levelSoundIsPlaying == 1) Level.lvl1Sound.stop();
+            if (Level.levelSoundIsPlaying == 3) Level.lvl3Sound.stop();
             Level.startLevelSound(2);
         }
         if(Level.levelNumber == 3) {
-            Level.lvl1Sound.stop();
-            Level.lvl2Sound.stop();
+            if (Level.levelSoundIsPlaying == 1) Level.lvl1Sound.stop();
+            if (Level.levelSoundIsPlaying == 2) Level.lvl2Sound.stop();
             Level.startLevelSound(3);
         }
     }

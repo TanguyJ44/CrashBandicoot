@@ -1,4 +1,6 @@
-package com.supinfo.project.crashbandicoot.utiles;
+package com.supinfo.project.crashbandicoot.utiles.levelSound;
+
+import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -6,7 +8,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AudioControl implements LineListener {
+public class SoundLvl2 implements LineListener {
 
     private static boolean playCompleted;
 
@@ -17,14 +19,14 @@ public class AudioControl implements LineListener {
 
     private static Thread audioThread;
 
-    public void init(File audioFilePath) {
+    public void init(File path) {
 
         try {
 
-            audioStream = AudioSystem.getAudioInputStream(audioFilePath);
+            audioStream = AudioSystem.getAudioInputStream(path);
 
             if (audioStream != null) {
-                System.out.println("Playing sound > " + audioFilePath.getName());
+                System.out.println("Playing sound > LvL 1");
             }
 
             format = audioStream.getFormat();
@@ -54,7 +56,7 @@ public class AudioControl implements LineListener {
 
     public static int realTime = 0;
 
-    public void play() {
+    public static void play() {
 
         playCompleted = false;
 
@@ -124,5 +126,8 @@ public class AudioControl implements LineListener {
 
     public static void setPlayCompleted(boolean value) { playCompleted = value; }
 
+    public static void stopClip() {
+        audioClip.stop();
+    }
 
 }

@@ -102,6 +102,7 @@ Langage : Java 8 (SE)
 - Ajout des nuages dynamiques
 - Animation des nuages
 - Fermeture du jeu en fin de niveau 3
+- Optimisation des sons level
 
 
 # Patchs

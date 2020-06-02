@@ -13,6 +13,9 @@ import com.supinfo.project.crashbandicoot.objects.Fruit;
 import com.supinfo.project.crashbandicoot.utiles.AudioControl;
 import com.supinfo.project.crashbandicoot.utiles.ObjectsAnimation;
 import com.supinfo.project.crashbandicoot.utiles.ScreenLoader;
+import com.supinfo.project.crashbandicoot.utiles.levelSound.SoundLvl1;
+import com.supinfo.project.crashbandicoot.utiles.levelSound.SoundLvl2;
+import com.supinfo.project.crashbandicoot.utiles.levelSound.SoundLvl3;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,9 +55,9 @@ public class Level {
     ObjectsAnimation animFruits;
 
     public static AudioControl wompasSound;
-    public static AudioControl lvl1Sound;
-    public static AudioControl lvl2Sound;
-    public static AudioControl lvl3Sound;
+    public static SoundLvl1 lvl1Sound;
+    public static SoundLvl2 lvl2Sound;
+    public static SoundLvl3 lvl3Sound;
 
     int loadLevel = 0;
 
@@ -67,9 +70,9 @@ public class Level {
 
         animFruits = new ObjectsAnimation(5, 6, true);
 
-        lvl1Sound = new AudioControl();
-        lvl2Sound = new AudioControl();
-        lvl3Sound = new AudioControl();
+        lvl1Sound = new SoundLvl1();
+        lvl2Sound = new SoundLvl2();
+        lvl3Sound = new SoundLvl3();
     }
 
     public void generate() {
@@ -226,7 +229,7 @@ public class Level {
             boxes.add(new Boxes(540, 130,1,true,false, Boxes.BoxType.BASIC,1));
             boxes.add(new Boxes(660, 130,1,false,false, Boxes.BoxType.TNT,1));
             boxes.add(new Boxes(800, 130,0,true,false, Boxes.BoxType.BASIC,1));
-            boxes.add(new Boxes(920, 130,5,true,false, Boxes.BoxType.ARROW,1));
+            boxes.add(new Boxes(920, 130,500,false,false, Boxes.BoxType.ARROW,1));
 
             checkpoints.add(new CheckPoint(425, 121, false, 1));
 
@@ -292,7 +295,7 @@ public class Level {
             boxes.add(new Boxes(450, 100,0,true,false, Boxes.BoxType.BASIC,3));
             //boxes.add(new Boxes(490, 70,0,false,false, Boxes.BoxType.IRON,3));
             boxes.add(new Boxes(580, 130,1,false,false, Boxes.BoxType.TNT,3));
-            boxes.add(new Boxes(630, 130,5,true,false, Boxes.BoxType.ARROW,3));
+            boxes.add(new Boxes(630, 130,500,false,false, Boxes.BoxType.ARROW,3));
             boxes.add(new Boxes(680, 60,0,true,false, Boxes.BoxType.BASIC,3));
             boxes.add(new Boxes(1020, 130,0,true,false, Boxes.BoxType.AKU,3));
             boxes.add(new Boxes(1160, 130,1,false,false, Boxes.BoxType.NITRO,3));
@@ -334,7 +337,7 @@ public class Level {
         plants.add(new Plant(1410, 115, 3));
 
         // Level 2
-        traps.add(new Traps(720, 170, 2));
+        //traps.add(new Traps(720, 170, 2));
         traps.add(new Traps(1400, 170, 2));
 
         for (int i = 0; i < crabs.size(); i++) {
@@ -372,10 +375,6 @@ public class Level {
         for (int i = 0; i < boxes.size(); i++) {
             if(boxes.get(i).getBreak() != true)
                 boxes.get(i).render();
-        }
-
-        for (int i = 0; i < traps.size(); i++) {
-            traps.get(i).render();
         }
 
         for (int i = 0; i < checkpoints.size(); i++) {
@@ -442,10 +441,6 @@ public class Level {
 
         for (int i = 0; i < checkpoints.size(); i++) {
             checkpoints.get(i).render();
-        }
-
-        for (int i = 0; i < traps.size(); i++) {
-            traps.get(i).render();
         }
 
         for (int i = 0; i < fruits.size(); i++) {
@@ -553,6 +548,7 @@ public class Level {
         }
 
     }
+
 
     public static Player getPlayer() {
         return player;

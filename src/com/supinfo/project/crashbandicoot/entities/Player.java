@@ -247,6 +247,11 @@ public class Player extends Entity{
             dir = old_dir;
         }
 
+        // Drop Limit disabled
+        if(y > 120) {
+            keysEnable = false;
+            tornadoAttack = false;
+        }
         // Drop Limit
         if(y > 220) {
             killPlayer = true;
@@ -308,6 +313,7 @@ public class Player extends Entity{
 
         playerDeath();
         onTornadoAttack();
+
     }
 
     static boolean switchEnabled = true;
