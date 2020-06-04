@@ -22,6 +22,8 @@ public class Interaction {
 
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+            System.out.println("[GP] Connected !");
+
             isConnected = true;
 
             listening();
@@ -44,28 +46,28 @@ public class Interaction {
                                 case "RIGHT":
                                     Player.moveRight = true;
                                     Player.moveLeft = false;
-                                    System.out.println("RIGHT");
+                                    System.out.println("[GP] RIGHT");
                                     break;
                                 case "LEFT":
                                     Player.moveLeft = true;
                                     Player.moveRight = false;
-                                    System.out.println("LEFT");
+                                    System.out.println("[GP] LEFT");
                                     break;
                                 case "STOP":
                                     Player.moveRight = false;
                                     Player.moveLeft = false;
-                                    System.out.println("STOP");
+                                    System.out.println("[GP] STOP");
                                     break;
                                 case "JUMP":
                                     Player.moveJump = true;
-                                    System.out.println("JUMP");
+                                    System.out.println("[GP] JUMP");
                                     break;
                                 case "TORNADO":
-                                    System.out.println("TORNADO");
+                                    System.out.println("[GP] TORNADO");
                                     break;
                                 case "B":
                                     Player.gamepadB = true;
-                                    System.out.println("B");
+                                    System.out.println("[GP] B");
                                     break;
                                 default:
                                     break;
@@ -88,6 +90,8 @@ public class Interaction {
                 t.stop();
                 bufferedReader.close();
                 socket.close();
+
+                System.out.println("[GP] Disconnected !");
             } catch (IOException e) {
                 e.printStackTrace();
             }

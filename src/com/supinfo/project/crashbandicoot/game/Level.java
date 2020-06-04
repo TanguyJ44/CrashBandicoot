@@ -1,5 +1,6 @@
 package com.supinfo.project.crashbandicoot.game;
 
+import com.supinfo.project.crashbandicoot.Component;
 import com.supinfo.project.crashbandicoot.entities.*;
 import com.supinfo.project.crashbandicoot.game.tiles.Tile;
 import com.supinfo.project.crashbandicoot.graphics.Colors;
@@ -567,19 +568,22 @@ public class Level {
     public static void startLevelSound(int lvl) {
 
         if(lvl == 1) {
-            gain = 10;
+            if(Component.soundLevelEnabled == -1) gain = 10;
+            else gain = Component.soundLevelEnabled;
             lvl1Sound.init(new File("./res/sounds/lvl1.wav"));
             lvl1Sound.play();
             lvl1Sound.setVolume((float) gain / 100);
             levelSoundIsPlaying = 1;
         } else if(lvl == 2) {
-            gain = 40;
+            if(Component.soundLevelEnabled == -1) gain = 40;
+            else gain = Component.soundLevelEnabled+20;
             lvl2Sound.init(new File("./res/sounds/lvl2.wav"));
             lvl2Sound.play();
             lvl2Sound.setVolume((float) gain / 100);
             levelSoundIsPlaying = 2;
         } else if(lvl == 3) {
-            gain = 40;
+            if(Component.soundLevelEnabled == -1) gain = 40;
+            else gain = Component.soundLevelEnabled+20;
             lvl3Sound.init(new File("./res/sounds/lvl3.wav"));
             lvl3Sound.play();
             lvl3Sound.setVolume((float) gain / 100);

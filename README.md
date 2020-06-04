@@ -104,6 +104,7 @@ Langage : Java 8 (SE)
 - Fermeture du jeu en fin de niveau 3
 - Optimisation des sons level
 - Finalisation collisions des caisses
+- Lecture des arguments launcher
 - Finalisation du jeu 
 
 

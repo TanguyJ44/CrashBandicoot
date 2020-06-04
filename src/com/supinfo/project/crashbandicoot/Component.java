@@ -21,6 +21,8 @@ public class Component {
     public static boolean tick = false;
     public static boolean render = false;
 
+    public static int soundLevelEnabled = -1;
+
     DisplayMode displaymode = new DisplayMode(frameWidth * frameScale, frameHeight * frameScale);
 
     Game game;
@@ -142,8 +144,15 @@ public class Component {
 
     public static void main(String[] args) {
 
-        //if(args[0] != null) Interaction.connect(Integer.parseInt(args[0]));
-        //Interaction.connect(2236);
+        for(String startArgs : args){
+            if(startArgs.equalsIgnoreCase("gamepad")) {
+                Interaction.connect(2236);
+            }
+            if(startArgs.contains("sound")) {
+                System.out.println("+Args sound : " + Integer.parseInt(startArgs.substring(5)));
+                soundLevelEnabled = Integer.parseInt(startArgs.substring(5));
+            }
+        }
 
         Component component = new Component();
         component.launch();
