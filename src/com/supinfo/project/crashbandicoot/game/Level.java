@@ -139,6 +139,45 @@ public class Level {
                 }
             }
         }
+
+        if(Level.levelNumber == 1) {
+            solidTile[16][5] = new Tile(15, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[17][5] = new Tile(15, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[18][5] = new Tile(15, 5, 0, 0, Tile.Tiles.COL);
+        } else if(Level.levelNumber == 2) {
+            solidTile[29][5] = new Tile(29, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[30][5] = new Tile(30, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[31][5] = new Tile(31, 5, 0, 0, Tile.Tiles.COL);
+
+            solidTile[62][5] = new Tile(62, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[63][5] = new Tile(63, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[64][5] = new Tile(64, 5, 0, 0, Tile.Tiles.COL);
+
+            solidTile[95][5] = new Tile(95, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[96][5] = new Tile(96, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[97][5] = new Tile(97, 5, 0, 0, Tile.Tiles.COL);
+
+            solidTile[97][3] = new Tile(97, 3, 0, 0, Tile.Tiles.COL);
+            solidTile[98][3] = new Tile(98, 3, 0, 0, Tile.Tiles.COL);
+            solidTile[99][3] = new Tile(99, 3, 0, 0, Tile.Tiles.COL);
+        } else if(Level.levelNumber == 3) {
+            solidTile[27][5] = new Tile(27, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[28][5] = new Tile(28, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[29][5] = new Tile(29, 5, 0, 0, Tile.Tiles.COL);
+
+            solidTile[29][3] = new Tile(29, 3, 0, 0, Tile.Tiles.COL);
+            solidTile[30][3] = new Tile(30, 3, 0, 0, Tile.Tiles.COL);
+            solidTile[31][3] = new Tile(31, 3, 0, 0, Tile.Tiles.COL);
+
+            solidTile[79][5] = new Tile(79, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[80][5] = new Tile(80, 5, 0, 0, Tile.Tiles.COL);
+            solidTile[81][5] = new Tile(81, 5, 0, 0, Tile.Tiles.COL);
+
+            solidTile[82][3] = new Tile(82, 3, 0, 0, Tile.Tiles.COL);
+            solidTile[83][3] = new Tile(83, 3, 0, 0, Tile.Tiles.COL);
+            solidTile[34][3] = new Tile(84, 3, 0, 0, Tile.Tiles.COL);
+
+        }
     }
 
     public void addEntity(Entity e) {
@@ -212,7 +251,7 @@ public class Level {
             fruits.add(new Fruit(130, 120, false, 1));
             fruits.add(new Fruit(300, 45, false, 1));
             fruits.add(new Fruit(320, 25, false, 1));
-            fruits.add(new Fruit(340, 5, false, 1));
+            //fruits.add(new Fruit(340, 5, false, 1));
             fruits.add(new Fruit(445, 95, false, 1));
             fruits.add(new Fruit(470, 80, false, 1));
             fruits.add(new Fruit(495, 95, false, 1));
@@ -260,9 +299,9 @@ public class Level {
             boxes.add(new Boxes(1340, 130,0,true,false, Boxes.BoxType.AKU,2));
             boxes.add(new Boxes(1460, 130,1,false,false, Boxes.BoxType.NITRO,2));
             boxes.add(new Boxes(1510, 130,0,false,false, Boxes.BoxType.IRON,2));
-            boxes.add(new Boxes(1540, 100,10,true,false, Boxes.BoxType.JUMP,2));
-            //boxes.add(new Boxes(1540, 100,0,false,false, Boxes.BoxType.IRON,2));
-            //boxes.add(new Boxes(1570, 70,0,false,false, Boxes.BoxType.IRON,2));
+            //boxes.add(new Boxes(1540, 100,10,true,false, Boxes.BoxType.JUMP,2));
+            boxes.add(new Boxes(1540, 100,0,false,false, Boxes.BoxType.IRON,2));
+            boxes.add(new Boxes(1570, 70,0,false,false, Boxes.BoxType.IRON,2));
             //boxes.add(new Boxes(1600, 40,10,true,false, Boxes.BoxType.JUMP,2));
             boxes.add(new Boxes(1690, 130,1,false,false, Boxes.BoxType.TNT,2));
 
@@ -292,15 +331,15 @@ public class Level {
 
             boxes.add(new Boxes(350, 130,0,true,false, Boxes.BoxType.AKU,3));
             boxes.add(new Boxes(410, 130,0,false,false, Boxes.BoxType.IRON,3));
-            boxes.add(new Boxes(450, 100,0,true,false, Boxes.BoxType.BASIC,3));
-            //boxes.add(new Boxes(490, 70,0,false,false, Boxes.BoxType.IRON,3));
+            boxes.add(new Boxes(450, 100,0,false,false, Boxes.BoxType.IRON,3));
+            boxes.add(new Boxes(490, 70,0,false,false, Boxes.BoxType.IRON,3));
             boxes.add(new Boxes(580, 130,1,false,false, Boxes.BoxType.TNT,3));
             boxes.add(new Boxes(630, 130,500,false,false, Boxes.BoxType.ARROW,3));
             boxes.add(new Boxes(680, 60,0,true,false, Boxes.BoxType.BASIC,3));
             boxes.add(new Boxes(1020, 130,0,true,false, Boxes.BoxType.AKU,3));
             boxes.add(new Boxes(1160, 130,1,false,false, Boxes.BoxType.NITRO,3));
             boxes.add(new Boxes(1230, 130,0,false,false, Boxes.BoxType.IRON,3));
-            boxes.add(new Boxes(1280, 100,0,true,false, Boxes.BoxType.BASIC,3));
+            boxes.add(new Boxes(1280, 100,0,false,false, Boxes.BoxType.IRON,3));
             boxes.add(new Boxes(1330, 70,0,false,false, Boxes.BoxType.IRON,3));
 
             checkpoints.add(new CheckPoint(1320, 115, false, 3));

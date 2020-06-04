@@ -14,7 +14,7 @@ import java.io.File;
 public class Player extends Entity{
 
     // ========= PASSER EN MODE DÉVELOPPEUR =========
-    boolean devMode = true;
+    boolean devMode = false;
     // ==============================================
 
     public static int playerBoxWidth = 32;
@@ -122,6 +122,7 @@ public class Player extends Entity{
             }
             if(isGrounded()) {
                 ya -= 20;
+                System.out.println("isGrounded");
             }
 
             if(Level.levelNumber == 2 && x > 514 && x < 516 && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {

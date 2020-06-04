@@ -103,6 +103,8 @@ Langage : Java 8 (SE)
 - Animation des nuages
 - Fermeture du jeu en fin de niveau 3
 - Optimisation des sons level
+- Finalisation collisions des caisses
+- Finalisation du jeu 
 
 
 # Patchs
@@ -122,6 +124,11 @@ Langage : Java 8 (SE)
 - Correction de bugs mineurs
 - Optimisation des collisions
 - Changement version JDK
+
+#### PA04-2020-06-04
+- Correction de bugs majeurs
+- Stabilité sur les diffèrents OS
+- Refonte des tiles & collides
 
 
 # Pistes de réflexion
