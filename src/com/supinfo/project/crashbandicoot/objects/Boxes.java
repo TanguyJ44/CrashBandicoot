@@ -11,6 +11,8 @@ import java.io.File;
 
 public class Boxes {
 
+    // Classe de gestion de toutes les caisses (sous la forme d'objet)
+
     int x, y;
     int numberBreak;
     boolean tornadoBreak;
@@ -29,10 +31,12 @@ public class Boxes {
 
     BoxType boxType;
 
+    // Petite énumération de toutes les caisses disponible en jeu
     public enum BoxType {
         BASIC, JUMP, ARROW, AKU, CRASH, IRON, TNT, NITRO
     }
 
+    // constructeur de la classe Boxes
     public Boxes(int x, int y, int numberBreak, boolean tornadoBreak, boolean isBreak, BoxType boxType, int level) {
         this.x = x;
         this.y = y;
@@ -53,6 +57,7 @@ public class Boxes {
         initSpriteSheet();
     }
 
+    // méthode de récupération de la caisse dans le sprite sheet
     public void initSpriteSheet() {
         switch (boxType) {
             case BASIC:
@@ -93,6 +98,7 @@ public class Boxes {
         }
     }
 
+    // méthode de détection de collision sur l'axe X
     public boolean getCollideX () {
         float px = Player.playerX + Player.xa;
         float py = Player.playerY + Player.ya;
@@ -104,6 +110,7 @@ public class Boxes {
         }
     }
 
+    // méthode de détection de collision sur l'axe Y
     public boolean getCollideY () {
         float px = Player.playerX + Player.xa;
         float py = Player.playerY + Player.ya;
@@ -123,6 +130,7 @@ public class Boxes {
     int time = 0;
     int count = 3;
 
+    // update frame par frame des valeurs de variables + gestion des explosions caisses TnT + Nitro
     public void update() {
 
         if(numberBreak > 0 && getCollideY() && (Player.playerY +40 > y)) {
@@ -232,6 +240,7 @@ public class Boxes {
 
     boolean waitAction = false;
 
+    // méthode appelé lors d'une interaction avec une caisse pour y associer la bonne action lors du contact
     public void onAction() {
         if(boxType == BoxType.TNT && !waitAction) {
             tnt = true;
@@ -274,6 +283,7 @@ public class Boxes {
         }
     }
 
+    // méthode de remise à 0 lors d'une explosion ou d'un changement d'état
     public void reset() {
         numberBreak = constNumberBreak;
         animate = false;
@@ -288,6 +298,7 @@ public class Boxes {
         initSpriteSheet();
     }
 
+    // méthode de rendu graphique de la caisse frame par frame
     public void render() {
         if(!explosion) {
             texture.bind();
@@ -299,6 +310,8 @@ public class Boxes {
             texture.unbind();
         }
     }
+
+    // getter and setter
 
     public int getX() {
         return x;

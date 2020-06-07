@@ -12,8 +12,12 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
 
+    // Cette classe est un peut prise de tête car elle rend sous la forme de carré les diffèrentes textures.
+    // OpenGL nous aide à faire cela sous la forme de vecteur 2D
+
     public static AudioControl audioControl = new AudioControl();
 
+    // fonction de création des carré 2D de rendu
     public static void quadData(float x, float y, int width, int height, float[] color, float size, int xo, int yo) {
         glColor4f(color[0], color[1], color[2], color[3]);
         glTexCoord2f((0 + xo) / size, (0 + yo) / size); glVertex2f(x, y);
@@ -22,12 +26,14 @@ public class Renderer {
         glTexCoord2f((0 + xo) / size, (1 + yo) / size); glVertex2f(x, y + height);
     }
 
+    // fonction de rendu à l'écran des carré 2D
     public static void renderQuad(float x, float y, int width, int height, float[] color, float size, int xo, int yo) {
         glBegin(GL_QUADS);
             Renderer.quadData(x, y, width, height, color, size, xo, yo);
         glEnd();
     }
 
+    // fonction de rendu des entités sous un format différent
     public static void renderEntity(float x, float y, int width, int height, float[] color, float size, int xo, int yo) {
         glBegin(GL_QUADS);
             glColor4f(color[0], color[1], color[2], color[3]);
@@ -49,6 +55,7 @@ public class Renderer {
 
     static int count = 0;
 
+    // fonction d'affichage du changement de level et du game-over
     // type 1 = next level, type 2 = game over
     public static void renderBlackOut(int type) {
 
@@ -125,6 +132,7 @@ public class Renderer {
         }
     }
 
+    // remise à 0 du rendu des changements de niveau et du game-over
     public static void renderBlackOutReload() {
         drawText = false;
         loop = true;

@@ -24,6 +24,8 @@ import java.util.List;
 
 public class Level {
 
+    // Attention aux yeux, dans cette classe on aime bien ce répéter (tu vas vite comprendre en la parcourant) !
+
     public float gravity = 1.8f;
 
     public int width, height;
@@ -62,6 +64,7 @@ public class Level {
 
     int loadLevel = 0;
 
+    // constructeur de la classe Level
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
@@ -76,6 +79,7 @@ public class Level {
         lvl3Sound = new SoundLvl3();
     }
 
+    // fonction de génération des tuiles du terrain pour chaque niveau
     public void generate() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -84,6 +88,7 @@ public class Level {
         }
     }
 
+    // Voila de quoi ajouter le joueur et Akuaku sur le terrain (sinon on s'amuse moins c'est sur :) )
     public void spawner() {
         player.init(this);
         akuaku.init(this);
@@ -92,11 +97,13 @@ public class Level {
         addEntity(akuaku);
     }
 
+    // fonction de récupération des tuiles pour en connaitre leurs positions
     public Tile getSolidTile(int x, int y) {
         if (x < 0 || y < 0 || x >= width || y >= height) return null;
         return solidTile[x][y];
     }
 
+    // fonction d'initialisation des composants essentiels aux niveaux
     public void init() {
         solidTile = new Tile[width][height];
         textureFruit = Texture.apple;
@@ -127,6 +134,7 @@ public class Level {
         clouds.add(new Clouds(1800, 10, 4, false));
     }
 
+    // Initialisation des tiles map par map (du moins niveau par niveau) car 1 map = 1 niveau chez nous
     public void mapInit() {
         solidTile = new Tile[width][height];
         for (int i = 0; i < width; i++) {
@@ -140,6 +148,8 @@ public class Level {
                 }
             }
         }
+
+        // Attention aux yeux :
 
         if(Level.levelNumber == 1) {
             solidTile[16][5] = new Tile(15, 5, 0, 0, Tile.Tiles.COL);
@@ -181,14 +191,17 @@ public class Level {
         }
     }
 
+    // ici on ajoute une entité au niveau
     public void addEntity(Entity e) {
         entities.add(e);
     }
 
+    // et la bas ... on la supprime !
     public void removeEntity(Entity e) {
         entities.remove(e);
     }
 
+    // cette fonction nous permet d'update les valeur de chaques objets un à un
     public void update() {
         for(int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
@@ -226,6 +239,7 @@ public class Level {
         }
     }
 
+    // maintenant que tout cela est fait, on peut rendre nos composants de niveau frame après frame
     public void render() {
         for (Tile tile : tiles) {
             tile.render();
@@ -241,6 +255,9 @@ public class Level {
         if(Player.playerLife == 0) Renderer.renderBlackOut(2);
     }
 
+    // Alors ici c'est quelque chose ! On se répéte beaucoup mais il le faut bien ..
+    // C'est ici que nous créons et initialison chaques objets comme les caisses, les fruits, les checkpoints ...
+    // et le tout niveau par niveau
     public static void initObjects() {
         fruits.clear();
         boxes.clear();
@@ -347,6 +364,7 @@ public class Level {
         }
     }
 
+    // Ici même principe qu'au dessus mais pour les entités (= ennemies)
     public void initEntities() {
         // Level 1
         crabs.add(new Crab(160, 135, 1));
@@ -396,6 +414,7 @@ public class Level {
         }
     }
 
+    // fonction permettant le rendu d'objet sur le niveau 1
     public void level1Objects() {
         for (int i = 0; i < clouds.size(); i++) {
             if(clouds.get(i).getLevel1() == true) {
@@ -427,6 +446,7 @@ public class Level {
         }
     }
 
+    // fonction permettant le rendu d'objet sur le niveau 2
     public void level2Objects() {
         for (int i = 0; i < clouds.size(); i++) {
             clouds.get(i).render();
@@ -460,6 +480,7 @@ public class Level {
         }
     }
 
+    // fonction permettant le rendu d'objet sur le niveau 3
     public void level3Objects() {
         for (int i = 0; i < clouds.size(); i++) {
             clouds.get(i).render();
@@ -489,8 +510,11 @@ public class Level {
         }
     }
 
-    public void load1AfterPlayer() {
+    // les fonctions suivantes sont déjà en place pour de futur MàJ
+    // pour le moment elles n'ont pas d'utilités mais laissons les tranquilles,
+    // leurs heures viendra !
 
+    public void load1AfterPlayer() {
 
     }
 
@@ -502,6 +526,7 @@ public class Level {
 
     }
 
+    // fonction permettant de rmettre à 0 tout ce jolie petit monde (fruits, caisses, ennemies ...)
     public void reloadObject() {
         // Reload fruits
         for (int i = 0; i < fruits.size(); i++) {
@@ -523,6 +548,7 @@ public class Level {
         }
     }
 
+    // fonction de remise à 0 après un game over
     public static void reloadGameOver() {
         Level.levelNumber = 1;
         initObjects();
@@ -532,8 +558,10 @@ public class Level {
         }
     }
 
-    public static void levelDischarge() {}
+    // fonction de déchargement du level pour vider la mémoire (plus utilisé depuis la dernière MàJ car jugé trop instable)
+    public static void levelDischarge() { /* R.I.P */ }
 
+    // fonction de vérification des collisions de toutes les caisses sur l'axe X
     public static boolean checkCollideAllBoxesX() {
         for (int i = 0; i < boxes.size(); i++) {
             if(!boxes.get(i).getBreak()) {
@@ -552,6 +580,8 @@ public class Level {
 
         return false;
     }
+
+    // fonction de vérification des collisions de toutes les caisses sur l'axe Y
     public static boolean checkCollideAllBoxesY() {
         for (int i = 0; i < boxes.size(); i++) {
             if(!boxes.get(i).getBreak()) {
@@ -565,6 +595,7 @@ public class Level {
     static double gain;
 
     public static int levelSoundIsPlaying = 0;
+    // Gestion des sons d'arrière plant des niveaux
     public static void startLevelSound(int lvl) {
 
         if(lvl == 1) {
@@ -592,7 +623,7 @@ public class Level {
 
     }
 
-
+    // petite instance pour la récupération du joueur dans les levels
     public static Player getPlayer() {
         return player;
     }

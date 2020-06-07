@@ -7,6 +7,7 @@ public class Fruit {
     int defaultY;
     int level;
 
+    // constructeur classe Fruit
     public Fruit(int x, int y, boolean eat, int level) {
         this.x = x;
         this.y = y;
@@ -15,6 +16,8 @@ public class Fruit {
 
         defaultY = y;
     }
+
+    // quelques getter and setter par-ci par-là ...
 
     public int getX() {
         return x;

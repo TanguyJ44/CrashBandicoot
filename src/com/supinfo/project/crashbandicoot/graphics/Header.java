@@ -10,6 +10,8 @@ import java.awt.*;
 
 public class Header {
 
+    // Cette classe gère le header en haut du jeu (compteur de vie, de fruit ...)
+
     public static Font awtFont;
     public static UnicodeFont font, font2, fontBlackOut;
 
@@ -19,6 +21,7 @@ public class Header {
 
     public static boolean mysteryObject = false;
 
+    // fonction d'initialisation des fontes du jeu
     public static void init() {
         awtFont = new Font("Arial", Font.BOLD, 20);
         font = new UnicodeFont(awtFont);
@@ -31,8 +34,6 @@ public class Header {
         font2.addAsciiGlyphs();
         fontBlackOut.addAsciiGlyphs();
 
-
-
         try {
             font.loadGlyphs();
             font2.loadGlyphs();
@@ -41,7 +42,6 @@ public class Header {
             System.err.println(ex.toString());
         }
 
-
         textureFruit = Texture.apple;
         headPlayer = Texture.head_player;
         turtle = Texture.turtle;
@@ -49,6 +49,7 @@ public class Header {
 
     static float screenScroller;
 
+    // fonction de rendu frame par frame du header
     public static void render() {
         screenScroller = Math.abs(Game.xScroll);
 

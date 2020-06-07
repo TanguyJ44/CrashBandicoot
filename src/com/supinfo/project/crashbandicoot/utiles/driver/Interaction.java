@@ -9,6 +9,9 @@ import java.net.Socket;
 
 public class Interaction {
 
+    // Cette classe permet de communiquer avec le driver prenant en charge les manettes de jeux.
+    // Les instructions reçu sont ensuite converti en donnée compréhensible par le jeu.
+
     static Socket socket;
     static BufferedReader bufferedReader;
 
@@ -16,6 +19,7 @@ public class Interaction {
 
     static boolean isConnected = false;
 
+    // connexion au driver
     public static void connect (int port) {
         try {
             socket = new Socket("localhost", port);
@@ -33,11 +37,12 @@ public class Interaction {
     }
 
     static String req = null;
+    // écoute des données envoyés par le driver
     public static void listening () {
         t = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (isConnected) {
                     try {
                         req = bufferedReader.readLine();
 
@@ -83,13 +88,17 @@ public class Interaction {
         t.start();
     }
 
+    // déconnexion du driver (fermer les flux)
     public static void disconnect () {
         if(isConnected == true) {
             try {
-                t.interrupt();
-                t.stop();
+                isConnected = false;
+
                 bufferedReader.close();
                 socket.close();
+                t.interrupt();
+                t.currentThread().interrupt();
+                t.stop();
 
                 System.out.println("[GP] Disconnected !");
             } catch (IOException e) {

@@ -11,6 +11,8 @@ import java.io.File;
 
 public class ScreenLoader {
 
+    // Cette classe permet de générer et d'afficher l'écran de chargement du jeu
+
     static boolean isVisible = true;
     static boolean soundIsPlaying = false;
 
@@ -18,6 +20,7 @@ public class ScreenLoader {
 
     static AudioControl audioControl;
 
+    // fonction d'initialisation de l'écran de chargement
     public static void init() {
         loadScreen = Texture.load;
 
@@ -26,6 +29,7 @@ public class ScreenLoader {
 
     static int time = 0;
 
+    // fonction de rendu graphique du chargement
     public static void render() {
         if(isVisible == true) {
             loadScreen.bind();
@@ -49,6 +53,8 @@ public class ScreenLoader {
         }
 
     }
+
+    // getter and setter
 
     public static void setVisible(boolean visible) {
         isVisible = visible;

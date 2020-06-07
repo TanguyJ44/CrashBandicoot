@@ -12,6 +12,7 @@ public abstract class Entity {
     protected float mass;
     protected float drag;
 
+    // constructeur de la classe Entity
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
@@ -21,6 +22,7 @@ public abstract class Entity {
     public abstract void update();
     public abstract void render();
 
+    // fonction de vérification du contact ou non du joueur sur le sol (tile = tuile du sol et/ou des caisses)
     public boolean isSolidTile(float xa, float ya) {
 
         int x0 = (int) (x + xa) / 16;
@@ -35,10 +37,13 @@ public abstract class Entity {
         return false;
     }
 
+    // fonction de vérification si les le joueur est en saut ou non par rapport au sol / caisses
     public boolean isGrounded() {
         if (level.getSolidTile((int)(x + 5) / 16,(int)(y + 14.1) / 16) != null) return true;
         return false;
     }
+
+    // getter and setter
 
     public float getX() {
         return x;

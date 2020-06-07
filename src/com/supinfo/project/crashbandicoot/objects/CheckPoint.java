@@ -21,6 +21,7 @@ public class CheckPoint {
 
     AudioControl controlSound;
 
+    // constructeur de la classe CheckPoint
     public CheckPoint (int x, int y, boolean checked, int level) {
         this.x = x;
         this.y = y;
@@ -35,6 +36,7 @@ public class CheckPoint {
         controlSound = new AudioControl();
     }
 
+    // méthode d'update des valeurs de variable
     public void update() {
 
         if(!checked && yUp !=0) yUp = 0;
@@ -61,6 +63,7 @@ public class CheckPoint {
         }
     }
 
+    // méthode de rendu graphique des checkpoints
     public void render() {
         texturePost.bind();
             Renderer.renderEntity(x, y, 20, 20, Colors.WHITE, 1f, 0, 0);
@@ -70,6 +73,8 @@ public class CheckPoint {
             Renderer.renderEntity(x+6, y+12-yUp, 15, 15, Colors.WHITE, 1f, 0, 0);
         textureFlag.unbind();
     }
+
+    // getter and setter
 
     public int getX() {
         return x;

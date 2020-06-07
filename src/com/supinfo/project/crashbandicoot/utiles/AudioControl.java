@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 public class AudioControl implements LineListener {
 
+    // Cette classe permet de gérer l'audio des différents objets, entitées ...
+
     private static boolean playCompleted;
 
     private AudioInputStream audioStream = null;
@@ -17,6 +19,7 @@ public class AudioControl implements LineListener {
 
     private static Thread audioThread;
 
+    // méthode d'initialisation de l'audio
     public void init(File audioFilePath) {
 
         try {
@@ -54,6 +57,7 @@ public class AudioControl implements LineListener {
 
     public static int realTime = 0;
 
+    // méthode pour jouer le son
     public void play() {
 
         playCompleted = false;
@@ -84,6 +88,7 @@ public class AudioControl implements LineListener {
 
     }
 
+    // méthode pour stopper le son
     public static void stop() {
         playCompleted = true;
         audioClip.close();
@@ -91,6 +96,7 @@ public class AudioControl implements LineListener {
         System.out.println("Stopping sound");
     }
 
+    // méthode d'update du statut du son
     @Override
     public void update(LineEvent event) {
         LineEvent.Type type = event.getType();
@@ -105,9 +111,12 @@ public class AudioControl implements LineListener {
 
     }
 
+    // méthode pour détruire le son
     public static void destroy() {
         audioClip.close();
     }
+
+    // getter and setter
 
     public static float getVolume() {
         FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);

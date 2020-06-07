@@ -22,6 +22,7 @@ public class Fish extends Entity {
 
     Delay delay;
 
+    // constructeur de la classe Fish
     public Fish(int x, int y, int level) {
         super(x, y);
 
@@ -30,6 +31,7 @@ public class Fish extends Entity {
         texture = Texture.fish;
     }
 
+    // méthode d'initialisation des paramètres lors de l'initialisation de l'objet
     @Override
     public void init(Level level) {
         length = 50;
@@ -46,6 +48,7 @@ public class Fish extends Entity {
     boolean invert = false;
     int dir = 0;
 
+    // méthode d'update des valeurs de variable frame par frame
     @Override
     public void update() {
         if(Level.levelNumber == level) {
@@ -67,14 +70,15 @@ public class Fish extends Entity {
             }
 
 
-            // Fish collide detection
+            // Détecteur de collision
             if ((Player.playerX+10 >= x + 25)
                     || (Player.playerX+10 + Player.playerBoxWidth-20 <= x)
                     || (Player.playerY+10 >= y - coord + 35)
                     || (Player.playerY+10 + Player.playerBoxHeight-20 <= y - coord)){
-                // Player is not in a area
+                // Le joueur n'est pas dans la zone
             } else {
                 if(delay.talk() == true) {
+                    // Le joueur meurt
                     Player.killPlayer = true;
                     delay.start();
                     System.out.println("[Player] was killed by Fish !");
@@ -83,6 +87,7 @@ public class Fish extends Entity {
         }
     }
 
+    // méthode de rendu graphique frame par grape
     @Override
     public void render() {
         if(Level.levelFinished != true && Level.levelNumber == level) {
@@ -101,6 +106,8 @@ public class Fish extends Entity {
             }
         }
     }
+
+    // getter and setter
 
     public int getLevel() { return level; }
 

@@ -14,6 +14,8 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class Texture {
 
+    // Cette classe nous permet de charger et d'initialiser toutes les textures du jeu
+
     public static Texture load = loadTexture("./res/images/load.png");
     public static Texture tilesLvl1 = loadTexture("./res/images/lvl1.png");
     public static Texture tilesLvl2 = loadTexture("./res/images/lvl2.png");
@@ -47,12 +49,14 @@ public class Texture {
     int width, height;
     int id;
 
+    // constructeur de la classe
     public Texture(int width, int height, int id) {
         this.width = width;
         this.height = height;
         this.id = id;
     }
 
+    // fonction de chargement des textures
     public static Texture loadTexture(String path) {
         BufferedImage image = null;
         try {
@@ -96,6 +100,8 @@ public class Texture {
         return new Texture(w, h, id);
     }
 
+    // getter and setter
+
     public int getWidth() {
         return width;
     }
@@ -103,6 +109,8 @@ public class Texture {
     public int getHeight() {
         return height;
     }
+
+    // bind and unbind
 
     public void bind() {
         glBindTexture(GL_TEXTURE_2D, id);

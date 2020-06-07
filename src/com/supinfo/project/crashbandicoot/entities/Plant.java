@@ -29,6 +29,7 @@ public class Plant extends Entity{
 
     Delay delay;
 
+    // constructeur de la classe Plant
     public Plant(int x, int y, int level) {
         super(x, y);
 
@@ -37,6 +38,7 @@ public class Plant extends Entity{
         texture = Texture.plant;
     }
 
+    // méthode d'initialisation des paramètres lors de l'initialisation de l'objet
     @Override
     public void init(Level level) {
         length = 60;
@@ -51,6 +53,7 @@ public class Plant extends Entity{
         delay = new Delay(2, true);
     }
 
+    // méthode d'update des valeurs de variable
     @Override
     public void update() {
         if(isEnabled && Level.levelNumber == level) {
@@ -100,16 +103,18 @@ public class Plant extends Entity{
                 }
             }
 
-            // Plant collide detection
+            // Détecteur de collision
             if ((Player.playerX >= x + 32)
                     || (Player.playerX + Player.playerBoxWidth <= x)
                     || (Player.playerY >= y + 40)
                     || (Player.playerY + Player.playerBoxHeight <= y)){
-                // Player is not in a area
+                // Le joueur n'est pas dans la zone
 
                 if(Player.dir == 0 && (Player.playerX + Player.playerBoxWidth) >= x-15) {
                     if(playerDetector != true) playerDetector = true;
                 }
+
+                // ce bout de code est dangereux, laissons le commenté ...
 
                 /*if(Player.dir == 1 && Player.playerX <= (x + 32 + 10)) {
                     if(playerDetector != true) playerDetector = true;
@@ -130,6 +135,7 @@ public class Plant extends Entity{
         }
     }
 
+    // méthode de rendu graphique frame par frame
     @Override
     public void render() {
         if(isEnabled && Level.levelFinished != true && Level.levelNumber == level) {
@@ -138,6 +144,8 @@ public class Plant extends Entity{
             texture.unbind();
         }
     }
+
+    // getter and setter
 
     public int getLevel() { return level; }
 

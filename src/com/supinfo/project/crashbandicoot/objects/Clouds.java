@@ -14,6 +14,7 @@ public class Clouds {
 
     Texture texture;
 
+    // constructeur de la classe Clouds
     public Clouds(int x, int y, int speed, boolean level1) {
         this.x = x;
         this.y = y;
@@ -24,6 +25,7 @@ public class Clouds {
     }
 
     int time = 0;
+    // méthode d'update des valeurs de variable
     public void update() {
         time++;
         if (time > speed) {
@@ -38,11 +40,14 @@ public class Clouds {
         }
     }
 
+    // méthode de rendu graphique des nuages
     public void render() {
         texture.bind();
             Renderer.renderEntity(x, y, 70, 35, Colors.WHITE, 1f, 0, 0);
         texture.unbind();
     }
+
+    // getter and setter
 
     public boolean getLevel1() { return level1; }
 

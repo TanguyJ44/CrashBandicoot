@@ -9,6 +9,8 @@ import com.supinfo.project.crashbandicoot.graphics.Texture;
 
 import static org.lwjgl.opengl.GL11.*;
 
+// Cette classe gère les tuiles de rendu OpenGL (bon bas la c'est vraiment pas le fun .. des maths et des maths comme on aime)
+
 public class Tile {
 
     public int x, y;
@@ -23,6 +25,7 @@ public class Tile {
         BG, COL
     }
 
+    // constructeur de la classe Tile
     public Tile(int x, int y, int xo, int yo, Tiles tile) {
         this.x = x;
         this.y = y;
@@ -31,6 +34,7 @@ public class Tile {
         this.tile = tile;
     }
 
+    // fonction de rendu des tiles
     public void render() {
         float x0 = x + Game.xScroll / 32;
         float y0 = y + Game.yScroll / 32;

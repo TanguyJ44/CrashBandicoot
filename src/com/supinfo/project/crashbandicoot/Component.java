@@ -27,17 +27,20 @@ public class Component {
 
     Game game;
 
+    // constructeur de la classe
     public Component() {
         display();
 
         game = new Game();
     }
 
+    // lancement de la boucle principale
     public void launch() {
         run = true;
         loop();
     }
 
+    // boucle principale du jeu = moteur de jeu > gestion des dimensions, appel des rendus, gestion FPS ...
     public void loop() {
         game.init();
 
@@ -89,6 +92,7 @@ public class Component {
         exit();
     }
 
+    // détruire la boucle (fonction non protégé en cas d'échec)
     public void destroy() {
         run = false;
     }
@@ -99,10 +103,12 @@ public class Component {
         System.exit(0);
     }
 
+    // mise a jour frame après frame de la classe Game
     public void update(){
         game.update();
     }
 
+    // rendu des éléments hérités de la classe Game
     public void render(){
         view2D(frameWidth, frameHeight);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -110,6 +116,7 @@ public class Component {
         game.render();
     }
 
+    // Création et initialisation de la fenêtre du jeu
     public void display() {
         try {
             Display.setDisplayMode(displaymode);
@@ -127,6 +134,7 @@ public class Component {
         }
     }
 
+    // gestion de la mise à l'échelle et propriétés de rendu
     private void view2D(int width, int height){
         glViewport(0, 0, width * frameScale, height * frameScale);
 
@@ -142,6 +150,7 @@ public class Component {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
+    // on ne la présente plus, fonction principale appelée au démarrage du jeu
     public static void main(String[] args) {
 
         for(String startArgs : args){

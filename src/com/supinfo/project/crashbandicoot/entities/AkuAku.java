@@ -10,18 +10,21 @@ public class AkuAku extends Entity {
     public static boolean invokAkuaku = false;
     public static int akuakuLife = 0; // De 0 à 2
 
+    // constructeur de la classe AkuAku
     public AkuAku(int x, int y) {
         super(x, y);
 
         texture = Texture.akuaku;
     }
 
+    // méthode d'initialisation (non utilisé car init dans le constructeur) mais conservé pour de futur MaJ
     @Override
     public void init(Level level) { }
 
     int akuakuDir;
     float draging = 2f;
 
+    // Update frame par frame des valeurs de variable
     @Override
     public void update() {
 
@@ -49,6 +52,7 @@ public class AkuAku extends Entity {
 
     }
 
+    // méthode de rendu graphique frame par frame
     @Override
     public void render() {
         if(invokAkuaku == true) {
@@ -57,6 +61,8 @@ public class AkuAku extends Entity {
             texture.unbind();
         }
     }
+
+    // getter and setter
 
     public boolean getInvokAkuaku () { return invokAkuaku; }
     public int getAkuakuLife () { return akuakuLife; }

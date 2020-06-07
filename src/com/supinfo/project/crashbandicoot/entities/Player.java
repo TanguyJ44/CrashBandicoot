@@ -41,6 +41,7 @@ public class Player extends Entity{
 
     Texture tornado;
 
+    // Constructeur de la classe Player
     public Player(int x, int y) {
         super(x, y);
         texture = Texture.player;
@@ -56,6 +57,7 @@ public class Player extends Entity{
         audioControl = new AudioControl();
     }
 
+    // fonction d'initialisation du level sur lequel le joueur ce trouve
     @Override
     public void init(Level level) {
         this.level = level;
@@ -76,6 +78,7 @@ public class Player extends Entity{
 
     public static AudioControl killSound = new AudioControl();
 
+    // update frame par frame des valeurs, gestion des événements du clavier et de mort à chaque frame
     @Override
     public void update() {
         ya += level.gravity * mass;
@@ -122,7 +125,6 @@ public class Player extends Entity{
             }
             if(isGrounded()) {
                 ya -= 20;
-                System.out.println("isGrounded");
             }
 
             if(Level.levelNumber == 2 && x > 514 && x < 516 && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
@@ -144,11 +146,6 @@ public class Player extends Entity{
             }
             if(isGrounded()) {
                 ya -= 20;
-            }
-
-            if(Level.levelNumber == 2 && x > 514 && x < 516) {
-                System.out.println(">> Player find a mystery object !");
-                Header.mysteryObject = true;
             }
         }
 
@@ -190,7 +187,7 @@ public class Player extends Entity{
             }
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_F5) || gamepadB) {
             Level.levelFinished = false;
             Level.levelNumber = 1;
 
@@ -242,18 +239,18 @@ public class Player extends Entity{
         }
 
 
-        // Jump
+        // Saut
         if (ya == 0.9f && dir == 2) {
             anim.play();
             dir = old_dir;
         }
 
-        // Drop Limit disabled
+        // Désactivation des touches lors des chutes
         if(y > 120) {
             keysEnable = false;
             tornadoAttack = false;
         }
-        // Drop Limit
+        // Limite de chute avant mort
         if(y > 220) {
             killPlayer = true;
         }
@@ -283,12 +280,12 @@ public class Player extends Entity{
 
         // Détection des fruits
         for (int i = 0; i < level.fruits.size(); i++) {
-            // Fruit collide detection
+            // Détecteur de collision
             if ((Player.playerX+10 >= level.fruits.get(i).getX() + 20)
                     || (Player.playerX+10 + Player.playerBoxWidth-20 <= level.fruits.get(i).getX())
                     || (Player.playerY+10 >= level.fruits.get(i).getY() + 20)
                     || (Player.playerY+10 + Player.playerBoxHeight-20 <= level.fruits.get(i).getY())){
-                // Player is not in a area
+                // Le joueur n'est pas dans la zone
             } else {
                 if(level.fruits.get(i).getEat() == false) {
                     level.fruits.get(i).setEat(true);
@@ -318,6 +315,7 @@ public class Player extends Entity{
     }
 
     static boolean switchEnabled = true;
+    // fonction de désactivation du jump
     public static void switchLockJump () {
         if(lockJump == false && switchEnabled == true) {
             switchEnabled = false;
@@ -325,6 +323,7 @@ public class Player extends Entity{
         }
     }
 
+    // fonction de gestion de la mort du joueur
     public void playerDeath () {
         if(killPlayer == true) {
             keysEnable = false;
@@ -418,6 +417,7 @@ public class Player extends Entity{
 
     int time = 0;
     int tornadoTime = 0;
+    // fonction gestion temps et action de l'attaque tornade
     public void onTornadoAttack () {
         if(tornadoAttack == true) {
 
@@ -437,6 +437,7 @@ public class Player extends Entity{
         }
     }
 
+    // fonction de rendu graphique frame par frame
     @Override
     public void render() {
         if(Level.levelNumber == 1) level.level1Objects();
