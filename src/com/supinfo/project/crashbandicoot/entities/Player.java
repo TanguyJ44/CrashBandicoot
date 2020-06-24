@@ -190,6 +190,7 @@ public class Player extends Entity{
         if (Keyboard.isKeyDown(Keyboard.KEY_F5) || gamepadB) {
             Level.levelFinished = false;
             Level.levelNumber = 1;
+            Level.loadLevel = 0;
 
             keysEnable = true;
             playerIsDead = false;

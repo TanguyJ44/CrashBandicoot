@@ -62,7 +62,7 @@ public class Level {
     public static SoundLvl2 lvl2Sound;
     public static SoundLvl3 lvl3Sound;
 
-    int loadLevel = 0;
+    public static int loadLevel = 0;
 
     // constructeur de la classe Level
     public Level(int width, int height) {
@@ -126,17 +126,18 @@ public class Level {
         clouds.add(new Clouds(800, 15, 4, true));
         clouds.add(new Clouds(950, 45, 4, true));
 
-        clouds.add(new Clouds(1050, 15, 4, false));
+        /*clouds.add(new Clouds(1050, 15, 4, false));
         clouds.add(new Clouds(1200, 10, 4, false));
         clouds.add(new Clouds(1350, 30, 4, false));
         clouds.add(new Clouds(1500, 30, 4, false));
         clouds.add(new Clouds(1680, 45, 4, false));
-        clouds.add(new Clouds(1800, 10, 4, false));
+        clouds.add(new Clouds(1800, 10, 4, false));*/
     }
 
     // Initialisation des tiles map par map (du moins niveau par niveau) car 1 map = 1 niveau chez nous
     public void mapInit() {
         solidTile = new Tile[width][height];
+        System.out.println("Map Init ! Level : " + levelNumber);
         for (int i = 0; i < width; i++) {
             for (int j = 7; j < 15; j++) {
                 if(Level.levelNumber == 1 && i != 28 && i != 29 /* && i != 28 && i != 48 && i != 49*/) {
@@ -150,7 +151,6 @@ public class Level {
         }
 
         // Attention aux yeux :
-
         if(Level.levelNumber == 1) {
             solidTile[16][5] = new Tile(15, 5, 0, 0, Tile.Tiles.COL);
             solidTile[17][5] = new Tile(15, 5, 0, 0, Tile.Tiles.COL);
@@ -233,6 +233,7 @@ public class Level {
         }
 
         if(loadLevel < Level.levelNumber) {
+            System.out.println("Cond : " + loadLevel);
             loadLevel = Level.levelNumber;
             mapInit();
             initObjects();
